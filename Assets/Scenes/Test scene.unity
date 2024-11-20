@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 764032640}
   - component: {fileID: 764032643}
   m_Layer: 0
-  m_Name: Rename Camera
+  m_Name: Camera 1
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
