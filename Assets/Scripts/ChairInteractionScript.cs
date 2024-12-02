@@ -21,7 +21,7 @@ public class ChairInteractionScript : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        chairSprite.color = new Color (188,188,188);
+        chairSprite.color = Color.gray;
         //if mouse in collider area and mouse down, transition to table prefab
         if (Input.GetMouseButtonDown(0))
         {

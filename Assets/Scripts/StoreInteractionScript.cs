@@ -20,7 +20,7 @@ public class StoreInteractionScript : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        storeSprite.color = new Color(188, 188, 188);
+        storeSprite.color = Color.gray;
         //if mouse in collider area and mouse down, transition to store prefab
         if (Input.GetMouseButtonDown(0))
         {
