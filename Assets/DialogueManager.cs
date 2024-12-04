@@ -7,10 +7,7 @@ using System;
 public static class DialogueHandler
 {
     public static float textTypingDelay = 0.08f;
-
     private static bool finishOnNextIter = false;
-    //public static Sprite dialogueBGImage;
-
     private static TextMeshProUGUI textElement;
     public static IEnumerator Display(string text)
     {
@@ -25,27 +22,28 @@ public static class DialogueHandler
         textElement = textObj.AddComponent<TextMeshProUGUI>();
         textElement.fontSize = 30;
 
+        const int textPaddingPX_X = 30;
+        const int textPaddingPX_Y = 20;
         RectTransform rectTransformTXT = textObj.GetComponent<RectTransform>();
-        rectTransformTXT.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
-        rectTransformTXT.anchoredPosition = new Vector2(0, -Screen.height / 3);
+        rectTransformTXT.sizeDelta = new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
+        rectTransformTXT.anchoredPosition = new Vector2(0 + textPaddingPX_X, -Screen.height / 3 - textPaddingPX_Y);
 
+        // Background Image
+        GameObject backgroundObj = new GameObject("Background");
+        backgroundObj.transform.SetParent(canvas.transform);
 
+        Image backgroundImage = backgroundObj.AddComponent<Image>();
+        backgroundImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG2");
+        backgroundImage.type = Image.Type.Filled;
 
-        ////GameObject backgroundObj = new GameObject("Background");
-        //backgroundObj.transform.SetParent(textObj.transform);
+        RectTransform rectTransformBG = backgroundObj.GetComponent<RectTransform>();
+        rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
+        rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
 
-        //Image backgroundImage = backgroundObj.AddComponent<Image>();
-        //backgroundImage.sprite = dialogueBGImage;
-        //backgroundImage.type = Image.Type.Filled;
-
-        //RectTransform rectTransformBG = backgroundObj.GetComponent<RectTransform>();
-        //rectTransformBG.sizeDelta = rectTransformTXT.sizeDelta; // Match text size
-
-        //rectTransformBG.anchoredPosition = Vector2.zero;
-
-        //backgroundObj.transform.SetSiblingIndex(0);
+        backgroundObj.transform.SetSiblingIndex(0);
         textObj.transform.SetSiblingIndex(1);
 
+        // Text printing
         foreach (char c in text)
         {
             if (finishOnNextIter)
