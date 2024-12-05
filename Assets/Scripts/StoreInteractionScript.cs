@@ -4,13 +4,12 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class StoreInteractionScript : MonoBehaviour
 {
-    public GameObject cafe;
     public GameObject store;
-    private SpriteRenderer storeSprite;
+    public GameObject canvas;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        storeSprite = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -18,19 +17,13 @@ public class StoreInteractionScript : MonoBehaviour
     {
         
     }
-    private void OnMouseOver()
+    private void OnMouseEnter()
     {
-        storeSprite.color = Color.gray;
         //if mouse in collider area and mouse down, transition to store prefab
         if (Input.GetMouseButtonDown(0))
         {
-            cafe.SetActive(false);
+            canvas.SetActive(false);
             store.SetActive(true);
         }
-
-    }
-    private void OnMouseExit()
-    {
-        storeSprite.color = Color.white;
     }
 }

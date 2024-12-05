@@ -5,13 +5,12 @@ using UnityEngine.U2D;
 
 public class ChairInteractionScript : MonoBehaviour
 {
-    public GameObject cafe;
+    public GameObject canvas;
     public GameObject table;
-    private SpriteRenderer chairSprite;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        chairSprite = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -19,18 +18,17 @@ public class ChairInteractionScript : MonoBehaviour
     {
 
     }
-    private void OnMouseOver()
+
+    private void OnMouseEnter()
     {
-        chairSprite.color = Color.gray;
         //if mouse in collider area and mouse down, transition to table prefab
         if (Input.GetMouseButtonDown(0))
         {
-            cafe.SetActive(false);
+            canvas.SetActive(false);
             table.SetActive(true);
         }
     }
-    private void OnMouseExit()
-    {
-        chairSprite.color= Color.white;
-    }
 }
+
+
+
