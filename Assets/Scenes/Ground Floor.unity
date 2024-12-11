@@ -444,6 +444,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &496104889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496104891}
+  - component: {fileID: 496104890}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &496104890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496104889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5020a7f8652f2ab4ca5254c0323d0009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cafeCanvas: {fileID: 118606742}
+  chair: {fileID: 1988154580}
+  table: {fileID: 1816801208}
+  store: {fileID: 662181666}
+--- !u!4 &496104891
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496104889}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.0150279, y: 0.20073125, z: 7.8623004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,8 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 104c02c46d8c4674d8349588d6e4437d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  store: {fileID: 662181666}
-  canvas: {fileID: 118606742}
+  gameManager: {fileID: 496104890}
 --- !u!212 &699505256
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -871,8 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4b7cf667dc035489d8d5616e598e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 118606742}
-  table: {fileID: 1816801208}
+  gameManager: {fileID: 496104890}
 --- !u!61 &1988154583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -985,3 +1031,4 @@ SceneRoots:
   - {fileID: 421728937}
   - {fileID: 441443419}
   - {fileID: 14381172}
+  - {fileID: 496104891}

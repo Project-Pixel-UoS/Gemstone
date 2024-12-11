@@ -4,26 +4,14 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class StoreInteractionScript : MonoBehaviour
 {
-    public GameObject store;
-    public GameObject canvas;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    public GameManager gameManager;
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    public void OnMouseDown()
     {
-        
-    }
-    private void OnMouseEnter()
-    {
-        //if mouse in collider area and mouse down, transition to store prefab
-        if (Input.GetMouseButtonDown(0))
+        if (gameManager != null)
         {
-            canvas.SetActive(false);
-            store.SetActive(true);
+            gameManager.OnStoreClicked();
         }
     }
 }
+
