@@ -1,0 +1,7 @@
+Format:
+text|typing delay|skippable (1/0)|item dependency
+
+[CafeCounter/]
+Hello, welcome to the cafe!
+What can I get started for you?
+[/CafeCounter]
