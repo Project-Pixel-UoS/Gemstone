@@ -4,10 +4,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public GameObject cafeCanvas;
-    public GameObject chair;
-    public GameObject table;
-    public GameObject store;
+    [SerializeField] private GameObject cafe;
+    [SerializeField] private GameObject table;
+    [SerializeField] private GameObject store;
 
     private void Awake()
     {
@@ -25,7 +24,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //this will have to change according to starting location or prev. saved position
-        cafeCanvas.SetActive(true);
+        cafe.SetActive(true);
         table.SetActive(false);
         store.SetActive(false);
     }
@@ -71,12 +70,12 @@ public class GameManager : MonoBehaviour
 
     public void OnChairClicked()
     {
-        cafeCanvas.SetActive(false);
+        cafe.SetActive(false);
         table.SetActive(true);
     }
     public void OnStoreClicked()
     {
-        cafeCanvas.SetActive(false);
+        cafe.SetActive(false);
         store.SetActive(true);
     }
 }
