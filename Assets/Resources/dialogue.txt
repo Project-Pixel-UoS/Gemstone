@@ -1,7 +1,20 @@
 Format:
 text|typing delay|skippable (1/0)|item dependency
+If nothing is put, e.g:
+Hello, welcome to the cafe!
+
+Default values are assumed 
+
+or:
+Hello, welcome to the cafe!|0.05|0
+What can I get started for you?
+
+The values most recently input are re-used until changed again
+-----------------------------------------------------------------------------
+
 
 [CafeCounter/]
 Hello, welcome to the cafe!
 What can I get started for you?
+This is awesome!
 [/CafeCounter]
