@@ -5,50 +5,80 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.Experimental.GraphView;
 
 public static class DialogueHandler
 {
     private static bool finishOnNextIter = false;
     private static TextMeshProUGUI textElement;
     private static bool hasFinished = false;
+
+    private static GameObject canvasObj = null;
+    private static GameObject textObj = null;
+    private static RectTransform rectTransformTXT = null;
+    private static GameObject backgroundObj = null;
+    private static Image backgroundImage = null;
+    private static RectTransform rectTransformBG = null;
+    
+    private const int textPaddingPX_X = 30;
+    private const int textPaddingPX_Y = 20;
     public static IEnumerator Display(string text, float delay, bool skippable)
     {
         hasFinished = false;
-        
-        GameObject canvasObj = new GameObject("DialogueCanvas");
-        Canvas canvas = canvasObj.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
-        GameObject textObj = new GameObject("DynamicDialogueText");
-        textObj.transform.SetParent(canvas.transform);
-        textElement = textObj.AddComponent<TextMeshProUGUI>();
-        textElement.fontSize = 30;
-        textObj.transform.SetSiblingIndex(1);
+        if (canvasObj == null)
+        {
+            canvasObj = new GameObject("DialogueCanvas");
+            Canvas canvas = canvasObj.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        }
 
-        const int textPaddingPX_X = 30;
-        const int textPaddingPX_Y = 20;
-        RectTransform rectTransformTXT = textObj.GetComponent<RectTransform>();
-        rectTransformTXT.sizeDelta = new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
-        rectTransformTXT.anchoredPosition = new Vector2(0 + textPaddingPX_X, -Screen.height / 3 - textPaddingPX_Y);
+        if (textObj == null)
+        {
+            textObj = new GameObject("DynamicDialogueText");
+            textObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
+            textElement = textObj.AddComponent<TextMeshProUGUI>();
+            textElement.fontSize = 30;
+            textObj.transform.SetSiblingIndex(1);
+        }
 
-        // Background Image
-        GameObject backgroundObj = new GameObject("Background");
-        backgroundObj.transform.SetParent(canvas.transform);
-        backgroundObj.transform.SetSiblingIndex(0);
+        if (rectTransformTXT == null)
+        {
+            rectTransformTXT = textObj.GetComponent<RectTransform>();
+            rectTransformTXT.sizeDelta =
+                new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
+            rectTransformTXT.anchoredPosition = new Vector2(0 + textPaddingPX_X, -Screen.height / 3 - textPaddingPX_Y);
+        }
 
-        Image backgroundImage = backgroundObj.AddComponent<Image>();
-        backgroundImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG2");
-        backgroundImage.type = Image.Type.Filled;
+        if (backgroundObj == null)
+        {
+            // Background Image
+            backgroundObj = new GameObject("Background");
+            backgroundObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
+            backgroundObj.transform.SetSiblingIndex(0);
+        }
 
-        RectTransform rectTransformBG = backgroundObj.GetComponent<RectTransform>();
-        rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
-        rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
-        
+        if (backgroundImage == null)
+        {
+            backgroundImage = backgroundObj.AddComponent<Image>();
+            backgroundImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG2");
+            backgroundImage.type = Image.Type.Filled;
+        }
+
+
+        if (rectTransformBG == null)
+        {
+            rectTransformBG = backgroundObj.GetComponent<RectTransform>();
+            rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
+            rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
+        }
+
         // Text printing
         foreach (char c in text)
         {
             if (finishOnNextIter && !skippable)
             {
+                Debug.Log("Pointer clicked 6");
                 textElement.text = text;
                 break;
             }
@@ -64,15 +94,17 @@ public static class DialogueHandler
     }
     public static void FinishCurrentParagraph()
     {
+        Debug.Log("Pointer clicked 4");
         if (!hasFinished)
         {
+            Debug.Log("Pointer clicked 5");
             finishOnNextIter = true;
         }
     }
     public static string FetchDialogueFromTag(string tag)
     {
         StreamReader sr = new StreamReader("Assets/Resources/Dialogue.txt");
-        string dialogue = sr.ReadToEnd().Split($"[{tag}/]")[1].Split($"/{tag}")[0];
+        string dialogue = sr.ReadToEnd().Split($"[{tag}/]")[1].Split($"[/{tag}]")[0];
         sr.Close();
         return dialogue;
     }
@@ -80,13 +112,15 @@ public static class DialogueHandler
     public static bool IsFinished()
     {
         return hasFinished;
+        // hi
     }
 
     public static void ClearDialogue()
     {
-        if (!hasFinished)
+        if (hasFinished)
         {
             textElement.text = "";
+            textElement.GetComponent<TextMeshProUGUI>().text = "";
         }
     }
 }
@@ -117,15 +151,11 @@ public class DialogueInstance
 
             if (s.Length > 1)
             {
-                dialogueLines.Add(new DialogueBlock(s[0], float.Parse(s[1]), Convert.ToBoolean(int.Parse(s[2]))));
-                
                 typingDelay = float.Parse(s[1]);
                 skippable = Convert.ToBoolean(int.Parse(s[2]));
             }
-            else
-            {
-                dialogueLines.Add(new DialogueBlock(s[0], typingDelay, skippable));
-            }
+            dialogueLines.Add(new DialogueBlock(s[0], typingDelay, skippable));
+            
         }
     }
     public void StartDialogue()

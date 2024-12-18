@@ -4,6 +4,7 @@ public class DialogueCanvasController : MonoBehaviour, IPointerClickHandler
 {
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("Pointer clicked 1");
         AdvanceDialogue();
     }
 
