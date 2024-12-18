@@ -24,6 +24,7 @@ public static class DialogueHandler
     private const int textPaddingPX_Y = 20;
     public static IEnumerator Display(string text, float delay, bool skippable)
     {
+        Debug.Log("Display called");
         hasFinished = false;
 
         if (canvasObj == null)
@@ -76,7 +77,7 @@ public static class DialogueHandler
         // Text printing
         foreach (char c in text)
         {
-            if (finishOnNextIter && !skippable)
+            if (finishOnNextIter && skippable)
             {
                 Debug.Log("Pointer clicked 6");
                 textElement.text = text;
@@ -142,11 +143,16 @@ public class DialogueInstance
     {
         string dialogueText = DialogueHandler.FetchDialogueFromTag(tag);
         
-        float typingDelay = 0.04f;
+        float typingDelay = 0.025f;
         bool skippable = true;
         
         foreach (string line in dialogueText.Split('\n'))
         {
+            if (dialogueText.IndexOf(line) == 0 || dialogueText.IndexOf(line) == dialogueText.Length - 1)
+            {
+                continue;
+            }
+
             var s = line.Split("|");
 
             if (s.Length > 1)
@@ -160,12 +166,14 @@ public class DialogueInstance
     }
     public void StartDialogue()
     {
+        Debug.Log("StartDialogue called");
         CoroutineRunner.Instance.RunCoroutine(this.PlayDialogueSequentially());
     }
     private IEnumerator PlayDialogueSequentially()
     {
         foreach (DialogueBlock line in dialogueLines)
         {
+            Debug.Log(line.text);
             var index = dialogueLines.IndexOf(line);
             if (index > 0)
             {
@@ -203,6 +211,7 @@ public class DialogueBlock
     }
     public void Play()
     {
+        Debug.Log("Dialoue block played");
         CoroutineRunner.Instance.RunCoroutine(DialogueHandler.Display(this.text, this.letterDelay, this.skippable));
     }
 }
