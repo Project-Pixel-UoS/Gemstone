@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject cafe;
     [SerializeField] private GameObject table;
     [SerializeField] private GameObject store;
-
+    [SerializeField] private GameObject mainHall;
+    [SerializeField] private GameObject sign;
+    [SerializeField] private GameObject elevator;
+    [SerializeField] private GameObject backButton;
     private void Awake()
     {
         if (instance == null)
@@ -25,7 +28,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //this will have to change according to starting location or prev. saved position
-        cafe.SetActive(true);
+        mainHall.SetActive(true);
+        cafe.SetActive(false);
         table.SetActive(false);
         store.SetActive(false);
     }
@@ -51,11 +55,21 @@ public class GameManager : MonoBehaviour
             case "Chair":
                 OnChairClicked();
                 break;
+            case "Sign":
+                OnSignClicked();
+                break;
+            case "BackButton":
+                OnBackButtonClicked();
+                break;
             default:
                 break;
         }
     }
-
+    public void OnSignClicked()
+    {
+        mainHall.SetActive(false);
+        cafe.SetActive(true);
+    }
     public void OnChairClicked()
     {
         cafe.SetActive(false);
@@ -65,5 +79,17 @@ public class GameManager : MonoBehaviour
     {
         cafe.SetActive(false);
         store.SetActive(true);
+    }
+    public void OnElevatorClicked()
+    {
+        //change scene to first floor
+    }
+    public void OnBackButtonClicked()
+    {
+        //change this to check current room rather than hard coding in future
+
+        mainHall.SetActive(true);
+        cafe.SetActive(false);
+
     }
 }
