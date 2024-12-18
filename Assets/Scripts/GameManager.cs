@@ -1,6 +1,6 @@
 using UnityEngine;
 using Util;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     {
         //this will have to change according to starting location or prev. saved position
         mainHall.SetActive(true);
+        backButton.SetActive(false);
         cafe.SetActive(false);
         table.SetActive(false);
         store.SetActive(false);
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour
             case "Sign":
                 OnSignClicked();
                 break;
+            case "Elevator":
+                OnElevatorClicked();
+                break;
             case "BackButton":
                 OnBackButtonClicked();
                 break;
@@ -69,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         mainHall.SetActive(false);
         cafe.SetActive(true);
+        backButton.SetActive(true);
     }
     public void OnChairClicked()
     {
@@ -82,14 +87,22 @@ public class GameManager : MonoBehaviour
     }
     public void OnElevatorClicked()
     {
-        //change scene to first floor
+        SceneManager.LoadScene("First Floor");
     }
     public void OnBackButtonClicked()
     {
-        //change this to check current room rather than hard coding in future
-
-        mainHall.SetActive(true);
-        cafe.SetActive(false);
-
+        //note: need to make our own back button graphic to avoid copyright lol
+        if (table.activeSelf == true || store.activeSelf == true)
+        {
+            cafe.SetActive(true);
+            table.SetActive(false);
+            store.SetActive(false);
+        }
+        else
+        {
+            mainHall.SetActive(true);
+            cafe.SetActive(false);
+            backButton.SetActive(false);
+        }
     }
 }
