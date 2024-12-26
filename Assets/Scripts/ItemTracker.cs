@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Util;
 
@@ -31,7 +32,7 @@ public class ItemTracker : MonoBehaviour
         if (Utils.IsMouseClicked())
         {
             SelectItem();
-            if(currentItem == null) PickupItem();
+            if (currentItem == null) PickupItem();
         }
     }
 
@@ -77,5 +78,22 @@ public class ItemTracker : MonoBehaviour
             item.transform.localScale = itemSlot.localScale;
             item.gameObject.layer = itemSlot.gameObject.layer;
         }
+    }
+
+    /// <summary>
+    /// destroys the selected item if the right item is used.
+    /// </summary>
+    /// <param name="itemName">item needed to be used</param>
+    /// <returns>true if correct item is used, false otherwise.</returns>
+    public bool UseItem(String itemName)
+    {
+        if(itemName.Equals(currentItem.name))
+        {
+            GameObject item = GameObject.Find(itemName); 
+            Destroy(item);
+            currentItem = null;
+            return true;
+        }
+        return false;
     }
 }
