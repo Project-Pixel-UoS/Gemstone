@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Util;
 
@@ -31,14 +32,68 @@ public class ItemTracker : MonoBehaviour
         if (Utils.IsMouseClicked())
         {
             SelectItem();
-            print(currentItem);
+            if (currentItem == null) PickupItem();
         }
     }
 
-    public void SelectItem()
+    /// <summary>
+    /// selects/unselects item from the inv.
+    /// </summary>
+    public GameObject SelectItem()
     {
         var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("UI")).collider;
-        currentItem = (item != null) ? item.gameObject : null;
+        //shorthand for: if *condition*, then currentItem = null, else = item.
+        //can click twice on the same item to unselect.
+        currentItem = (item == null || item.gameObject == currentItem) ? null : item.gameObject;
+        print(currentItem);
+        return currentItem;
     }
 
+    /// <summary>
+    /// get the first empty item slot.
+    /// </summary>
+    /// <returns>gameobject of the empty inv slot.</returns>
+    public Transform GetEmptyInvSlot()
+    {
+        var hotbar = GameObject.Find("Hotbar").transform;
+        foreach(Transform child in hotbar)
+        {
+            if (child.transform.childCount == 0)
+            {
+                return child.transform;
+            }
+        }
+        return null;
+    }
+
+    //Items in the room need the "Item" tag and be on the Default layer (or wtv
+    //layer we decide to put the room in future).
+    public void PickupItem()
+    {
+        var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
+        if (item != null && item.transform.tag.Equals("Item"))
+        {
+            Transform itemSlot = GetEmptyInvSlot();
+            item.transform.SetParent(itemSlot, false);
+            item.transform.localScale = itemSlot.localScale;
+            item.gameObject.layer = itemSlot.gameObject.layer;
+        }
+    }
+
+    /// <summary>
+    /// destroys the selected item if the right item is used.
+    /// </summary>
+    /// <param name="itemName">item needed to be used</param>
+    /// <returns>true if correct item is used, false otherwise.</returns>
+    public bool UseItem(String itemName)
+    {
+        if(itemName.Equals(currentItem.name))
+        {
+            GameObject item = GameObject.Find(itemName); 
+            Destroy(item);
+            currentItem = null;
+            return true;
+        }
+        return false;
+    }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Inventory
   - GameStage
+  - Item
   layers:
   - Default
   - TransparentFX
