@@ -1668,21 +1668,21 @@ MonoBehaviour:
     - Right Answer
     - Wrong Answer
     - Wrong Answer
-    CorrectAnswerIndex: 0
+    CorrectAnswerIndex: 1
   - Question: Whats the Right2 Answer
     Answers:
     - Wrong Answer
     - Right2 Answer
     - Wrong Answer
     - Wrong Answer
-    CorrectAnswerIndex: 0
+    CorrectAnswerIndex: 1
   - Question: Whats the Right3 Answer
     Answers:
     - Wrong Answer
     - Right3 Answer
     - Wrong Answer
     - Wrong Answer
-    CorrectAnswerIndex: 0
+    CorrectAnswerIndex: 1
   options:
   - {fileID: 696658900}
   - {fileID: 584418347}
