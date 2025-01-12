@@ -1,6 +1,8 @@
 using UnityEngine;
 using Util;
 using UnityEngine.SceneManagement;
+using Microsoft.Unity.VisualStudio.Editor;
+using JetBrains.Annotations;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -96,10 +98,12 @@ public class GameManager : MonoBehaviour
     }
     public void OnCorridor1Clicked()
     {
-        GameObject Corridor1 = GameObject.Find("Room: Corridor 1");
-        GameObject Reception = GameObject.Find("Room: Reception");
-        Reception.SetActive(false);
-        Corridor1.SetActive(true);
+        GameObject panel = GameObject.FindWithTag("GameStage");
+        //transform.Find instead of gameObject.find so you can find inactive gameObjects
+        GameObject reception = panel.transform.Find("Room: Reception").gameObject;
+        GameObject corridor1 = panel.transform.Find("Room: Corridor 1").gameObject;
+        reception.SetActive(false);
+        corridor1.SetActive(true);
     }
     public void OnBackButtonClicked()
     {
