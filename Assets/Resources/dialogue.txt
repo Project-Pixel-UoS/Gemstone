@@ -14,7 +14,6 @@ The values most recently input are re-used until changed again
 
 
 [CafeCounter/]
-Hello, welcome to the cafe!
-What can I get started for you?
-This is awesome!
+Hello, welcome to the cafe! What can I get started for you? H  GIHCGUWOUID GAWIDG IOUWd|0.03|1
+This is awesome! GIHCGUWOUID GAWIDG IOUWd GIHCGUWOUID GAWIDG IOUWd
 [/CafeCounter]

@@ -5,7 +5,6 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor.Experimental.GraphView;
 
 public static class DialogueHandler
 {
@@ -73,13 +72,15 @@ public static class DialogueHandler
             rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
         }
 
+        // bool hasFinishedPara = false;
+        
         // Text printing
         foreach (char c in text)
         {
-            if (finishOnNextIter && !skippable)
+            if (finishOnNextIter && skippable)
             {
-                Debug.Log("Pointer clicked 6");
                 textElement.text = text;
+                // hasFinishedPara = true;
                 break;
             }
             else
@@ -94,17 +95,15 @@ public static class DialogueHandler
     }
     public static void FinishCurrentParagraph()
     {
-        Debug.Log("Pointer clicked 4");
         if (!hasFinished)
         {
-            Debug.Log("Pointer clicked 5");
             finishOnNextIter = true;
         }
     }
     public static string FetchDialogueFromTag(string tag)
     {
         StreamReader sr = new StreamReader("Assets/Resources/Dialogue.txt");
-        string dialogue = sr.ReadToEnd().Split($"[{tag}/]")[1].Split($"[/{tag}]")[0];
+        string dialogue = sr.ReadToEnd().Split($"[{tag}/]")[1].Split($"[/{tag}]")[0].Trim();
         sr.Close();
         return dialogue;
     }
@@ -123,16 +122,23 @@ public static class DialogueHandler
             textElement.GetComponent<TextMeshProUGUI>().text = "";
         }
     }
+
+    public static void DeleteTempObjs()
+    {
+        UnityEngine.Object.Destroy(canvasObj);
+        UnityEngine.Object.Destroy(textObj);
+        UnityEngine.Object.Destroy(rectTransformTXT);
+        UnityEngine.Object.Destroy(backgroundObj);
+        UnityEngine.Object.Destroy(backgroundImage);
+        UnityEngine.Object.Destroy(rectTransformBG);
+    }
 }
 
 public class DialogueInstance
 {
     public List<DialogueBlock> dialogueLines;
-    private const float PAUSE_BETWEEN_BLOCKS = 4;
-    // public DialogueInstance()
-    // {
-    //     dialogueLines = new List<DialogueBlock>();
-    // }
+    private const float PAUSE_BETWEEN_BLOCKS = 2.5f;
+    
     public DialogueInstance(string tag)
     {
         dialogueLines = new List<DialogueBlock>();
@@ -166,11 +172,11 @@ public class DialogueInstance
     {
         foreach (DialogueBlock line in dialogueLines)
         {
-            var index = dialogueLines.IndexOf(line);
-            if (index > 0)
-            {
-                DialogueHandler.ClearDialogue();
-            }
+            // var index = dialogueLines.IndexOf(line);
+            
+            // Debug.Log($"{index} - {line.text}");
+            
+            DialogueHandler.ClearDialogue();
             
             line.Play();
             
@@ -184,6 +190,7 @@ public class DialogueInstance
         
         
         // Destroy all the dialogue related things
+        DialogueHandler.DeleteTempObjs();
     }
     public void FinishCurrentParagraph()
     {
