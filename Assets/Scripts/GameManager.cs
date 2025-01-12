@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject sign;
     [SerializeField] private GameObject elevator;
     [SerializeField] private GameObject backButton;
+
     private void Awake()
     {
         if (instance == null)
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         {
             GetClickedScene();
         }
+
     }
 
     //select which scene to switch to depending on which collider mouse collides w/
@@ -65,6 +67,9 @@ public class GameManager : MonoBehaviour
             case "BackButton":
                 OnBackButtonClicked();
                 break;
+            case "Corridor 1":
+                OnCorridor1Clicked();
+                break;
             default:
                 break;
         }
@@ -88,6 +93,13 @@ public class GameManager : MonoBehaviour
     public void OnElevatorClicked()
     {
         SceneManager.LoadScene("First Floor");
+    }
+    public void OnCorridor1Clicked()
+    {
+        GameObject Corridor1 = GameObject.Find("Room: Corridor 1");
+        GameObject Reception = GameObject.Find("Room: Reception");
+        Reception.SetActive(false);
+        Corridor1.SetActive(true);
     }
     public void OnBackButtonClicked()
     {
