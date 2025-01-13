@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
             case "BackButton":
                 OnBackButtonClicked();
                 break;
+            case "BackButton2":
+                OnBackButton2Clicked();
+                break;
             case "Corridor 1":
                 OnCorridor1Clicked();
                 break;
@@ -101,9 +104,9 @@ public class GameManager : MonoBehaviour
         GameObject panel = GameObject.FindWithTag("GameStage");
         //transform.Find instead of gameObject.find so you can find inactive gameObjects
         GameObject reception = panel.transform.Find("Room: Reception").gameObject;
-        GameObject corridor1 = panel.transform.Find("Room: Corridor 1").gameObject;
+        GameObject corridor1Room = panel.transform.Find("Room: Corridor 1").gameObject;
         reception.SetActive(false);
-        corridor1.SetActive(true);
+        corridor1Room.SetActive(true);
     }
     public void OnBackButtonClicked()
     {
@@ -119,6 +122,28 @@ public class GameManager : MonoBehaviour
             mainHall.SetActive(true);
             cafe.SetActive(false);
             backButton.SetActive(false);
+        }
+    }
+    /// <summary>
+    /// There must be a better way to do this but atm you don't have much choice
+    /// because the backbutton from the ground floor is deleted so you have to 
+    /// reference a new one, but this seems bad for when we have more scenes.
+    /// </summary>
+    public void OnBackButton2Clicked()
+    {
+        GameObject panel = GameObject.FindWithTag("GameStage");
+        GameObject reception = panel.transform.Find("Room: Reception").gameObject;
+        GameObject corridor1Room = panel.transform.Find("Room: Corridor 1").gameObject;
+        if (reception.activeSelf == true)
+        {
+            //bad bad bad, no objects in first floor so pointless atm
+            SceneManager.LoadScene("Ground Floor");
+        }
+        else
+        //corridor 1 active condition, will add more when corridor 2 is a thing
+        {
+            corridor1Room.SetActive(false);
+            reception.SetActive(true);
         }
     }
 }
