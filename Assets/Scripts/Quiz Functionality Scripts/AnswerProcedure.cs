@@ -3,6 +3,9 @@ using UnityEngine;
 /// <summary>
 /// Handles the logic for answering quiz questions and interacting with the QuizManager.
 /// </summary>
+/// /// <remarks>
+/// Maintained by: Michael Edems-Eze
+/// </remarks>
 public class AnswerProcedure : MonoBehaviour
 {
     /// <summary>

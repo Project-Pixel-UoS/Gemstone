@@ -2,6 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <remarks>
+/// Maintained by: Michael Edems-Eze
+/// </remarks>
+
 public class QuizManager : MonoBehaviour
 {
     [Header("Quiz Data")]

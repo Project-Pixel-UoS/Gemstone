@@ -417,7 +417,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 354016153}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 354016155}
+        m_TargetAssemblyTypeName: AnswerProcedure, Assembly-CSharp
+        m_MethodName: Answer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &354016153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -886,7 +898,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 584418350}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 584418352}
+        m_TargetAssemblyTypeName: AnswerProcedure, Assembly-CSharp
+        m_MethodName: Answer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &584418350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,7 +1167,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 696658903}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 696658905}
+        m_TargetAssemblyTypeName: AnswerProcedure, Assembly-CSharp
+        m_MethodName: Answer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &696658903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1805,7 +1841,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1185154235}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1185154237}
+        m_TargetAssemblyTypeName: AnswerProcedure, Assembly-CSharp
+        m_MethodName: Answer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1185154235
 MonoBehaviour:
   m_ObjectHideFlags: 0
