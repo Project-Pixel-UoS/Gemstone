@@ -32,10 +32,14 @@ public class QuizManager : MonoBehaviour
     /// Sets the answer options for the current question.  
     /// Updates the text and assigns whether each option is correct or not.
     /// </summary>
+    /// <bug>
+    /// Get Child Line returns a null reference exception.
+    /// </bug>
     void SetAnswers()
     {
         for (int i = 0; i < options.Length; i++)
         {
+            Debug.Log(QnA[currentQuestionID].Answers[i]);
             options[i].GetComponent<AnswerProcedure>().isCorrect = false;
             options[i].transform.GetChild(0).GetComponent<TextMeshPro>().text = QnA[currentQuestionID].Answers[i];
 
