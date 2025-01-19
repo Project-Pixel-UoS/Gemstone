@@ -5,6 +5,9 @@ using TMPro;
 /// <remarks>
 /// Maintained by: Michael Edems-Eze
 /// </remarks>
+/// /// <todo>
+/// - Prevent index errors when generating a question by ensuring currentQuestionID is valid.
+/// </todo>
 
 public class QuizManager : MonoBehaviour
 {
