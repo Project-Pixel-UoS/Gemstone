@@ -34,15 +34,15 @@ public class AnswerProcedure : MonoBehaviour
         {
             Debug.Log("Correct");
             quizManager.correctAnswerProvided();
+
+            // Increment the number of answered questions.
+            answeredQuestionsNum++;
         }
         else
         {
             Debug.Log("Not Correct");
-            quizManager.correctAnswerProvided(); 
-        }
-
-        // Increment the number of answered questions.
-        answeredQuestionsNum++;
+            quizManager.incorrectAnswerProvided(); 
+        }        
 
         // Check if three questions have been answered and trigger the night transition.
         if (answeredQuestionsNum == 3)

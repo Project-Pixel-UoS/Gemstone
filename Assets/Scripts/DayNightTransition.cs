@@ -13,10 +13,12 @@ public class DayNightTransition : MonoBehaviour
 
     }
 
-    public void TransitionToNight() {
+    public void TransitionToNight()
+    {
 
         openLaptopImage.SetActive(false);
         closedLaptopImage.SetActive(true);
         quizPanel.SetActive(false);
+
     }
 }

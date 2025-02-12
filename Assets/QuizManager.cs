@@ -22,7 +22,11 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
-        generateQuestion();
+        QuestionText.text = QnA[currentQuestionID].Question;
+
+        SetAnswers();
+
+        QnA.RemoveAt(currentQuestionID);
     }
 
     /// <summary>
@@ -31,8 +35,12 @@ public class QuizManager : MonoBehaviour
     /// </summary>
     public void correctAnswerProvided()
     {
-        QnA.RemoveAt(currentQuestionID);
         generateQuestion();
+    }
+
+    public void incorrectAnswerProvided()
+    {
+        //Add bad message here
     }
 
     /// <summary>
@@ -46,7 +54,7 @@ public class QuizManager : MonoBehaviour
             options[i].GetComponent<AnswerProcedure>().isCorrect = false;
             options[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = QnA[currentQuestionID].Answers[i];
 
-            if (QnA[currentQuestionID].CorrectAnswerIndex == i + 1)
+            if (QnA[currentQuestionID].CorrectAnswerIndex == i)
             {
                 options[i].GetComponent<AnswerProcedure>().isCorrect = true;
             }
@@ -59,9 +67,9 @@ public class QuizManager : MonoBehaviour
     /// </summary>
     void generateQuestion()
     {
-        currentQuestionID = Random.Range(0, QnA.Count);
+        currentQuestionID++;
 
-        QuestionText.text = QnA[currentQuestionID].Question;
+        QuestionText.text = QnA[0].Question;
 
         SetAnswers();
 

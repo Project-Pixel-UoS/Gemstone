@@ -482,6 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1084747766}
+  dayNightScript: {fileID: 1816801210}
 --- !u!1 &378024548
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1084747766}
+  dayNightScript: {fileID: 1816801210}
 --- !u!1 &653529931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,6 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1084747766}
+  dayNightScript: {fileID: 1816801210}
 --- !u!1 &699505252
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,24 +1701,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QnA:
-  - Question: Whats the Right Answer
+  - Question: Question 1) Whats the Right Answer
     Answers:
     - Wrong Answer
     - Right Answer
     - Wrong Answer
     - Wrong Answer
     CorrectAnswerIndex: 1
-  - Question: Whats the Right2 Answer
+  - Question: Question 2) Whats the Right Answer
     Answers:
     - Wrong Answer
-    - Right2 Answer
+    - Right Answer
     - Wrong Answer
     - Wrong Answer
     CorrectAnswerIndex: 1
-  - Question: Whats the Right3 Answer
+  - Question: Question 3) Whats the Right Answer
     Answers:
     - Wrong Answer
-    - Right3 Answer
+    - Wrong Answer
+    - Right Answer
+    - Wrong Answer
+    CorrectAnswerIndex: 2
+  - Question: Question 4) Whats the Right Answer
+    Answers:
+    - Wrong Answer
+    - Right Answer
     - Wrong Answer
     - Wrong Answer
     CorrectAnswerIndex: 1
@@ -1906,6 +1916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1084747766}
+  dayNightScript: {fileID: 1816801210}
 --- !u!1 &1239952129
 GameObject:
   m_ObjectHideFlags: 0
@@ -2809,6 +2820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1816801209}
+  - component: {fileID: 1816801210}
   m_Layer: 0
   m_Name: 'Room: Table'
   m_TagString: Untagged
@@ -2833,6 +2845,21 @@ Transform:
   - {fileID: 1084747765}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1816801210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816801208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64edd45dd53bbd34d9f34dea6ee205b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openLaptopImage: {fileID: 1798552175}
+  closedLaptopImage: {fileID: 2130267800}
+  quizPanel: {fileID: 1356723722}
 --- !u!1 &1950430008
 GameObject:
   m_ObjectHideFlags: 0
