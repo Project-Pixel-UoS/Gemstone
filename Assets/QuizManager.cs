@@ -25,8 +25,6 @@ public class QuizManager : MonoBehaviour
         QuestionText.text = QnA[currentQuestionID].Question;
 
         SetAnswers();
-
-        QnA.RemoveAt(currentQuestionID);
     }
 
     /// <summary>
@@ -51,6 +49,7 @@ public class QuizManager : MonoBehaviour
     {
         for (int i = 0; i < options.Length; i++)
         {
+            Debug.Log(currentQuestionID);
             options[i].GetComponent<AnswerProcedure>().isCorrect = false;
             options[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = QnA[currentQuestionID].Answers[i];
 
@@ -58,6 +57,8 @@ public class QuizManager : MonoBehaviour
             {
                 options[i].GetComponent<AnswerProcedure>().isCorrect = true;
             }
+
+            Debug.Log(currentQuestionID);
         }
     }
 
@@ -69,11 +70,10 @@ public class QuizManager : MonoBehaviour
     {
         currentQuestionID++;
 
-        QuestionText.text = QnA[0].Question;
+        QuestionText.text = QnA[currentQuestionID].Question;
 
         SetAnswers();
 
-        QnA.RemoveAt(currentQuestionID);
     }
 
 }

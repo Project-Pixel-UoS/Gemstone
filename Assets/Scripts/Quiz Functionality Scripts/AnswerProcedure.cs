@@ -33,10 +33,19 @@ public class AnswerProcedure : MonoBehaviour
         if (isCorrect)
         {
             Debug.Log("Correct");
-            quizManager.correctAnswerProvided();
 
             // Increment the number of answered questions.
             answeredQuestionsNum++;
+
+            // Check if three questions have been answered and trigger the night transition.
+            if (answeredQuestionsNum == 3)
+            {
+                dayNightScript.TransitionToNight();
+            }
+            else
+            {
+                quizManager.correctAnswerProvided();
+            }
         }
         else
         {
@@ -44,10 +53,6 @@ public class AnswerProcedure : MonoBehaviour
             quizManager.incorrectAnswerProvided(); 
         }        
 
-        // Check if three questions have been answered and trigger the night transition.
-        if (answeredQuestionsNum == 3)
-        {
-            dayNightScript.TransitionToNight();
-        }
+        
     }
 }
