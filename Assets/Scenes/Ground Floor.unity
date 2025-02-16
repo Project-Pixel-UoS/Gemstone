@@ -281,6 +281,63 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
+--- !u!1001 &195766033
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 219424429158025335, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6843622690565968603, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
+      propertyPath: m_Name
+      value: BuyCoffeeQuestStep
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fa028f10e5824c94892b3043a3ad67c0, type: 3}
 --- !u!1 &246133900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2524,3 +2581,4 @@ SceneRoots:
   - {fileID: 14381172}
   - {fileID: 496104891}
   - {fileID: 1345257630}
+  - {fileID: 195766033}

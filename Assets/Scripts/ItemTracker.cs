@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Util;
 
@@ -9,11 +10,14 @@ public class ItemTracker : MonoBehaviour
 {
     public static ItemTracker Instance { get; private set; }
     private GameObject item;
+    public ItemEvent itemEvents;
+
     public GameObject currentItem
     {
         get => item;
         set => item = value;
     }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,7 +49,6 @@ public class ItemTracker : MonoBehaviour
         //shorthand for: if *condition*, then currentItem = null, else = item.
         //can click twice on the same item to unselect.
         currentItem = (item == null || item.gameObject == currentItem) ? null : item.gameObject;
-        print(currentItem);
         return currentItem;
     }
 
@@ -78,6 +81,7 @@ public class ItemTracker : MonoBehaviour
             item.transform.localScale = itemSlot.localScale;
             item.gameObject.layer = itemSlot.gameObject.layer;
         }
+        itemEvents.ItemAdded(); //broadcast event 
     }
 
     /// <summary>
@@ -92,8 +96,22 @@ public class ItemTracker : MonoBehaviour
             GameObject item = GameObject.Find(itemName); 
             Destroy(item);
             currentItem = null;
+            itemEvents.ItemRemoved();
             return true;
         }
         return false;
     }
+
+    public Transform[] GetItems()
+    {
+        Transform[] inventory = new Transform[5];
+        var hotbar = GameObject.Find("Hotbar").transform;
+        int x = 0;
+        foreach (Transform slot in hotbar)
+        {
+            inventory[x] = slot.transform.GetChild(0);
+        }
+        return inventory;
+    }
+
 }
