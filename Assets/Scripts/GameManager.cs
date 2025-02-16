@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        //may need to change depending on previous saved location
         InitialiseScene();
     }
 
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
         store?.SetActive(false);
     }
 
+    //select which scene to switch to depending on which collider mouse collides w/
     private void GetClickedScene()
     {
         CacheGameObjects();
