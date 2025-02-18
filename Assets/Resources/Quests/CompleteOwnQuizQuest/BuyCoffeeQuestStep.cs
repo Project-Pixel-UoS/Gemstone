@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class BuyCoffeeQuestStep : QuestStep
 {
-    private void OnEnable()
+    private void Start()
     {
         ItemTracker.Instance.itemEvents.OnItemAdded += ItemAdded;
+    }
+    private void OnEnable()
+    {
+        if(ItemTracker.Instance != null) ItemTracker.Instance.itemEvents.OnItemAdded += ItemAdded;
     }
 
     private void OnDisable()
@@ -16,7 +20,6 @@ public class BuyCoffeeQuestStep : QuestStep
 
     private void ItemAdded()
     {
-        print(ItemTracker.Instance.GetItems());
         FinishQuestStep();
     }
 

@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using Util;
 
@@ -20,15 +19,13 @@ public class ItemTracker : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance != null)
         {
-            Destroy(this);
+            Debug.LogError("Found more than one Item Events Manager in the scene.");
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        Instance = this;
+        itemEvents = new ItemEvent();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -80,8 +77,9 @@ public class ItemTracker : MonoBehaviour
             item.transform.SetParent(itemSlot, false);
             item.transform.localScale = itemSlot.localScale;
             item.gameObject.layer = itemSlot.gameObject.layer;
+            itemEvents.ItemAdded();//broadcast event 
         }
-        itemEvents.ItemAdded(); //broadcast event 
+         
     }
 
     /// <summary>
@@ -109,7 +107,7 @@ public class ItemTracker : MonoBehaviour
         int x = 0;
         foreach (Transform slot in hotbar)
         {
-            inventory[x] = slot.transform.GetChild(0);
+            if (slot.transform.childCount != 0) inventory[x] = slot.transform.GetChild(0);
         }
         return inventory;
     }

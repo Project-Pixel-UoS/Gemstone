@@ -1,18 +1,19 @@
 using UnityEngine;
 using System;
+using Unity.VisualScripting.FullSerializer;
 
 public class ItemEvent
 {
     public event Action OnItemAdded;
     public void ItemAdded()
     {
-        if (OnItemAdded != null) OnItemAdded();
+        OnItemAdded?.Invoke();
     }
 
     public event Action OnItemRemoved;
 
     public void ItemRemoved()
     {
-        if (OnItemRemoved != null) OnItemRemoved();
+        OnItemRemoved?.Invoke();
     }
 }
