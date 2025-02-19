@@ -43,14 +43,16 @@ public class QuestPoint : MonoBehaviour
         if (QuestManager.Instance != null)
         {
             QuestManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
-            //Debug.Log("reenabled quest point " + questState);
+            Debug.Log("reenabled quest point " + questState);
         }
     }
 
+    /* uncomment in future in case of performance issue.
     private void OnDisable()
     {
         QuestManager.Instance.questEvents.onQuestStateChange -= QuestStateChange;
-    }
+        Debug.Log("disabled quest point " + questState);
+    }*/
 
     //checks if quest point has correct quest, then change state.
     private void QuestStateChange(Quest quest)
@@ -58,7 +60,7 @@ public class QuestPoint : MonoBehaviour
         if(quest.info.id.Equals(questID))
         {
             questState = quest.state;
-            //print("actually changed state" + quest.state);
+            print("actually changed state" + quest.state);
         }
     }
 
