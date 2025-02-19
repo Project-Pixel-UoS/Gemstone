@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 41771d14fa1061f4482cacf169e35ef3
+guid: 17fc8aa6c8f9aed41ace4578187d9a0a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6241922607756613096
-    second: Reception_0
+      213: 3172860995558525883
+    second: cavj0b2g_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,43 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Reception_0
+      name: cavj0b2g_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 596
-        height: 442
+        width: 583
+        height: 155
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 81aef29957c3069a0800000000000000
-      internalID: -6241922607756613096
+      spriteID: bbb45f1d344480c20800000000000000
+      internalID: 3172860995558525883
       vertices: []
       indices: 
       edges: []
@@ -134,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cavj0b2g_0: 3172860995558525883
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
