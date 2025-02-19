@@ -1,3 +1,5 @@
+//Class for quest objects. Stores information about a quest and its state.
+
 using UnityEngine;
 
 public class Quest
@@ -23,6 +25,10 @@ public class Quest
         return currQuestStepIndex < info.questSteps.Length; 
     }
 
+    /// <summary>
+    /// Creates a queststep game object in the scene.
+    /// </summary>
+    /// <param name="parent">parent to create the game object under.</param>
     public void InstantiateCurrQuestStep(Transform parent)
     {
         GameObject questStepPrefab = GetCurrentQuestStepPrefab();
@@ -34,6 +40,10 @@ public class Quest
 
     }
 
+    /// <summary>
+    /// get current quest step prefab.
+    /// </summary>
+    /// <returns>current quest step prefab.</returns>
     private GameObject GetCurrentQuestStepPrefab()
     {
         GameObject questStepPrefab = null;

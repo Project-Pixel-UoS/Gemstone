@@ -1,3 +1,5 @@
+//Quest Manager script. Mostly a blackbox. responsible for starting, advancing, and finishing quests. 
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,7 +34,7 @@ public class QuestManager : MonoBehaviour
         UpdateQuestStates();
     }
 
-    //constantly check if there are any quests taht can be started.
+    //constantly check if there are any quests that can be started.
     private void Update()
     {
         UpdateQuestStates();
@@ -55,6 +57,7 @@ public class QuestManager : MonoBehaviour
         questEvents.onFinishQuest -= FinishQuest;
     }
 
+    //initialise all quests in the game.
     private Dictionary<string, Quest> CreateQuestMap()
     {
         QuestInfoSO[] allQuests = Resources.LoadAll<QuestInfoSO>("Quests");
@@ -79,6 +82,11 @@ public class QuestManager : MonoBehaviour
         Debug.Log("updating quest "+quest.info.id+" to "+ quest.state);
     }
 
+    /// <summary>
+    /// checks quest prerequisites for quest to start.
+    /// </summary>
+    /// <param name="quest">quest to be checked for prereqs.</param>
+    /// <returns>true if all quest prereqs are complete, false otherwise.</returns>
     private bool CheckReqs(Quest quest)
     {
         bool meetsReqs = true;
@@ -89,11 +97,20 @@ public class QuestManager : MonoBehaviour
         return meetsReqs;
     }
 
+    /// <summary>
+    /// returns quest object by id (name).
+    /// </summary>
+    /// <param name="id">id (name) of the quest</param>
+    /// <returns>quest object in questMap dict.</returns>
     private Quest GetQuestByID(string id)
     {
         return questMap[id];
     }
 
+    /// <summary>
+    /// instantiates first quest step object under QuestManager.
+    /// </summary>
+    /// <param name="id">name of questSO to start.</param>
     private void StartQuest(string id)
     {
         Debug.Log("start quest");
@@ -102,6 +119,11 @@ public class QuestManager : MonoBehaviour
         quest.InstantiateCurrQuestStep(this.transform);
         ChangeQuestState(quest.info.id, QuestState.IN_PROGRESS);
     }
+
+    /// <summary>
+    /// if a questSO contains > 1 quest step, move onto next quest step, else update quest state.
+    /// </summary>
+    /// <param name="id">name of questSO to advance.</param>
     private void AdvanceQuest(string id)
     {
         Debug.Log("advance quest");
@@ -118,6 +140,11 @@ public class QuestManager : MonoBehaviour
             ChangeQuestState(quest.info.id, QuestState.CAN_FINISH);
         }
     }
+
+    /// <summary>
+    /// update questSO to CAN_FINISH.
+    /// </summary>
+    /// <param name="id">name of questSO to finish.</param>
     private void FinishQuest(string id)
     {
         Debug.Log("finish quest");
@@ -127,6 +154,10 @@ public class QuestManager : MonoBehaviour
         ChangeQuestState(quest.info.id, QuestState.FINISHED);
     }
 
+    /// <summary>
+    /// give rewards to player after quest is completed.
+    /// </summary>
+    /// <param name="quest">the quest that was completed.</param>
     private void ClaimRewards(Quest quest)
     {
         //TODO: add some rewards (game object?)

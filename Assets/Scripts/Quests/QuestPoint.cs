@@ -1,3 +1,4 @@
+// Script for any game object that acts as a quest start/end point. 
 using UnityEngine;
 using Util;
 
@@ -33,6 +34,7 @@ public class QuestPoint : MonoBehaviour
         }
     }
 
+    //add listener to quest manager on startup and enable.
     private void Start()
     {
         QuestManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
