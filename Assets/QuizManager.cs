@@ -80,8 +80,7 @@ public class QuizManager : MonoBehaviour
         else
         {
             Debug.Log("Out of Questions");
-        }
-        
+        }       
 
     }
 
