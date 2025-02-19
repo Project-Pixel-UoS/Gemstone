@@ -70,9 +70,18 @@ public class QuizManager : MonoBehaviour
     {
         currentQuestionID++;
 
-        QuestionText.text = QnA[currentQuestionID].Question;
+        if (currentQuestionID < QnA.Count)
+        {           
 
-        SetAnswers();
+            QuestionText.text = QnA[currentQuestionID].Question;
+
+            SetAnswers();
+        }
+        else
+        {
+            Debug.Log("Out of Questions");
+        }
+        
 
     }
 

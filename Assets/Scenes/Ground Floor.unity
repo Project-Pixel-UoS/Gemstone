@@ -1711,10 +1711,10 @@ MonoBehaviour:
   - Question: Question 2) Whats the Right Answer
     Answers:
     - Wrong Answer
+    - Wrong Answer
+    - Wrong Answer
     - Right Answer
-    - Wrong Answer
-    - Wrong Answer
-    CorrectAnswerIndex: 1
+    CorrectAnswerIndex: 3
   - Question: Question 3) Whats the Right Answer
     Answers:
     - Wrong Answer

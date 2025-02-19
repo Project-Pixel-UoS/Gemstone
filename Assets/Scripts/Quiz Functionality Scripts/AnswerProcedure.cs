@@ -51,8 +51,6 @@ public class AnswerProcedure : MonoBehaviour
         {
             Debug.Log("Not Correct");
             quizManager.incorrectAnswerProvided(); 
-        }        
-
-        
+        }                
     }
 }
