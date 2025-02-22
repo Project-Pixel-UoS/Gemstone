@@ -100,6 +100,10 @@ public class ItemTracker : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// get an array of items in inventory.
+    /// </summary>
+    /// <returns>all items in respective inventory slot.</returns>
     public Transform[] GetItems()
     {
         Transform[] inventory = new Transform[5];
