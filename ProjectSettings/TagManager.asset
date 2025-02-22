@@ -7,6 +7,7 @@ TagManager:
   - Inventory
   - GameStage
   - Item
+  - QuestPoint
   layers:
   - Default
   - TransparentFX
