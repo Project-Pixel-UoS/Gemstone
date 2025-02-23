@@ -84,4 +84,13 @@ public class QuizManager : MonoBehaviour
 
     }
 
+    private float receivedSliderValue;
+
+    // Method to receive slider value
+    public void ReceiveSliderValue(float value)
+    {
+        receivedSliderValue = value;
+        Debug.Log("Received slider value: " + receivedSliderValue);
+        // You can now use this value in your quiz logic
+    }
 }

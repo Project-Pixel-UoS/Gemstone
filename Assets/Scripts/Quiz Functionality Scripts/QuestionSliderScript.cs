@@ -8,6 +8,8 @@ public class QuestionSliderScript : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private TextMeshProUGUI sliderText;
 
+    public QuizManager quizManager; // Reference to the QuizManager script
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,10 +18,15 @@ public class QuestionSliderScript : MonoBehaviour
             sliderText.text = v.ToString("0.00");
         }); 
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SubmitSliderValue()
     {
-        
+        if (quizManager != null)
+        {
+            quizManager.ReceiveSliderValue(slider.value); // Send value to QuizManager
+        }
+        else
+        {
+            Debug.LogWarning("QuizManager reference not set in SliderHandler!");
+        }
     }
 }
