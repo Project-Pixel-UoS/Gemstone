@@ -1399,6 +1399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbd51dca8dbff54439b56a327c433068, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slider: {fileID: 512758554}
+  sliderText: {fileID: 270188902}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4609,7 +4611,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 3
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
