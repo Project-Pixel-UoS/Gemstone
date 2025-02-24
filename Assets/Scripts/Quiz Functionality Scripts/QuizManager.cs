@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -19,6 +20,10 @@ public class QuizManager : MonoBehaviour
     public int currentQuestionID;
 
     public TMP_Text QuestionText;
+
+    public GameObject mainPanel; // Main quiz UI (questions)
+    public GameObject responsePanel; // Temporary response screen
+    public TextMeshProUGUI responseText; // Text for feedback message
 
     private void Start()
     {
@@ -93,4 +98,23 @@ public class QuizManager : MonoBehaviour
         Debug.Log("Received slider value: " + receivedSliderValue);
         // You can now use this value in your quiz logic
     }
+
+    public void ShowResponse(string message, float duration = 2f)
+    {
+        StartCoroutine(DisplayResponse(message, duration));
+    }
+
+    private IEnumerator DisplayResponse(string message, float duration)
+    {
+        responseText.text = message;
+        mainPanel.SetActive(false);
+        responsePanel.SetActive(true);
+
+        yield return new WaitForSeconds(duration);
+
+        responsePanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
+
+
 }
