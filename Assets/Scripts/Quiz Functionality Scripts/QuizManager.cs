@@ -73,6 +73,7 @@ public class QuizManager : MonoBehaviour
     /// </summary>
     void generateQuestion()
     {
+        ShowResponse("Well.. ", 5);
         currentQuestionID++;
 
         if (currentQuestionID < QnA.Count)
