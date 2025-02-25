@@ -25,8 +25,14 @@ public class QuizManager : MonoBehaviour
     public GameObject responsePanel; // Temporary response screen
     public TextMeshProUGUI responseText; // Text for feedback message
 
+    [Header("Quiz Sections")]
+    public List<GameObject> quizSections; // Assign sections in the Inspector
+    private int currentSectionIndex = 0; //What Section we're on
+
     private void Start()
     {
+        ShowSection(0);
+
         QuestionText.text = QnA[currentQuestionID].Question;
 
         SetAnswers();
@@ -92,19 +98,33 @@ public class QuizManager : MonoBehaviour
 
     private float receivedSliderValue;
 
-    // Method to receive slider value
+    /// <summary>
+    /// Receives the slider value from the UI and updates the internal variable.
+    /// </summary>
+    /// <param name="value">The float value from the slider input.</param>
     public void ReceiveSliderValue(float value)
     {
         receivedSliderValue = value;
         Debug.Log("Received slider value: " + receivedSliderValue);
-        // You can now use this value in your quiz logic
+        // The received value can now be used in quiz logic.
     }
 
+    /// <summary>
+    /// Displays a response message to the user for a specified duration.
+    /// </summary>
+    /// <param name="message">The message to be displayed.</param>
+    /// <param name="duration">Duration for which the message will be shown (default: 2 seconds).</param>
     public void ShowResponse(string message, float duration = 2f)
     {
         StartCoroutine(DisplayResponse(message, duration));
     }
 
+    /// <summary>
+    /// Handles the display of the response message, temporarily hiding the main panel.
+    /// </summary>
+    /// <param name="message">The response message to be displayed.</param>
+    /// <param name="duration">Time in seconds before the response disappears.</param>
+    /// <returns>IEnumerator to handle the coroutine timing.</returns>
     private IEnumerator DisplayResponse(string message, float duration)
     {
         responseText.text = message;
@@ -115,6 +135,36 @@ public class QuizManager : MonoBehaviour
 
         responsePanel.SetActive(false);
         mainPanel.SetActive(true);
+    }
+
+
+    /// <summary>
+    /// Activates the specified quiz section and deactivates all others.
+    /// </summary>
+    /// <param name="index">Index of the section to activate.</param>
+    public void NextSection()
+    {
+        // Hide current section
+        if (currentSectionIndex < quizSections.Count)
+            quizSections[currentSectionIndex].SetActive(false);
+
+        // Move to the next section
+        currentSectionIndex++;
+
+        // Show the next section if it exists
+        if (currentSectionIndex < quizSections.Count)
+            ShowSection(currentSectionIndex);
+        else
+            Debug.Log("Quiz Complete!");
+    }
+
+    /// <summary>
+    /// Moves to the next quiz section if available.
+    /// </summary>
+    private void ShowSection(int index)
+    {
+        if (index >= 0 && index < quizSections.Count)
+            quizSections[index].SetActive(true);
     }
 
 
