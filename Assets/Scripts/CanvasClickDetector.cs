@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CanvasClickDetector : MonoBehaviour, IPointerClickHandler
+public class CanvasClickDetector : MonoBehaviour, IPointerDownHandler
 {
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         AdvanceDialogue();
     }

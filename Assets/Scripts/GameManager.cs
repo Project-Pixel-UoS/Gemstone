@@ -75,6 +75,11 @@ public class GameManager : MonoBehaviour
     //select which scene to switch to depending on which collider mouse collides w/
     private void GetClickedScene()
     {
+        if (DialogueHandler.IsActive())
+        {
+            return;
+        }
+        
         CacheGameObjects();
         var clickedItem = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
         if (clickedItem == null) return;
@@ -95,10 +100,16 @@ public class GameManager : MonoBehaviour
     /// then activates only the room that you want to show.
     /// </summary>
     /// <param name="roomToShow"></param>
-    private void SwitchRooms(GameObject roomToShow)
+    private void SwitchRooms(GameObject roomToShow, string entranceDialogueTag = null)
     {
+        if (entranceDialogueTag != null)
+        {
+            DialogueInstance DI = new DialogueInstance(entranceDialogueTag);
+            DI.StartDialogue();
+        }
+        
         if (panel == null || roomToShow == null) return;
-
+        Debug.Log(roomToShow.name);
         foreach (Transform child in panel.transform)
         {
             child.gameObject.SetActive(false);
@@ -113,7 +124,7 @@ public class GameManager : MonoBehaviour
     public void OnSignClicked() => SwitchRooms(cafe);
     public void OnChairClicked() => SwitchRooms(table);
     public void OnStoreClicked() => SwitchRooms(store);
-    public void OnCorridor1Clicked() => SwitchRooms(corridor1);    
+    public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
     public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
 
     public void OnBackButtonClicked()

@@ -70,6 +70,11 @@ public class ItemTracker : MonoBehaviour
     //layer we decide to put the room in future).
     public void PickupItem()
     {
+        if (DialogueHandler.IsActive())
+        {
+            return;
+        }
+        
         var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
         if (item != null && item.transform.tag.Equals("Item"))
         {
@@ -78,6 +83,9 @@ public class ItemTracker : MonoBehaviour
             item.transform.localScale = itemSlot.localScale;
             item.gameObject.layer = itemSlot.gameObject.layer;
             itemEvents.ItemAdded();//broadcast event 
+
+            DialogueInstance DI = new DialogueInstance(item.name);
+            DI.StartDialogue();
         }
          
     }
