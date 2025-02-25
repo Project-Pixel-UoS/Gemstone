@@ -44,11 +44,13 @@ public class QuizManager : MonoBehaviour
     /// </summary>
     public void correctAnswerProvided()
     {
+        ShowResponse("Good Job! For now... ", 4);
         generateQuestion();
     }
 
     public void incorrectAnswerProvided()
     {
+        ShowResponse("Well... that's bad... ", 4);
         //Add bad message here
     }
 
@@ -79,7 +81,6 @@ public class QuizManager : MonoBehaviour
     /// </summary>
     void generateQuestion()
     {
-        ShowResponse("Well.. ", 5);
         currentQuestionID++;
 
         if (currentQuestionID < QnA.Count)
