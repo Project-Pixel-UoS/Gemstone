@@ -5,6 +5,7 @@ public class DialogueTest : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Log("Being called");
         DialogueInstance dialogueInstance = new DialogueInstance("CafeCounter");
         dialogueInstance.StartDialogue();
     }

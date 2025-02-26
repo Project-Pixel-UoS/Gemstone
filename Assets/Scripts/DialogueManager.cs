@@ -5,11 +5,12 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine.InputSystem.LowLevel;
 
 public static class DialogueHandler
 {
     private static bool finishOnNextIter = false;
-    private static TextMeshProUGUI textElement;
+    private static TextMeshProUGUI textElement = null;
     private static bool hasFinished = false;
 
     private static GameObject canvasObj = null;
@@ -33,7 +34,7 @@ public static class DialogueHandler
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         }
 
-        if (textObj == null)
+        if (textObj == null || textElement == null)
         {
             textObj = new GameObject("DynamicDialogueText");
             textObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
@@ -72,8 +73,6 @@ public static class DialogueHandler
             rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
             rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
         }
-
-        // bool hasFinishedPara = false;
         
         // Text printing
         foreach (char c in text)
@@ -81,7 +80,6 @@ public static class DialogueHandler
             if (finishOnNextIter && skippable)
             {
                 textElement.text = text;
-                // hasFinishedPara = true;
                 break;
             }
             else
@@ -101,23 +99,30 @@ public static class DialogueHandler
             finishOnNextIter = true;
         }
     }
+
+    public static bool IsActive()
+    {
+        Debug.Log(!(canvasObj == null));
+        return !(canvasObj == null);
+    }
     public static string FetchDialogueFromTag(string tag)
     {
         StreamReader sr = new StreamReader("Assets/Resources/Dialogue.txt");
         string dialogue = sr.ReadToEnd().Split($"[{tag}/]")[1].Split($"[/{tag}]")[0].Trim();
         sr.Close();
-        return dialogue;
+        if (dialogue.Length > 1) { return dialogue; }
+        Debug.Log("No dialogue found for this tag");
+        return "No dialogue found for this tag";
     }
 
     public static bool IsFinished()
     {
         return hasFinished;
-        // hi
     }
 
     public static void ClearDialogue()
     {
-        if (hasFinished)
+        if (hasFinished && textElement != null)
         {
             textElement.text = "";
             textElement.GetComponent<TextMeshProUGUI>().text = "";
@@ -127,6 +132,7 @@ public static class DialogueHandler
     public static void DeleteTempObjs()
     {
         UnityEngine.Object.Destroy(canvasObj);
+        UnityEngine.Object.Destroy(textElement);
         UnityEngine.Object.Destroy(textObj);
         UnityEngine.Object.Destroy(rectTransformTXT);
         UnityEngine.Object.Destroy(backgroundObj);
@@ -172,7 +178,6 @@ public class DialogueInstance
     }
     public void StartDialogue()
     {
-        Debug.Log("StartDialogue called");
         CoroutineRunner.Instance.RunCoroutine(this.PlayDialogueSequentially());
     }
     private IEnumerator PlayDialogueSequentially()

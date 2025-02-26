@@ -9,22 +9,23 @@ public class ItemTracker : MonoBehaviour
 {
     public static ItemTracker Instance { get; private set; }
     private GameObject item;
+    public ItemEvent itemEvents;
+
     public GameObject currentItem
     {
         get => item;
         set => item = value;
     }
+
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (Instance != null)
         {
-            Destroy(this);
+            Debug.LogError("Found more than one Item Events Manager in the scene.");
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        Instance = this;
+        itemEvents = new ItemEvent();
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Update()
@@ -45,7 +46,6 @@ public class ItemTracker : MonoBehaviour
         //shorthand for: if *condition*, then currentItem = null, else = item.
         //can click twice on the same item to unselect.
         currentItem = (item == null || item.gameObject == currentItem) ? null : item.gameObject;
-        print(currentItem);
         return currentItem;
     }
 
@@ -70,6 +70,11 @@ public class ItemTracker : MonoBehaviour
     //layer we decide to put the room in future).
     public void PickupItem()
     {
+        if (DialogueHandler.IsActive())
+        {
+            return;
+        }
+        
         var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
         if (item != null && item.transform.tag.Equals("Item"))
         {
@@ -77,7 +82,12 @@ public class ItemTracker : MonoBehaviour
             item.transform.SetParent(itemSlot, false);
             item.transform.localScale = itemSlot.localScale;
             item.gameObject.layer = itemSlot.gameObject.layer;
+            itemEvents.ItemAdded();//broadcast event 
+
+            DialogueInstance DI = new DialogueInstance(item.name);
+            DI.StartDialogue();
         }
+         
     }
 
     /// <summary>
@@ -92,8 +102,26 @@ public class ItemTracker : MonoBehaviour
             GameObject item = GameObject.Find(itemName); 
             Destroy(item);
             currentItem = null;
+            itemEvents.ItemRemoved();
             return true;
         }
         return false;
     }
+
+    /// <summary>
+    /// get an array of items in inventory.
+    /// </summary>
+    /// <returns>all items in respective inventory slot.</returns>
+    public Transform[] GetItems()
+    {
+        Transform[] inventory = new Transform[5];
+        var hotbar = GameObject.Find("Hotbar").transform;
+        int x = 0;
+        foreach (Transform slot in hotbar)
+        {
+            if (slot.transform.childCount != 0) inventory[x] = slot.transform.GetChild(0);
+        }
+        return inventory;
+    }
+
 }

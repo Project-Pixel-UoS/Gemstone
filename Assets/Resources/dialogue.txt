@@ -14,9 +14,15 @@ The values most recently input are re-used until changed again
 
 
 [CafeCounter/]
-Hello, welcome to the cafe! Hello, welcome to the cafe! Hello, welcome to the cafe!
-What can I get started for you? What can I get started for you? What can I get started for you?
-This is awesome! This is awesome! This is awesome! This is awesome! This is awesome!
 Hello, welcome to the cafe! What can I get started for you? H  GIHCGUWOUID GAWIDG IOUWd|0.03|1
 This is awesome! GIHCGUWOUID GAWIDG IOUWd GIHCGUWOUID GAWIDG IOUWd
 [/CafeCounter]
+
+[corridor1/]
+WELCOME TO THE CORRIDOROR!!!!!!|0.03|1
+WELawddawdawawddawCOME TO THE CORRIDOROR!!!!!!!!!!!!!!!!!
+[/corridor1]
+
+[Item 4/]
+ITEM FOUR OMG!!!!!
+[/Item 4]
