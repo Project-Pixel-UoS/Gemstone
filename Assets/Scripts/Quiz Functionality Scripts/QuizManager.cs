@@ -164,8 +164,10 @@ public class QuizManager : MonoBehaviour
     /// </summary>
     private void ShowSection(int index)
     {
-        if (index >= 0 && index < quizSections.Count)
-            quizSections[index].SetActive(true);
+        for (int i = 0; i < quizSections.Count; i++)
+        {
+            quizSections[i].SetActive(i == index);
+        }
     }
 
 
