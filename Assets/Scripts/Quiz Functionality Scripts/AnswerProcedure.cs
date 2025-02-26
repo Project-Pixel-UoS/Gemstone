@@ -40,7 +40,7 @@ public class AnswerProcedure : MonoBehaviour
             // Check if three questions have been answered and trigger the night transition.
             if (answeredQuestionsNum == 3)
             {
-                dayNightScript.TransitionToNight();
+                quizManager.NextSection();
             }
             else
             {
