@@ -188,6 +188,7 @@ public class QuizManager : MonoBehaviour
             if (toggle == correctToggle)
             {
                 DisplayResponse("Well Done! Moving On...", 3);
+                NextSection();
                 return;
             }
         }
