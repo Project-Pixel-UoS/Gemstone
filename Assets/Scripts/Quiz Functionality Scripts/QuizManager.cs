@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 /// <remarks>
@@ -29,6 +30,11 @@ public class QuizManager : MonoBehaviour
     public List<GameObject> quizSections; // Assign sections in the Inspector
     private int currentSectionIndex = 0; //What Section we're on
 
+    [Header("Spot the Difference")]
+    public Toggle correctToggle; // Set this in the Inspector
+    public ToggleGroup toggleGroup;
+    public Button toggleSubmitButton;
+
     private void Start()
     {
         ShowSection(0);
@@ -36,6 +42,8 @@ public class QuizManager : MonoBehaviour
         QuestionText.text = QnA[currentQuestionID].Question;
 
         SetAnswers();
+
+        toggleSubmitButton.onClick.AddListener(CheckSpotTheDifference);
     }
 
     /// <summary>
@@ -170,5 +178,22 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the selected toggle is correct.
+    /// </summary>
+    public void CheckSpotTheDifference()
+    {
+        foreach (Toggle toggle in toggleGroup.ActiveToggles())
+        {
+            if (toggle == correctToggle)
+            {
+                DisplayResponse("Well Done! Moving On...", 3);
+                return;
+            }
+        }
+
+        DisplayResponse("You had a 50/50 shot and still failed...", 3);
+        return;
+    }
 
 }
