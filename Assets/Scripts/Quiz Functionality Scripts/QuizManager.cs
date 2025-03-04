@@ -26,6 +26,7 @@ public class QuizManager : MonoBehaviour
     public GameObject responsePanel; // Temporary response screen
     public TextMeshProUGUI responseText; // Text for feedback message
 
+
     [Header("Quiz Sections")]
     public List<GameObject> quizSections; // Assign sections in the Inspector
     private int currentSectionIndex = 0; //What Section we're on
@@ -137,13 +138,32 @@ public class QuizManager : MonoBehaviour
     private IEnumerator DisplayResponse(string message, float duration)
     {
         responseText.text = message;
-        mainPanel.SetActive(false);
+
+        // Set mainPanel to the currently active section
+        foreach (GameObject panel in quizSections)
+        {
+            if (panel.activeSelf)
+            {
+                mainPanel = panel;
+                break;
+            }
+        }
+
+        if (mainPanel != null)
+        {
+            mainPanel.SetActive(false);
+        }
+
         responsePanel.SetActive(true);
 
         yield return new WaitForSeconds(duration);
 
         responsePanel.SetActive(false);
-        mainPanel.SetActive(true);
+
+        if (mainPanel != null)
+        {
+            mainPanel.SetActive(true);
+        }
     }
 
 
