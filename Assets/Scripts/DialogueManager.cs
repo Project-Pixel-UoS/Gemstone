@@ -41,7 +41,9 @@ public static class DialogueHandler
             textObj = new GameObject("DynamicDialogueText");
             textObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
             textElement = textObj.AddComponent<TextMeshProUGUI>();
-            textElement.fontSize = 60;
+            textElement.enableAutoSizing = true;
+            textElement.fontSizeMin = 20;
+            textElement.fontSizeMax = 45;
             textElement.color = Color.black;
             textObj.transform.SetSiblingIndex(1);
         }
@@ -51,6 +53,9 @@ public static class DialogueHandler
         {
             rectTransformTXT = textObj.GetComponent<RectTransform>();
             rectTransformTXT.sizeDelta =
+                new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
+            rectTransformTXT.anchoredPosition = new Vector2(0 + textPaddingPX_X, -Screen.height / 3 - textPaddingPX_Y);
+            textElement.rectTransform.sizeDelta =
                 new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
             rectTransformTXT.anchoredPosition = new Vector2(0 + textPaddingPX_X, -Screen.height / 3 - textPaddingPX_Y);
         }
@@ -97,6 +102,7 @@ public static class DialogueHandler
                 textElement.text += c;
                 yield return new WaitForSeconds(delay);
             }
+            textElement.fontSize = textElement.fontSize * 0.7f;
         }
         
         finishOnNextIter = false;
