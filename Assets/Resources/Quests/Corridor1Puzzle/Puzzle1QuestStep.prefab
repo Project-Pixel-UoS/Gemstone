@@ -48,3 +48,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad5877c4e14afd846a89ddb797646b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectionMarker: {fileID: 3541706194086048579, guid: e0fcbac7d397f714b81edddfe4c03e6e, type: 3}
