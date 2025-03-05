@@ -141,4 +141,18 @@ public class GameManager : MonoBehaviour
             SwitchRooms(reception);
         }
     }
+
+    public void zoomOnTable()
+    {
+        GameObject roomTable = GameObject.Find("PortionToClick");
+        GameObject screenToZoom = GameObject.Find("TableContainer");
+        if (roomTable != null)
+        {
+            screenToZoom.SetActive(true);
+        }
+
+    }
+
+
+
 }
