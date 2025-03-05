@@ -27,6 +27,7 @@ public class Puzzle1QuestStep : QuestStep
         {
             clickedScene = GetClickedScene();
             clickedOrder.Add(clickedScene);
+            PlaceSelectionMarker();
             Debug.Log(clickedScene);
         }
         if (clickedOrder.Count == 4)
@@ -118,6 +119,16 @@ public class Puzzle1QuestStep : QuestStep
         backButton?.SetActive(true);
         fail4?.SetActive(false);
 
+    }
+    private void PlaceSelectionMarker()
+    {
+        var clickedItem = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
+        Vector3 targetPos = clickedItem.transform.position;
+        if (clickedItem != null)
+        {
+            Instantiate(selectionMarker, targetPos, Quaternion.identity,
+                GameObject.FindGameObjectWithTag("GameStage").transform);
+        }
     }
 
 }
