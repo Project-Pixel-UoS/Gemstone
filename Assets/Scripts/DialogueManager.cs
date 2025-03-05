@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using UnityEngine.InputSystem.LowLevel;
 
@@ -22,7 +23,8 @@ public static class DialogueHandler
     
     private const int textPaddingPX_X = 30;
     private const int textPaddingPX_Y = 20;
-    public static IEnumerator Display(string text, float delay, bool skippable)
+
+    public static IEnumerator Display(string text, float delay, bool skippable, string font_name)
     {
         Debug.Log("Display called");
         hasFinished = false;
@@ -39,10 +41,12 @@ public static class DialogueHandler
             textObj = new GameObject("DynamicDialogueText");
             textObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
             textElement = textObj.AddComponent<TextMeshProUGUI>();
-            textElement.fontSize = 30;
+            textElement.fontSize = 60;
+            textElement.color = Color.black;
             textObj.transform.SetSiblingIndex(1);
         }
-
+        textElement.font = Resources.Load<TMP_FontAsset>($"{font_name}");
+        
         if (rectTransformTXT == null)
         {
             rectTransformTXT = textObj.GetComponent<RectTransform>();
@@ -72,6 +76,12 @@ public static class DialogueHandler
             rectTransformBG = backgroundObj.GetComponent<RectTransform>();
             rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
             rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
+        }
+        
+        // Debug.Log(textElement.font.faceInfo.familyName);
+        if (textElement.font.faceInfo.familyName == "Strange Path")
+        {
+            text = text.ToUpper();
         }
         
         // Text printing
@@ -157,27 +167,25 @@ public class DialogueInstance
         
         float typingDelay = 0.025f;
         bool skippable = true;
+        string font_name = "normal";
         
         foreach (string line in dialogueText.Split('\n'))
         {
-            if (dialogueText.IndexOf(line) == 0 || dialogueText.IndexOf(line) == dialogueText.Length - 1)
-            {
-                continue;
-            }
-
-            var s = line.Split("|");
+            var s = line.Trim().Split("|");
 
             if (s.Length > 1)
             {
                 typingDelay = float.Parse(s[1]);
                 skippable = Convert.ToBoolean(int.Parse(s[2]));
+                font_name = s[3].Trim();
             }
-            dialogueLines.Add(new DialogueBlock(s[0], typingDelay, skippable));
+            dialogueLines.Add(new DialogueBlock(s[0], typingDelay, skippable, font_name));
             
         }
     }
     public void StartDialogue()
     {
+        // Debug.Log("Starting Dialogue");
         CoroutineRunner.Instance.RunCoroutine(this.PlayDialogueSequentially());
     }
     private IEnumerator PlayDialogueSequentially()
@@ -214,16 +222,17 @@ public class DialogueBlock
     public string text;
     public float letterDelay;
     public bool skippable;
-    public DialogueBlock(string text, float letterDelay, bool skippable) // Item dependancy waiting to be added
+    public string font_name;
+    public DialogueBlock(string text, float letterDelay, bool skippable, string font_name) // Item dependancy waiting to be added
     {
         this.text = text;
         this.letterDelay = letterDelay;
         this.skippable = skippable;
+        this.font_name = font_name;
     }
     public void Play()
     {
-        Debug.Log("Dialoue block played");
-        CoroutineRunner.Instance.RunCoroutine(DialogueHandler.Display(this.text, this.letterDelay, this.skippable));
+        CoroutineRunner.Instance.RunCoroutine(DialogueHandler.Display(this.text, this.letterDelay, this.skippable, font_name));
     }
 }
 
