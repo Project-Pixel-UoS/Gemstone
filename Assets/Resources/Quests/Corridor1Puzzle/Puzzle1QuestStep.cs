@@ -48,6 +48,12 @@ public class Puzzle1QuestStep : QuestStep
         }
     }
 
+    /// <summary>
+    /// Compares the order of clicked items to the correct order
+    /// </summary>
+    /// <param name="correct"></param>
+    /// <param name="clicked"></param>
+    /// <returns>true if correct, false is incorrect</returns>
     private bool CompareOrders(string[] correct, string[] clicked)
     {
         int correctCount = 0;
@@ -65,6 +71,10 @@ public class Puzzle1QuestStep : QuestStep
         return false;
     }
 
+    /// <summary>
+    /// Finds object that you are clicking
+    /// </summary>
+    /// <returns>name of the gameobject clicked</returns>
     private string GetClickedScene()
     {
         var clickedItem = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
@@ -73,6 +83,10 @@ public class Puzzle1QuestStep : QuestStep
             return clickedItem.gameObject.name;
         }
     }
+    /// <summary>
+    /// Stores all the objects in the scene so they can be accessed throughout the script
+    /// This is done because you can't place gameobjects onto a prefab script in the inspector.
+    /// </summary>
     private void StoreObjects()
     {
         panel = GameObject.FindWithTag("GameStage");
@@ -83,6 +97,13 @@ public class Puzzle1QuestStep : QuestStep
         fail3 = panel.transform.Find("Fail3").gameObject;
         fail4 = panel.transform.Find("Fail4").gameObject;
     }
+    /// <summary>
+    /// Reparents the children of the previous attempt of the puzzle to the next,
+    /// this is used because each attempt has the same things in it so this removes
+    /// the need for duplicating gameobjects
+    /// </summary>
+    /// <param name="curr"></param>
+    /// <param name="prev"></param>
     private void ReparentChildren(GameObject curr, GameObject prev)
     {
         curr?.SetActive(true);
@@ -92,6 +113,10 @@ public class Puzzle1QuestStep : QuestStep
         steps.transform.SetParent(curr.transform, true);
         prev?.SetActive(false);  
     }
+    /// <summary>
+    /// Moves spooky guy closer with each fail
+    /// </summary>
+    /// <param name="retries"></param>
     private void MoveSpookyCloser(int retries)
     { 
         backButton.SetActive(false);
@@ -101,10 +126,14 @@ public class Puzzle1QuestStep : QuestStep
             case 1: ReparentChildren(fail1, corridor1); break;
             case 2: ReparentChildren(fail2, fail1); break;
             case 3: ReparentChildren(fail3, fail2); break;
-            case 4: StartCoroutine(DeathScrean()); break;
+            case 4: StartCoroutine(DeathScreen()); break;
         }
     }
-    private IEnumerator DeathScrean()
+    /// <summary>
+    /// This is used to show a "death" screen when you fail the final attempt
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator DeathScreen()
     {
         ReparentChildren(corridor1, fail3);
 
@@ -120,6 +149,7 @@ public class Puzzle1QuestStep : QuestStep
         fail4?.SetActive(false);
 
     }
+    //wip: places selection marker, currently no way to destory them.
     private void PlaceSelectionMarker()
     {
         var clickedItem = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
