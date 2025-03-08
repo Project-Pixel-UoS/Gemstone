@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Util;
 using UnityEngine.SceneManagement;
@@ -118,6 +119,15 @@ public class GameManager : MonoBehaviour
         roomToShow.SetActive(true);
         if (roomToShow != mainHall) backButton?.SetActive(true);
     }
+    /*
+    private void RoomTransitionFade()
+    {
+        // yield return new WaitForSeconds();
+
+        return new NotImplementedException();
+    }
+    */
+    
     /// <summary>
     /// Room switching functions
     /// </summary>

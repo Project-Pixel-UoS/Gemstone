@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem.LowLevel;
 
 public static class DialogueHandler
@@ -155,6 +156,29 @@ public static class DialogueHandler
         UnityEngine.Object.Destroy(backgroundImage);
         UnityEngine.Object.Destroy(rectTransformBG);
     }
+
+    public static void ToggleDarkOverlay()
+    {
+        if (GameObject.Find("DarkScreenOverlay").IsUnityNull())
+        {
+            GameObject overlay = new GameObject("DarkScreenOverlay");
+            overlay.transform.SetParent(GameObject.Find("Canvas").transform, false);
+            Image overlayImage = overlay.AddComponent<Image>();
+            overlayImage.color = new Color(0.5f, 0.5f, 0.5f, 0.4f);
+            
+            RectTransform rectTransform = overlay.GetComponent<RectTransform>();
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.one;
+            rectTransform.sizeDelta = Vector2.zero;
+            rectTransform.anchoredPosition = Vector2.zero;
+            
+            overlay.transform.SetSiblingIndex(overlay.transform.childCount - 2);
+        }
+        else
+        {
+            UnityEngine.Object.Destroy(GameObject.Find("DarkScreenOverlay"));
+        }
+    }
 }
 
 public class DialogueInstance
@@ -196,12 +220,9 @@ public class DialogueInstance
     }
     private IEnumerator PlayDialogueSequentially()
     {
+        DialogueHandler.ToggleDarkOverlay();
         foreach (DialogueBlock line in dialogueLines)
         {
-            // var index = dialogueLines.IndexOf(line);
-            
-            // Debug.Log($"{index} - {line.text}");
-            
             DialogueHandler.ClearDialogue();
             
             line.Play();
@@ -213,6 +234,7 @@ public class DialogueInstance
 
             yield return new WaitForSeconds(PAUSE_BETWEEN_BLOCKS);
         }
+        DialogueHandler.ToggleDarkOverlay();
         
         
         // Destroy all the dialogue related things
@@ -238,6 +260,7 @@ public class DialogueBlock
     }
     public void Play()
     {
+        // Actual call for dialogue being shown
         CoroutineRunner.Instance.RunCoroutine(DialogueHandler.Display(this.text, this.letterDelay, this.skippable, font_name));
     }
 }
