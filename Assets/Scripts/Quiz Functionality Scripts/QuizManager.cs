@@ -82,7 +82,6 @@ public class QuizManager : MonoBehaviour
     {
         for (int i = 0; i < options.Length; i++)
         {
-            Debug.Log(currentQuestionID);
             options[i].GetComponent<AnswerProcedure>().isCorrect = false;
             options[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = QnA[currentQuestionID].Answers[i];
 
@@ -91,7 +90,6 @@ public class QuizManager : MonoBehaviour
                 options[i].GetComponent<AnswerProcedure>().isCorrect = true;
             }
 
-            Debug.Log(currentQuestionID);
         }
     }
 
@@ -111,7 +109,6 @@ public class QuizManager : MonoBehaviour
         }
         else
         {
-            
             Debug.Log("Out of Questions");
         }    
     }
@@ -125,7 +122,6 @@ public class QuizManager : MonoBehaviour
     public void ReceiveSliderValue(float value)
     {
         receivedSliderValue = value;
-        Debug.Log("Received slider value: " + receivedSliderValue);
         // The received value can now be used in quiz logic.
     }
 
@@ -225,7 +221,6 @@ public class QuizManager : MonoBehaviour
         {
             if (toggle == correctToggle)
             {
-                Debug.Log("Correct Answer Logged");
                 StartCoroutine(ShowResponseAndProceed("Well Done! Moving On...", 2));
                 return;
             }
@@ -237,7 +232,6 @@ public class QuizManager : MonoBehaviour
     {
         if (Mathf.Approximately(answerSlider.value, correctValue)) // Allow minor float precision errors
         {
-            Debug.Log("Correct Answer Logged");
             StartCoroutine(ShowResponseAndProceed("Correct!", 2));
             return;
         }
