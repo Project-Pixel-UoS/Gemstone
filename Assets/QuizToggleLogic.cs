@@ -7,6 +7,7 @@ public class QuizToggleLogic : MonoBehaviour
     [SerializeField] private TMP_Text textfield;
     [SerializeField] private string message;
 
+
     public void SendMessage(bool toggleValue)
     {
         if (toggleValue)

@@ -2166,7 +2166,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &621161239
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3203,21 +3203,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 512758555}
-        m_TargetAssemblyTypeName: QuestionSliderScript, Assembly-CSharp
-        m_MethodName: SubmitSliderValue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1084747766}
         m_TargetAssemblyTypeName: QuizManager, Assembly-CSharp
-        m_MethodName: NextSection
+        m_MethodName: CheckSliderAnswer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3798,9 +3786,13 @@ MonoBehaviour:
   - {fileID: 764780013}
   - {fileID: 1297889101}
   - {fileID: 1880736602}
+  currentSectionIndex: 0
   correctToggle: {fileID: 145469940}
   toggleGroup: {fileID: 1105853906}
   toggleSubmitButton: {fileID: 1372686825}
+  answerSlider: {fileID: 512758554}
+  sliderSubmitButton: {fileID: 948835343}
+  correctValue: 44
 --- !u!1 &1105853904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3899,7 +3891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1119422960
 RectTransform:
   m_ObjectHideFlags: 0

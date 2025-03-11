@@ -29,12 +29,17 @@ public class QuizManager : MonoBehaviour
 
     [Header("Quiz Sections")]
     public List<GameObject> quizSections; // Assign sections in the Inspector
-    private int currentSectionIndex = 0; //What Section we're on
+    public int currentSectionIndex = 0; //What Section we're on
 
     [Header("Spot the Difference")]
     public Toggle correctToggle; // Set this in the Inspector
     public ToggleGroup toggleGroup;
     public Button toggleSubmitButton;
+
+    [Header("Slider Section")]
+    public Slider answerSlider;
+    public Button sliderSubmitButton;
+    public float correctValue = 44f; // Set the correct slider value in the Inspector
 
     private void Start()
     {
@@ -45,6 +50,7 @@ public class QuizManager : MonoBehaviour
         SetAnswers();
 
         toggleSubmitButton.onClick.AddListener(CheckSpotTheDifference);
+        sliderSubmitButton.onClick.AddListener(CheckSliderAnswer);
     }
 
     /// <summary>
@@ -53,13 +59,13 @@ public class QuizManager : MonoBehaviour
     /// </summary>
     public void correctAnswerProvided()
     {
-        ShowResponse("Good Job! For now... ", 4);
+        ShowResponse("Good Job! For now... ", 2);
         generateQuestion();
     }
 
     public void incorrectAnswerProvided()
     {
-        ShowResponse("Well... that's bad... ", 4);
+        ShowResponse("Well... that's bad... ", 2);
         //Add bad message here
     }
 
@@ -139,20 +145,10 @@ public class QuizManager : MonoBehaviour
     {
         responseText.text = message;
 
-        // Set mainPanel to the currently active section
-        foreach (GameObject panel in quizSections)
-        {
-            if (panel.activeSelf)
-            {
-                mainPanel = panel;
-                break;
-            }
-        }
+        // Get the currently active section
+        mainPanel = quizSections[currentSectionIndex];
 
-        if (mainPanel != null)
-        {
-            mainPanel.SetActive(false);
-        }
+        mainPanel.SetActive(false);
 
         responsePanel.SetActive(true);
 
@@ -160,10 +156,8 @@ public class QuizManager : MonoBehaviour
 
         responsePanel.SetActive(false);
 
-        if (mainPanel != null)
-        {
-            mainPanel.SetActive(true);
-        }
+        mainPanel.SetActive(true);
+        
     }
 
 
@@ -198,6 +192,26 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    private IEnumerator ShowResponseAndProceed(string message, float duration)
+    {
+        responseText.text = message;
+
+        // Get the currently active section
+        mainPanel = quizSections[currentSectionIndex];
+
+        mainPanel.SetActive(false);
+
+        responsePanel.SetActive(true);
+
+        yield return new WaitForSeconds(duration);
+
+        responsePanel.SetActive(false);
+
+        mainPanel.SetActive(true);
+
+        NextSection();
+    }
+
     /// <summary>
     /// Checks if the selected toggle is correct.
     /// </summary>
@@ -207,14 +221,22 @@ public class QuizManager : MonoBehaviour
         {
             if (toggle == correctToggle)
             {
-                DisplayResponse("Well Done! Moving On...", 3);
-                NextSection();
+                Debug.Log("Correct Answer Logged");
+                StartCoroutine(ShowResponseAndProceed("Well Done! Moving On...", 2));
                 return;
             }
         }
 
-        DisplayResponse("You had a 50/50 shot and still failed...", 3);
-        return;
+        ShowResponse("You had a 50/50 shot and still failed...", 2);
     }
-
+    public void CheckSliderAnswer()
+    {
+        if (Mathf.Approximately(answerSlider.value, correctValue)) // Allow minor float precision errors
+        {
+            Debug.Log("Correct Answer Logged");
+            StartCoroutine(ShowResponseAndProceed("Correct!", 2));
+            return;
+        }
+        ShowResponse("Incorrect! Try again.", 2);
+    }
 }
