@@ -60,6 +60,11 @@ public class QuizManager : MonoBehaviour
     public void correctAnswerProvided()
     {
         ShowResponse("Good Job! For now... ", 2);
+
+        if (!((currentQuestionID + 1) < QnA.Count))
+        {
+            StartCoroutine(ShowResponseAndProceed("Correct!", 2));
+        }
         generateQuestion();
     }
 
@@ -100,16 +105,15 @@ public class QuizManager : MonoBehaviour
 
         if (currentQuestionID < QnA.Count)
         {           
-
             QuestionText.text = QnA[currentQuestionID].Question;
 
             SetAnswers();
         }
         else
         {
+            
             Debug.Log("Out of Questions");
-        }       
-
+        }    
     }
 
     private float receivedSliderValue;

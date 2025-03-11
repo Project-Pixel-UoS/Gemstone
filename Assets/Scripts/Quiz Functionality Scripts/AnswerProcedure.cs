@@ -37,15 +37,10 @@ public class AnswerProcedure : MonoBehaviour
             // Increment the number of answered questions.
             answeredQuestionsNum++;
 
-            // Check if three questions have been answered and trigger the night transition.
-            if (answeredQuestionsNum == 3)
-            {
-                quizManager.NextSection();
-            }
-            else
-            {
-                quizManager.correctAnswerProvided();
-            }
+            Debug.Log(answeredQuestionsNum);
+
+            quizManager.correctAnswerProvided();
+            
         }
         else
         {
