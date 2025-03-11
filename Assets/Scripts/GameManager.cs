@@ -1,8 +1,10 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Util;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
-using Microsoft.Unity.VisualStudio.Editor;
 using JetBrains.Annotations;
 using UnityEditor.Animations;
 public class GameManager : MonoBehaviour
@@ -96,20 +98,24 @@ public class GameManager : MonoBehaviour
             case "Corridor 1": OnCorridor1Clicked(); break;
         }
     }
+
+    private void SwitchRooms(GameObject roomToShow, string entranceDialogueTag = null)
+    {
+        StartCoroutine(SwitchRoomsIE(roomToShow, entranceDialogueTag));
+    }
+    
     /// <summary>
     /// Loops through each child of the panel transform and deactivates them,
     /// then activates only the room that you want to show.
     /// </summary>
     /// <param name="roomToShow"></param>
-    private void SwitchRooms(GameObject roomToShow, string entranceDialogueTag = null)
+    private IEnumerator SwitchRoomsIE(GameObject roomToShow, string entranceDialogueTag)
     {
-        if (entranceDialogueTag != null)
-        {
-            DialogueInstance DI = new DialogueInstance(entranceDialogueTag);
-            DI.StartDialogue();
-        }
+        yield return StartCoroutine(RoomTransitionFade(true));
+        yield return new WaitForSeconds(0.5f);
+        DestroyTransitionOverlay();
         
-        if (panel == null || roomToShow == null) return;
+        if (panel == null || roomToShow == null) yield break;
         Debug.Log(roomToShow.name);
         foreach (Transform child in panel.transform)
         {
@@ -118,15 +124,66 @@ public class GameManager : MonoBehaviour
 
         roomToShow.SetActive(true);
         if (roomToShow != mainHall) backButton?.SetActive(true);
+        
+        yield return StartCoroutine(RoomTransitionFade(false));
+        DestroyTransitionOverlay();
+        // yield return new WaitForSeconds(0.3f);
+        if (entranceDialogueTag != null)
+        {
+            DialogueInstance DI = new DialogueInstance(entranceDialogueTag);
+            DI.StartDialogue();
+        }
     }
-    /*
-    private void RoomTransitionFade()
+    
+    private IEnumerator RoomTransitionFade(bool fadeIn)
     {
-        // yield return new WaitForSeconds();
+        GameObject overlay = new GameObject("TransitionOverlay");
+        overlay.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        Image overlayImage = overlay.AddComponent<Image>();
+        overlayImage.color = new Color(0f, 0f, 0f, 0f);
+        
+        RectTransform rectTransform = overlay.GetComponent<RectTransform>();
+        rectTransform.anchorMin = Vector2.zero;
+        rectTransform.anchorMax = Vector2.one;
+        rectTransform.sizeDelta = Vector2.zero;
+        rectTransform.anchoredPosition = Vector2.zero;
+            
+        overlay.transform.SetSiblingIndex(overlay.transform.childCount - 2);
+        
+        const int fadeDuration = 1;
+        
+        for (float time = 0; time < fadeDuration; time += Time.deltaTime)
+        {
+            float alpha;
+            if (fadeIn)
+            {
+                // Debug.Log("Fading In");
+                alpha = Mathf.Lerp(0, 1, time / fadeDuration);
+            }
+            else
+            {
+                // Debug.Log("Fading Out");
+                alpha = Mathf.Lerp(1, 0, time / fadeDuration);
+            }
+            overlayImage.color = new Color(0, 0, 0, alpha);
+            yield return null;
+        }
 
-        return new NotImplementedException();
+        if (fadeIn)
+        {
+            overlayImage.color = new Color(0, 0, 0, 1);
+        }
+        else
+        {
+            overlayImage.color = new Color(0, 0, 0, 0);
+        }
     }
-    */
+
+    private void DestroyTransitionOverlay()
+    {
+        Destroy(GameObject.Find("TransitionOverlay"));
+    }
+    
     
     /// <summary>
     /// Room switching functions
