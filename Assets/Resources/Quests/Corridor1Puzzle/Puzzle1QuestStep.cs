@@ -40,6 +40,7 @@ public class Puzzle1QuestStep : QuestStep
             else
             {
                 clickedOrder.Clear();
+                DestroySelectionMarkers();
                 retryCount++;
                 MoveSpookyCloser(retryCount);
                 Debug.Log("Try again! Attempt: " + retryCount);
@@ -160,9 +161,19 @@ public class Puzzle1QuestStep : QuestStep
                 GameObject.FindGameObjectWithTag("GameStage").transform);
         }
     }
+    private void DestroySelectionMarkers()
+    {
+        foreach(Transform child in panel.transform)
+        {
+            if (child.gameObject.name == "SelectionMarker(Clone)")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+    }
 
 }
 
-    
+
 
 
