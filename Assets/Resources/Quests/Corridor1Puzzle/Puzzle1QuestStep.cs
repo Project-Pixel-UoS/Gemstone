@@ -23,12 +23,16 @@ public class Puzzle1QuestStep : QuestStep
     }
     private void Update()
     {
-        if (Utils.IsMouseClicked() && Utils.CheckMousePosInsideStage("GameStage"))
+        if (Utils.IsMouseClicked() && Utils.CheckMousePosInsideStage("GameStage")
+            && Utils.CheckMousePosInsideStage("Puzzle"))
         {
             clickedScene = GetClickedScene();
             clickedOrder.Add(clickedScene);
-            PlaceSelectionMarker();
-            Debug.Log(clickedScene);
+            if (retryCount < 4)
+            {
+                PlaceSelectionMarker();
+            }
+            Debug.Log(clickedScene + retryCount);
         }
         if (clickedOrder.Count == 4)
         {
@@ -141,13 +145,13 @@ public class Puzzle1QuestStep : QuestStep
         fail4?.SetActive(true);
         fail3?.SetActive(false);
         backButton?.SetActive(false);
-        retryCount = 0;
         
         yield return new WaitForSeconds(2);
         
         corridor1?.SetActive(true);
         backButton?.SetActive(true);
         fail4?.SetActive(false);
+        retryCount = 0;
 
     }
     //wip: places selection marker, currently no way to destory them.
