@@ -13,10 +13,12 @@ public static class DialogueHandler
 {
     private static bool finishOnNextIter = false;
     private static TextMeshProUGUI textElement = null;
+    private static TextMeshProUGUI textElementName = null;
     private static bool hasFinished = false;
 
     private static GameObject canvasObj = null;
     private static GameObject textObj = null;
+    private static GameObject textObjName = null;
     private static RectTransform rectTransformTXT = null;
     private static GameObject backgroundObj = null;
     private static Image backgroundImage = null;
@@ -46,10 +48,23 @@ public static class DialogueHandler
             textElement.fontSizeMin = 20;
             textElement.fontSizeMax = 45;
             textElement.color = Color.black;
-            textObj.transform.SetSiblingIndex(1);
         }
         textElement.font = Resources.Load<TMP_FontAsset>($"{font_name}");
-        
+        if (textObjName == null || textElementName == null)
+        {
+            textObjName = new GameObject("DynamicDialogueText");
+            textObjName.transform.SetSiblingIndex(1);
+            textElementName = textObjName.AddComponent<TextMeshProUGUI>();
+            Debug.Log(textElementName.IsUnityNull());
+            textElementName.enableAutoSizing = true;
+            textElementName.fontSizeMin = 20;
+            textElementName.fontSizeMax = 45;
+            textElementName.color = Color.black;
+        }
+        textElementName.font = textElement.font = Resources.Load<TMP_FontAsset>($"{font_name}");
+        textElementName.rectTransform.sizeDelta = new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
+        textElementName.text = "its findwiubgdoiauwgdaoidgawdpiaugwdpiue";
+
         if (rectTransformTXT == null)
         {
             rectTransformTXT = textObj.GetComponent<RectTransform>();
@@ -155,6 +170,7 @@ public static class DialogueHandler
         UnityEngine.Object.Destroy(backgroundObj);
         UnityEngine.Object.Destroy(backgroundImage);
         UnityEngine.Object.Destroy(rectTransformBG);
+        UnityEngine.Object.Destroy(textElementName);
     }
 
     public static void ToggleDarkOverlay()
