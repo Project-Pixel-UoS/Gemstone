@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// 
+/// </summary>
 /// <remarks>
 /// Maintained by: Michael Edems-Eze
 /// </remarks>
-/// /// <todo>
-/// - Prevent index errors when generating a question by ensuring currentQuestionID is valid.
-/// </todo>
 
 public class QuizManager : MonoBehaviour
 {
@@ -26,7 +26,6 @@ public class QuizManager : MonoBehaviour
     public GameObject responsePanel; // Temporary response screen
     public TextMeshProUGUI responseText; // Text for feedback message
 
-
     [Header("Quiz Sections")]
     public List<GameObject> quizSections; // Assign sections in the Inspector
     public int currentSectionIndex = 0; //What Section we're on
@@ -41,6 +40,9 @@ public class QuizManager : MonoBehaviour
     public Button sliderSubmitButton;
     public float correctValue = 44f; // Set the correct slider value in the Inspector
 
+    /// <summary>
+    /// Shows the First Section of Laptop Quiz, and makes sure the toggle and slider buttons work for later sections
+    /// </summary>
     private void Start()
     {
         ShowSection(0);
@@ -52,6 +54,8 @@ public class QuizManager : MonoBehaviour
         toggleSubmitButton.onClick.AddListener(CheckSpotTheDifference);
         sliderSubmitButton.onClick.AddListener(CheckSliderAnswer);
     }
+
+    #region Methods For Multiple Choice Questions
 
     /// <summary>
     /// Called when the correct answer is provided by the player.  
@@ -68,6 +72,10 @@ public class QuizManager : MonoBehaviour
         generateQuestion();
     }
 
+    /// <summary>
+    /// Called when the incorrect answer is provided by the player.  
+    /// Removes the current question from the list and generates a new question.
+    /// </summary>
     public void incorrectAnswerProvided()
     {
         ShowResponse("Well... that's bad... ", 2);
@@ -113,6 +121,10 @@ public class QuizManager : MonoBehaviour
         }    
     }
 
+    #endregion
+
+    #region Methods for Slider Section
+
     private float receivedSliderValue;
 
     /// <summary>
@@ -124,6 +136,23 @@ public class QuizManager : MonoBehaviour
         receivedSliderValue = value;
         // The received value can now be used in quiz logic.
     }
+
+
+    public void CheckSliderAnswer()
+    {
+        if (Mathf.Approximately(answerSlider.value, correctValue)) // Allow minor float precision errors
+        {
+            StartCoroutine(ShowResponseAndProceed("Correct!", 2));
+            return;
+        }
+        ShowResponse("Incorrect! Try again.", 2);
+    }
+
+    #endregion
+
+
+
+    #region General Quiz Functions
 
     /// <summary>
     /// Displays a response message to the user for a specified duration.
@@ -192,6 +221,9 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows a Message and moves to the Next Section
+    /// </summary>
     private IEnumerator ShowResponseAndProceed(string message, float duration)
     {
         responseText.text = message;
@@ -212,6 +244,8 @@ public class QuizManager : MonoBehaviour
         NextSection();
     }
 
+    #endregion
+
     /// <summary>
     /// Checks if the selected toggle is correct.
     /// </summary>
@@ -228,13 +262,5 @@ public class QuizManager : MonoBehaviour
 
         ShowResponse("You had a 50/50 shot and still failed...", 2);
     }
-    public void CheckSliderAnswer()
-    {
-        if (Mathf.Approximately(answerSlider.value, correctValue)) // Allow minor float precision errors
-        {
-            StartCoroutine(ShowResponseAndProceed("Correct!", 2));
-            return;
-        }
-        ShowResponse("Incorrect! Try again.", 2);
-    }
+
 }
