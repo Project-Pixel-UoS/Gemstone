@@ -8,6 +8,8 @@ TagManager:
   - GameStage
   - Item
   - QuestPoint
+  - BackButton
+  - Puzzle
   layers:
   - Default
   - TransparentFX
