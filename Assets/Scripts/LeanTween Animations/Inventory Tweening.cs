@@ -21,11 +21,13 @@ public class InventoryTweening : MonoBehaviour
     public void OnOpen()
     {
         LeanTween.moveX(gameObject, 0f, 1f).setDelay(closeDelay).setEase(easeType);
+        isInventoryOpen = true;
     }
 
     public void OnClose()
     {
         LeanTween.moveX(gameObject, 15f, 1f).setDelay(closeDelay).setEase(easeType);
+        isInventoryOpen = false;
     }
 
     public void DestroyMe()
