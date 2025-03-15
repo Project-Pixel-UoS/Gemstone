@@ -3,9 +3,12 @@ using UnityEngine;
 public class InventoryTweening : MonoBehaviour
 {
 
+    public LeanTweenType easeType;
+    public float closeDelay;
+
     public void OnClose()
     {
-        LeanTween.scale(gameObject, new Vector3(0, 0, 0), 0.5f).setOnComplete(DestroyMe);
+        LeanTween.moveX(gameObject, 15f, 1f).setDelay(closeDelay).setEase(easeType);
     }
 
     public void DestroyMe()
