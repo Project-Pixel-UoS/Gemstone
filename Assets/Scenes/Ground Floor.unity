@@ -366,7 +366,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 858076034}
         m_TargetAssemblyTypeName: InventoryTweening, Assembly-CSharp
-        m_MethodName: OnClose
+        m_MethodName: ToggleInventory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1245,6 +1245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 729af844841c73f4ea60ccf4ec8fd15e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  easeType: 15
+  closeDelay: 0.1
+  isInventoryOpen: 1
 --- !u!1 &861366195
 GameObject:
   m_ObjectHideFlags: 0

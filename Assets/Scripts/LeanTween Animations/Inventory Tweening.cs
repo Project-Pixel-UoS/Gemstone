@@ -5,7 +5,7 @@ public class InventoryTweening : MonoBehaviour
 
     public LeanTweenType easeType;
     public float closeDelay;
-    public bool isInventoryOpen = true;
+    public bool isInventoryOpen;
 
     public void ToggleInventory()
     {
@@ -20,7 +20,7 @@ public class InventoryTweening : MonoBehaviour
 
     public void OnOpen()
     {
-        LeanTween.moveX(gameObject, -15f, 1f).setDelay(closeDelay).setEase(easeType);
+        LeanTween.moveX(gameObject, 0f, 1f).setDelay(closeDelay).setEase(easeType);
     }
 
     public void OnClose()
