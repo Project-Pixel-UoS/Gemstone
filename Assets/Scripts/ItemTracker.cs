@@ -22,6 +22,7 @@ public class ItemTracker : MonoBehaviour
         if (Instance != null)
         {
             Debug.LogError("Found more than one Item Events Manager in the scene.");
+            Destroy(gameObject);
         }
         Instance = this;
         itemEvents = new ItemEvent();

@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
             case "Elevator": OnElevatorClicked(); break;
             case "BackButton": OnBackButtonClicked(); break;
             case "BackButton2": OnBackButton2Clicked(); break;
-            case "Corridor 1": OnCorridor1Clicked(); break;
+            case "Corridor1": OnCorridor1Clicked(); break;
         }
     }
     /// <summary>
