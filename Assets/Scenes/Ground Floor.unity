@@ -1246,8 +1246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   easeType: 15
-  closeDelay: 0.1
   isInventoryOpen: 1
+  inventoryPanel: {fileID: 858076031}
+  moveTime: 0.5
 --- !u!1 &861366195
 GameObject:
   m_ObjectHideFlags: 0
