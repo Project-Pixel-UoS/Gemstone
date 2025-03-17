@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //references to all GameObjects
-    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2;
+    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, inventory;
 
     private void Awake()
     {
@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         reception = panel.transform.Find("Room: Reception")?.gameObject;
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
+        inventory = panel.transform.Find("Inventory")?.gameObject;
 
     }
     
@@ -139,6 +140,7 @@ public class GameManager : MonoBehaviour
         else
         {
             SwitchRooms(reception);
+            inventory?.SetActive(true);
         }
     }
 }
