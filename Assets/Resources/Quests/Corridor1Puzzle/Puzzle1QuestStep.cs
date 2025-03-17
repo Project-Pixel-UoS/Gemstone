@@ -11,7 +11,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class Puzzle1QuestStep : QuestStep
 {
     public GameObject selectionMarker;
-    private GameObject fail1, fail2, fail3, fail4, corridor1, backButton, point, steps, panel;
+    private GameObject fail1, fail2, fail3, fail4, corridor1, backButton, point, steps, panel, inventory;
     private string clickedScene;
     private string[] correctOrder = { "Step1", "Step2", "Step3", "Step4" };
     private List<string> clickedOrder = new List<string>();
@@ -20,6 +20,7 @@ public class Puzzle1QuestStep : QuestStep
     private void OnEnable()
     {
         StoreObjects();
+        inventory.SetActive(false);
     }
     private void Update()
     {
@@ -40,6 +41,7 @@ public class Puzzle1QuestStep : QuestStep
             {
                 FinishQuestStep();
                 backButton.SetActive(true);
+                inventory.SetActive(true);
             }
             else
             {
@@ -97,6 +99,7 @@ public class Puzzle1QuestStep : QuestStep
         panel = GameObject.FindWithTag("GameStage");
         backButton = GameObject.FindWithTag("BackButton");
         corridor1 = panel.transform.Find("Room: Corridor 1").gameObject;
+        inventory = panel.transform.Find("Inventory").gameObject;
         fail1 = panel.transform.Find("Fail1").gameObject;
         fail2 = panel.transform.Find("Fail2").gameObject;
         fail3 = panel.transform.Find("Fail3").gameObject;
