@@ -4,12 +4,13 @@ using UnityEngine.SceneManagement;
 using Microsoft.Unity.VisualStudio.Editor;
 using JetBrains.Annotations;
 using UnityEditor.Animations;
+using System;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //references to all GameObjects
     private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2;
-
+    private GameObject tableContainer;
     private void Awake()
     {
         if (instance == null)
@@ -27,6 +28,13 @@ public class GameManager : MonoBehaviour
     {
         //may need to change depending on previous saved location
         InitialiseScene();
+
+        tableContainer = GameObject.Find("TableContainer");
+        if (tableContainer != null)
+        {
+            tableContainer.SetActive(false); 
+            
+        }
     }
 
     private void Update()
@@ -141,4 +149,22 @@ public class GameManager : MonoBehaviour
             SwitchRooms(reception);
         }
     }
+
+
+    private void OnMouseDown()
+    {
+        if (tableContainer != null)
+        {
+            tableContainer.SetActive(true);
+        }
+    }
+
+    /*public void HideScreen()
+    {
+        GameObject greyTable = GameObject.Find("roomTable");
+        if (greyTable != null)
+        {
+            greyTable.SetActive(true);
+        }
+    }*/
 }
