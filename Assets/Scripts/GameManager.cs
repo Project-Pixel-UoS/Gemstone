@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //references to all GameObjects
-    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2;
-    private GameObject tableContainer;
+    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, inventory;
+
     private void Awake()
     {
         if (instance == null)
@@ -28,13 +28,6 @@ public class GameManager : MonoBehaviour
     {
         //may need to change depending on previous saved location
         InitialiseScene();
-
-        tableContainer = GameObject.Find("TableContainer");
-        if (tableContainer != null)
-        {
-            tableContainer.SetActive(false); 
-            
-        }
     }
 
     private void Update()
@@ -63,6 +56,7 @@ public class GameManager : MonoBehaviour
         reception = panel.transform.Find("Room: Reception")?.gameObject;
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
+        inventory = panel.transform.Find("Inventory")?.gameObject;
 
     }
     
@@ -147,24 +141,7 @@ public class GameManager : MonoBehaviour
         else
         {
             SwitchRooms(reception);
+            inventory?.SetActive(true);
         }
     }
-
-
-    private void OnMouseDown()
-    {
-        if (tableContainer != null)
-        {
-            tableContainer.SetActive(true);
-        }
-    }
-
-    /*public void HideScreen()
-    {
-        GameObject greyTable = GameObject.Find("roomTable");
-        if (greyTable != null)
-        {
-            greyTable.SetActive(true);
-        }
-    }*/
 }
