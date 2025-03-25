@@ -7,25 +7,33 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using Unity.VisualScripting;
+using System.Globalization;
 using UnityEngine.InputSystem.LowLevel;
 
 public static class DialogueHandler
 {
     private static bool finishOnNextIter = false;
-    private static TextMeshProUGUI textElement = null;
     private static bool hasFinished = false;
 
     private static GameObject canvasObj = null;
+    
     private static GameObject textObj = null;
+    private static TextMeshProUGUI textElement = null;
     private static RectTransform rectTransformTXT = null;
     private static GameObject backgroundObj = null;
     private static Image backgroundImage = null;
     private static RectTransform rectTransformBG = null;
     
+    private static GameObject speakerNameObj;
+    private static TextMeshProUGUI speakerNameElement;
+    private static GameObject speakerBGObj;
+    private static Image speakerBGImage;
+    private static RectTransform rectTransformSpeakerName;
+    
     private const int textPaddingPX_X = 30;
     private const int textPaddingPX_Y = 20;
 
-    public static IEnumerator Display(string text, float delay, bool skippable, string font_name)
+    public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
         Debug.Log("Display called");
         hasFinished = false;
@@ -43,27 +51,25 @@ public static class DialogueHandler
             textObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
             textElement = textObj.AddComponent<TextMeshProUGUI>();
             textElement.enableAutoSizing = true;
-            textElement.fontSizeMin = 20;
-            textElement.fontSizeMax = 45;
+            textElement.fontSizeMin = 40;
+            textElement.fontSizeMax = 80;
+            textElement.textWrappingMode = TextWrappingModes.Normal;
+            textElement.overflowMode = TextOverflowModes.Masking;
             textElement.color = Color.black;
             textObj.transform.SetSiblingIndex(1);
         }
-        textElement.font = Resources.Load<TMP_FontAsset>($"{font_name}");
+        textElement.font = Resources.Load<TMP_FontAsset>($"{fontName}");
         
         if (rectTransformTXT == null)
         {
             rectTransformTXT = textObj.GetComponent<RectTransform>();
             rectTransformTXT.sizeDelta =
-                new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
-            rectTransformTXT.anchoredPosition = new Vector2(0 + textPaddingPX_X, -Screen.height / 3 - textPaddingPX_Y);
-            textElement.rectTransform.sizeDelta =
-                new Vector2(Screen.width - textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y);
-            rectTransformTXT.anchoredPosition = new Vector2(0 + textPaddingPX_X, -Screen.height / 3 - textPaddingPX_Y);
+                new Vector2(Screen.width - 2 * textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y - 30);
+            rectTransformTXT.anchoredPosition = new Vector2(0, -Screen.height / 3 - textPaddingPX_Y + 15);
         }
 
         if (backgroundObj == null)
         {
-            // Background Image
             backgroundObj = new GameObject("Background");
             backgroundObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
             backgroundObj.transform.SetSiblingIndex(0);
@@ -83,7 +89,46 @@ public static class DialogueHandler
             rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
             rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
         }
-        
+
+        if (speakerName != null)
+        {
+            if (speakerBGObj == null)
+            {
+                speakerBGObj = new GameObject("SpeakerBackground");
+                speakerBGObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
+                speakerBGObj.transform.SetSiblingIndex(2);
+
+                speakerBGImage = speakerBGObj.AddComponent<Image>();
+                speakerBGImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG2");
+                speakerBGImage.type = Image.Type.Filled;
+            }
+
+            if (speakerNameObj == null)
+            {
+                speakerNameObj = new GameObject("SpeakerName");
+                speakerNameObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
+                speakerNameObj.transform.SetSiblingIndex(3);
+
+                speakerNameElement = speakerNameObj.AddComponent<TextMeshProUGUI>();
+                speakerNameElement.enableAutoSizing = true;
+                speakerNameElement.fontSize = 70;
+                speakerNameElement.color = Color.black;
+                speakerNameElement.alignment = TextAlignmentOptions.Center;
+            }
+            
+            rectTransformSpeakerName = speakerNameObj.GetComponent<RectTransform>();
+            rectTransformSpeakerName.sizeDelta = new Vector2(300, 80);
+            rectTransformSpeakerName.anchoredPosition = new Vector2(-600, rectTransformBG.anchoredPosition.y + rectTransformBG.sizeDelta.y / 2 + 30);
+
+            RectTransform rectTransformSpeakerBG = speakerBGObj.GetComponent<RectTransform>();
+            rectTransformSpeakerBG.sizeDelta = new Vector2(320, 90);
+            rectTransformSpeakerBG.anchoredPosition = new Vector2(rectTransformSpeakerName.anchoredPosition.x, rectTransformSpeakerName.anchoredPosition.y);
+
+            speakerNameElement.font = Resources.Load<TMP_FontAsset>($"{fontName}");
+
+            speakerNameElement.text = speakerName;
+        }
+
         // Debug.Log(textElement.font.faceInfo.familyName);
         if (textElement.font.faceInfo.familyName == "Strange Path")
         {
@@ -103,8 +148,8 @@ public static class DialogueHandler
                 textElement.text += c;
                 yield return new WaitForSeconds(delay);
             }
-            textElement.fontSize = textElement.fontSize * 0.7f;
         }
+        textElement.ForceMeshUpdate();
         
         finishOnNextIter = false;
         hasFinished = true;
@@ -155,6 +200,12 @@ public static class DialogueHandler
         UnityEngine.Object.Destroy(backgroundObj);
         UnityEngine.Object.Destroy(backgroundImage);
         UnityEngine.Object.Destroy(rectTransformBG);
+        
+        UnityEngine.Object.Destroy(speakerNameObj);
+        UnityEngine.Object.Destroy(speakerNameElement);
+        UnityEngine.Object.Destroy(speakerBGObj);
+        UnityEngine.Object.Destroy(speakerBGImage);
+        UnityEngine.Object.Destroy(rectTransformSpeakerName);
     }
 
     public static void ToggleDarkOverlay()
@@ -197,7 +248,8 @@ public class DialogueInstance
         
         float typingDelay = 0.025f;
         bool skippable = true;
-        string font_name = "normal";
+        string fontName = "normal";
+        string speakerName = null;
         
         foreach (string line in dialogueText.Split('\n'))
         {
@@ -207,9 +259,10 @@ public class DialogueInstance
             {
                 typingDelay = float.Parse(s[1]);
                 skippable = Convert.ToBoolean(int.Parse(s[2]));
-                font_name = s[3].Trim();
+                fontName = s[3].Trim();
+                speakerName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s[4].Trim());
             }
-            dialogueLines.Add(new DialogueBlock(s[0], typingDelay, skippable, font_name));
+            dialogueLines.Add(new DialogueBlock(s[0], typingDelay, skippable, fontName, speakerName));
             
         }
     }
@@ -250,18 +303,20 @@ public class DialogueBlock
     public string text;
     public float letterDelay;
     public bool skippable;
-    public string font_name;
-    public DialogueBlock(string text, float letterDelay, bool skippable, string font_name) // Item dependancy waiting to be added
+    public string fontName;
+    public string speakerName;
+    public DialogueBlock(string text, float letterDelay, bool skippable, string fontName, string speakerName) // Item dependancy waiting to be added
     {
         this.text = text;
         this.letterDelay = letterDelay;
         this.skippable = skippable;
-        this.font_name = font_name;
+        this.fontName = fontName;
+        this.speakerName = speakerName;
     }
     public void Play()
     {
         // Actual call for dialogue being shown
-        CoroutineRunner.Instance.RunCoroutine(DialogueHandler.Display(this.text, this.letterDelay, this.skippable, font_name));
+        CoroutineRunner.Instance.RunCoroutine(DialogueHandler.Display(this.text, this.letterDelay, this.skippable, this.fontName, this.speakerName));
     }
 }
 
