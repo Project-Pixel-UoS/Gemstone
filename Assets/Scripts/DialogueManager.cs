@@ -31,7 +31,7 @@ public static class DialogueHandler
     private static RectTransform rectTransformSpeakerName;
     
     private const int textPaddingPX_X = 30;
-    private const int textPaddingPX_Y = 20;
+    private const int textPaddingPX_Y = 5;
 
     public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
@@ -85,7 +85,7 @@ public static class DialogueHandler
         if (rectTransformBG == null)
         {
             rectTransformBG = backgroundObj.GetComponent<RectTransform>();
-            rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4);
+            rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4 + 30);
             rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
         }
 
@@ -116,11 +116,13 @@ public static class DialogueHandler
             }
             
             rectTransformSpeakerName = speakerNameObj.GetComponent<RectTransform>();
-            rectTransformSpeakerName.sizeDelta = new Vector2(300, 80);
-            rectTransformSpeakerName.anchoredPosition = new Vector2(-600, rectTransformBG.anchoredPosition.y + rectTransformBG.sizeDelta.y / 2 + 30);
+            rectTransformSpeakerName.sizeDelta = new Vector2(300f/1920 * Screen.width, 80f/1080 * Screen.height);
+            Debug.Log(Screen.width);
+            Debug.Log(-0.5 * Screen.width); 
+            rectTransformSpeakerName.anchoredPosition = new Vector2(-0.3f * Screen.width, rectTransformBG.anchoredPosition.y + rectTransformBG.sizeDelta.y / 2 + 10);
 
             RectTransform rectTransformSpeakerBG = speakerBGObj.GetComponent<RectTransform>();
-            rectTransformSpeakerBG.sizeDelta = new Vector2(320, 90);
+            rectTransformSpeakerBG.sizeDelta = new Vector2(300f/1920 * Screen.width * 1.3f, 80f/1080 * Screen.height * 1.3f);
             rectTransformSpeakerBG.anchoredPosition = new Vector2(rectTransformSpeakerName.anchoredPosition.x, rectTransformSpeakerName.anchoredPosition.y);
 
             speakerNameElement.font = Resources.Load<TMP_FontAsset>($"{fontName}");

@@ -37,7 +37,7 @@ namespace Util
             Vector3[] worldCorners = new Vector3[4];
             rectTransform.GetWorldCorners(worldCorners);
             return worldCorners;
-        }
+        } 
     }
 }
 
