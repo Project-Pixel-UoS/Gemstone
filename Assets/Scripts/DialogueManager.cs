@@ -9,6 +9,8 @@ using System.IO;
 using Unity.VisualScripting;
 using System.Globalization;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Diagnostics;
+using Utils = Util.Utils;
 
 public static class DialogueHandler
 {
@@ -30,8 +32,8 @@ public static class DialogueHandler
     private static Image speakerBGImage;
     private static RectTransform rectTransformSpeakerName;
     
-    private const int textPaddingPX_X = 30;
-    private const int textPaddingPX_Y = 5;
+    private static int textPaddingPX_X { get {return Utils.GetPercentScreenSizeX(1.56f);} }
+    private static int textPaddingPX_Y { get {return Utils.GetPercentScreenSizeY(0.46f);} }
 
     public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
@@ -51,8 +53,8 @@ public static class DialogueHandler
             textObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
             textElement = textObj.AddComponent<TextMeshProUGUI>();
             textElement.enableAutoSizing = true;
-            textElement.fontSizeMin = 40f/1080 * Screen.height;
-            textElement.fontSizeMax = 80f/1080 * Screen.height;
+            textElement.fontSizeMin = Utils.GetPercentScreenSizeY(3.7f);
+            textElement.fontSizeMax = Utils.GetPercentScreenSizeY(7.4f);
             textElement.textWrappingMode = TextWrappingModes.Normal;
             textElement.overflowMode = TextOverflowModes.Masking;
             textElement.color = Color.black;
@@ -63,8 +65,8 @@ public static class DialogueHandler
         {
             rectTransformTXT = textObj.GetComponent<RectTransform>();
             rectTransformTXT.sizeDelta =
-                new Vector2(Screen.width - 2 * textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y - 30);
-            rectTransformTXT.anchoredPosition = new Vector2(0, -Screen.height / 3 - textPaddingPX_Y + 15);
+                new Vector2(Screen.width - 2 * textPaddingPX_X, Screen.height / 4 - textPaddingPX_Y - Utils.GetPercentScreenSizeY(2.7f));
+            rectTransformTXT.anchoredPosition = new Vector2(0, -Screen.height / 3 - textPaddingPX_Y + Utils.GetPercentScreenSizeY(1.38f));
         }
 
         if (backgroundObj == null)
@@ -85,7 +87,7 @@ public static class DialogueHandler
         if (rectTransformBG == null)
         {
             rectTransformBG = backgroundObj.GetComponent<RectTransform>();
-            rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4 + 30);
+            rectTransformBG.sizeDelta = new Vector2(Screen.width, Screen.height / 4 + Utils.GetPercentScreenSizeY(2.7f));
             rectTransformBG.anchoredPosition = new Vector2(0, -Screen.height / 3);
         }
 
@@ -110,19 +112,17 @@ public static class DialogueHandler
 
                 speakerNameElement = speakerNameObj.AddComponent<TextMeshProUGUI>();
                 speakerNameElement.enableAutoSizing = true;
-                speakerNameElement.fontSize = 70;
+                speakerNameElement.fontSize = Utils.GetPercentScreenSizeY(6.5f);
                 speakerNameElement.color = Color.black;
                 speakerNameElement.alignment = TextAlignmentOptions.Center;
             }
             
             rectTransformSpeakerName = speakerNameObj.GetComponent<RectTransform>();
-            rectTransformSpeakerName.sizeDelta = new Vector2(300f/1920 * Screen.width, 80f/1080 * Screen.height);
-            Debug.Log(Screen.width);
-            Debug.Log(-0.5 * Screen.width); 
-            rectTransformSpeakerName.anchoredPosition = new Vector2(-0.3f * Screen.width, rectTransformBG.anchoredPosition.y + rectTransformBG.sizeDelta.y / 2 + 10);
+            rectTransformSpeakerName.sizeDelta = new Vector2(Utils.GetPercentScreenSizeX(15.6f), Utils.GetPercentScreenSizeY(7.4f));
+            rectTransformSpeakerName.anchoredPosition = new Vector2(-1 * Utils.GetPercentScreenSizeX(30), rectTransformBG.anchoredPosition.y + rectTransformBG.sizeDelta.y / 2 + Utils.GetPercentScreenSizeY(0.9f));
 
             RectTransform rectTransformSpeakerBG = speakerBGObj.GetComponent<RectTransform>();
-            rectTransformSpeakerBG.sizeDelta = new Vector2(300f/1920 * Screen.width * 1.3f, 80f/1080 * Screen.height * 1.3f);
+            rectTransformSpeakerBG.sizeDelta = new Vector2(Utils.GetPercentScreenSizeX(15.6f) * 1.3f, Utils.GetPercentScreenSizeY(7.4f) * 1.3f);
             rectTransformSpeakerBG.anchoredPosition = new Vector2(rectTransformSpeakerName.anchoredPosition.x, rectTransformSpeakerName.anchoredPosition.y);
 
             speakerNameElement.font = Resources.Load<TMP_FontAsset>($"{fontName}");

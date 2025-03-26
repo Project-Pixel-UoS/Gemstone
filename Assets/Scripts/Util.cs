@@ -39,17 +39,17 @@ namespace Util
             return worldCorners;
         }
 
-        public static int GetPercentScreenSize(int value, bool isWidth)
+        private static int GetPercentScreenSize(float value, bool isWidth)
         {
             return isWidth ? (int)(value * (Screen.width / 100f)) : (int)(value * (Screen.height / 100f));
         }
-        public static int GetProportionalPixelValueX(int value)
+        public static int GetPercentScreenSizeX(float value)
         {
-            return (int)(value * (1920f / Screen.width));
+            return GetPercentScreenSize(value, true);
         }
-        public static int GetProportionalPixelValueY(int value)
+        public static int GetPercentScreenSizeY(float value)
         {
-            return (int)(value * (1080f / Screen.height));
+            return GetPercentScreenSize(value, false);
         }
     }
 }
