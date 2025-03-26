@@ -51,8 +51,8 @@ public static class DialogueHandler
             textObj.transform.SetParent(canvasObj.GetComponent<Canvas>().transform);
             textElement = textObj.AddComponent<TextMeshProUGUI>();
             textElement.enableAutoSizing = true;
-            textElement.fontSizeMin = 40;
-            textElement.fontSizeMax = 80;
+            textElement.fontSizeMin = 40f/1080 * Screen.height;
+            textElement.fontSizeMax = 80f/1080 * Screen.height;
             textElement.textWrappingMode = TextWrappingModes.Normal;
             textElement.overflowMode = TextOverflowModes.Masking;
             textElement.color = Color.black;
