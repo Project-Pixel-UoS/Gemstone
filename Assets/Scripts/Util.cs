@@ -38,6 +38,19 @@ namespace Util
             rectTransform.GetWorldCorners(worldCorners);
             return worldCorners;
         }
+
+        public static int GetPercentScreenSize(int value, bool isWidth)
+        {
+            return isWidth ? (int)(value * (Screen.width / 100f)) : (int)(value * (Screen.height / 100f));
+        }
+        public static int GetProportionalPixelValueX(int value)
+        {
+            return (int)(value * (1920f / Screen.width));
+        }
+        public static int GetProportionalPixelValueY(int value)
+        {
+            return (int)(value * (1080f / Screen.height));
+        }
     }
 }
 
