@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //references to all GameObjects
-    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2;
+    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom;
     private GameObject tableContainer;
     private void Awake()
     {
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         backButton = panel.transform.Find("BackButton")?.gameObject;
         reception = panel.transform.Find("Room: Reception")?.gameObject;
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
+        bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
 
     }
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
             case "BackButton": OnBackButtonClicked(); break;
             case "BackButton2": OnBackButton2Clicked(); break;
             case "Corridor1": OnCorridor1Clicked(); break;
+            case "Bathroom": OnBathroomClicked(); break;
         }
     }
     /// <summary>
@@ -121,7 +123,8 @@ public class GameManager : MonoBehaviour
     public void OnSignClicked() => SwitchRooms(cafe);
     public void OnChairClicked() => SwitchRooms(table);
     public void OnStoreClicked() => SwitchRooms(store);
-    public void OnCorridor1Clicked() => SwitchRooms(corridor1);    
+    public void OnCorridor1Clicked() => SwitchRooms(corridor1);
+    public void OnBathroomClicked() => SwitchRooms(bathroom);
     public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
 
     public void OnBackButtonClicked()
