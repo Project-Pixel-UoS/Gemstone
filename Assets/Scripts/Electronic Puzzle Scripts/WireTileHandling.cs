@@ -1,14 +1,32 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public enum Direction
+{
+    Top = 0,
+    Right = 1,
+    Bottom = 2,
+    Left = 3
+}
 
 public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image image;
-    [HideInInspector] public Transform initialParent; //Holds parent of dragged item before dragging begins
     TileSlot initialParentScript;
+    [HideInInspector] public Transform initialParent; //Holds parent of dragged item before dragging begins
     [HideInInspector] public Transform parentAfterDrag; //Holds parent of dragged item before dragging begins
+
+    public Dictionary<Direction, bool> connections = new Dictionary<Direction, bool>
+    {
+        { Direction.Top, false },
+        { Direction.Right, false },
+        { Direction.Bottom, false },
+        { Direction.Left, false }
+    };
+
+    private int rotationState = 0;
 
     private void Start()
     {
@@ -53,5 +71,19 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
+    }
+
+    public void RotateTile()
+    {
+        rotationState = (rotationState + 1) % 4; // Cycle through 0, 90, 180, 270 degrees
+        transform.Rotate(0, 0, -90);
+
+        // Rotate connections by shifting values
+        bool last = connections[Direction.Left];
+
+        connections[Direction.Left] = connections[Direction.Bottom];
+        connections[Direction.Bottom] = connections[Direction.Right];
+        connections[Direction.Right] = connections[Direction.Top];
+        connections[Direction.Top] = last;
     }
 }
