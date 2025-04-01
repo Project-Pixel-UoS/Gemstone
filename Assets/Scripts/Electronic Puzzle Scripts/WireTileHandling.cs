@@ -11,6 +11,12 @@ public enum Direction
     Left = 3
 }
 
+public class DirectionConnection
+{
+    public Direction direction;
+    public bool isConnected;
+}
+
 public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Image image;
@@ -18,15 +24,27 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     [HideInInspector] public Transform initialParent; //Holds parent of dragged item before dragging begins
     [HideInInspector] public Transform parentAfterDrag; //Holds parent of dragged item before dragging begins
 
-    public Dictionary<Direction, bool> connections = new Dictionary<Direction, bool>
+    public List<DirectionConnection> connectionsList = new List<DirectionConnection> //Makes a list of objects first so they can be set and show up in Inspector
     {
-        { Direction.Top, false },
-        { Direction.Right, false },
-        { Direction.Bottom, false },
-        { Direction.Left, false }
+        new DirectionConnection { direction = Direction.Top, isConnected = false },
+        new DirectionConnection { direction = Direction.Right, isConnected = false },
+        new DirectionConnection { direction = Direction.Bottom, isConnected = false },
+        new DirectionConnection { direction = Direction.Left, isConnected = false }
     };
 
     private int rotationState = 0;
+
+    private Dictionary<Direction, bool> connections = new Dictionary<Direction, bool>();
+
+    private void Awake()
+    {
+        // Convert list into dictionary at runtime
+        connections = new Dictionary<Direction, bool>();
+        foreach (var entry in connectionsList)
+        {
+            connections[entry.direction] = entry.isConnected;
+        }
+    }
 
     private void Start()
     {
