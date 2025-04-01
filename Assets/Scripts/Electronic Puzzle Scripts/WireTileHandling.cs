@@ -24,7 +24,6 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             return; // Stop the drag process
         }
 
-        Debug.Log("Begin Dragging");
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
@@ -33,7 +32,11 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("We're still dragging!");
+        if (initialParentScript != null && !initialParentScript.isEditable)
+        {
+            Debug.Log("Dragging is disabled for this slot.");
+            return; // Stop the drag process
+        }
 
         //These three lines make sure dragging and dropping actually works
         Vector3 mousePos = Input.mousePosition;
@@ -43,7 +46,11 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("We finally stopped dragging...");
+        if (initialParentScript != null && !initialParentScript.isEditable)
+        {
+            Debug.Log("Dragging is disabled for this slot.");
+            return; // Stop the drag process
+        }
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
     }
