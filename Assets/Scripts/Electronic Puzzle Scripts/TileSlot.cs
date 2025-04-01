@@ -3,9 +3,11 @@ using UnityEngine.EventSystems;
 
 public class TileSlot : MonoBehaviour, IDropHandler
 {
+    public bool isEditable; //If the slot is able to be edited
     public void OnDrop(PointerEventData eventData)
-    {
-        if (transform.childCount == 0)
+    {        
+
+        if ((transform.childCount == 0) && (isEditable))
         {
             GameObject dropped = eventData.pointerDrag;
             WireTileHandling draggableItem = dropped.GetComponent<WireTileHandling>();
