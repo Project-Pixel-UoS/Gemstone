@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 2172724086477402152}
   - component: {fileID: 6964363767761384634}
   - component: {fileID: 1625030873612242161}
+  - component: {fileID: 3725748728685468907}
   m_Layer: 0
   m_Name: Wire
-  m_TagString: Untagged
+  m_TagString: PuzzlePiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,3 +121,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3725748728685468907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027997479654623646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8901837fa0c554469f369a21cbc6dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
