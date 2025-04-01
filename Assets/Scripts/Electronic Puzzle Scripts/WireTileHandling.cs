@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 
 public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public Image image;
     [HideInInspector] public Transform parentAfterDrag; //Holds parent of dragged item before dragging begins
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -11,6 +14,7 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling(); //Places dragged object in front of everything else
+        image.raycastTarget = false;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -27,5 +31,6 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         Debug.Log("We finally stopped dragging...");
         transform.SetParent(parentAfterDrag);
+        image.raycastTarget = true;
     }
 }

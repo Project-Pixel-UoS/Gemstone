@@ -598,6 +598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wire
       objectReference: {fileID: 0}
+    - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 1879225894}
     - target: {fileID: 6964363767761384634, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -2592,6 +2596,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1879225894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6964363767761384634, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+  m_PrefabInstance: {fileID: 381426915}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1886847434
 PrefabInstance:
   m_ObjectHideFlags: 0
