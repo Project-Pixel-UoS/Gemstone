@@ -5,16 +5,17 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 {
     public void OnBeginDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Begin Dragging");
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("We're still dragging!");
+        transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("We finally stopped dragging...");
     }
 }
