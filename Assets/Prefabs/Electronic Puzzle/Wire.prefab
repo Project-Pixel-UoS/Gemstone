@@ -120,7 +120,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6964363767761384634}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3725748728685468907}
+        m_TargetAssemblyTypeName: WireTileHandling, Assembly-CSharp
+        m_MethodName: RotateTile
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3725748728685468907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,4 +146,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 6964363767761384634}
+  initialParent: {fileID: 0}
   parentAfterDrag: {fileID: 0}
+  connectionsList:
+  - direction: 0
+    isConnected: 0
+  - direction: 1
+    isConnected: 0
+  - direction: 2
+    isConnected: 0
+  - direction: 3
+    isConnected: 0

@@ -4066,6 +4066,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wire
       objectReference: {fileID: 0}
+    - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: connectionsList.Array.data[0].isConnected
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: connectionsList.Array.data[1].isConnected
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964363767761384634, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5914270777754789473, guid: 350f644b41cb4224982ce8eb079b795d, type: 3}
+    - target: {fileID: 6964363767761384634, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964363767761384634, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6964363767761384634, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7985144448423629157, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

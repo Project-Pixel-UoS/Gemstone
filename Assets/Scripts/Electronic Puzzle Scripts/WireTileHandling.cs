@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ public enum Direction
     Left = 3
 }
 
+[Serializable]
 public class DirectionConnection
 {
     public Direction direction;
@@ -24,7 +26,7 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     [HideInInspector] public Transform initialParent; //Holds parent of dragged item before dragging begins
     [HideInInspector] public Transform parentAfterDrag; //Holds parent of dragged item before dragging begins
 
-    public List<DirectionConnection> connectionsList = new List<DirectionConnection> //Makes a list of objects first so they can be set and show up in Inspector
+    [SerializeField] public List<DirectionConnection> connectionsList = new List<DirectionConnection> //Makes a list of objects first so they can be set and show up in Inspector
     {
         new DirectionConnection { direction = Direction.Top, isConnected = false },
         new DirectionConnection { direction = Direction.Right, isConnected = false },
