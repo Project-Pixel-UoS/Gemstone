@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    Transform parentAfterDrag; //Holds parent of dragged item before dragging begins
+    [HideInInspector] public Transform parentAfterDrag; //Holds parent of dragged item before dragging begins
 
     public void OnBeginDrag(PointerEventData eventData)
     {
