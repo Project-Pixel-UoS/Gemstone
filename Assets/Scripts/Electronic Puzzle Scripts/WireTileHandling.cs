@@ -1,56 +1,20 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class WireTileHandling : MonoBehaviour
+public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDrag(PointerEventData eventData)
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    private void OnMouseDrag()
+    public void OnEndDrag(PointerEventData eventData)
     {
-        if (isDragging && !isCorrect)
-        {
-            transform.position = CheckPuzzleCompletion() + offset;
-        }
-    }
-
-    private void OnMouseDown()
-    {
-        if (!isCorrect)
-        {
-            offset = transform.position - CheckPuzzleCompletion();
-            isDragging = true;
-        }
-    }
-
-    private void OnMouseUp()
-    {
-        isDragging = false;
-
-        if (Vector3.Distance(transform.position, correctPosition) < snapThreshold)
-        {
-            transform.position = correctPosition;
-            isCorrect = true;
-            snappedPieces++;
-
-            /*if (snappedPieces == totalPieces)
-            {
-                ShowSuccessMessage();
-            }*/
-        }
-    }
-    private Vector3 CheckPuzzleCompletion()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10f;
-        return Camera.main.ScreenToWorldPoint(mousePos);
+        throw new System.NotImplementedException();
     }
 }
