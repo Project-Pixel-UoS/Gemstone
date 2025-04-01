@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -97,6 +97,16 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         rotationState = (rotationState + 1) % 4; // Cycle through 0, 90, 180, 270 degrees
         transform.Rotate(0, 0, -90);
+
+        // Store the last connection before rotating
+        bool lastConnection = connectionsList[3].isConnected;
+
+        // Shift connections clockwise (left → bottom → right → top)
+        for (int i = 3; i > 0; i--)
+        {
+            connectionsList[i].isConnected = connectionsList[i - 1].isConnected;
+        }
+        connectionsList[0].isConnected = lastConnection;
 
         // Rotate connections by shifting values
         bool last = connections[Direction.Left];
