@@ -46,7 +46,7 @@ public class ItemTracker : MonoBehaviour
         var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("UI")).collider;
         //shorthand for: if *condition*, then currentItem = null, else = item.
         //can click twice on the same item to unselect.
-        currentItem = (item == null || item.gameObject == currentItem) ? null : item.gameObject;
+        currentItem = (item != null && (currentItem != item.gameObject || currentItem == null)) ? item.gameObject : null;
         return currentItem;
     }
 
