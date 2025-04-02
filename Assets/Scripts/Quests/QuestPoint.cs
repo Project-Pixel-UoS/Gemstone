@@ -21,10 +21,6 @@ public class QuestPoint : MonoBehaviour, IPointerClickHandler
         questState = QuestState.REQ_NOT_MET;
     }
 
-    private void Update()
-    {
-    }
-
     //add listener to quest manager on startup and enable.
     private void Start()
     {
@@ -59,16 +55,6 @@ public class QuestPoint : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    //checks if quest point is clicked.
-    private bool QuestPointInteract()
-    {
-        var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
-        if (item != null && item.transform.tag.Equals("QuestPoint") && item.transform.Equals(this.transform))
-        {
-            return true;
-        }
-        return false;
-    }
     public void OnPointerClick(PointerEventData eventData)
     {
         if (questState.Equals(QuestState.CAN_START) && startPoint)
