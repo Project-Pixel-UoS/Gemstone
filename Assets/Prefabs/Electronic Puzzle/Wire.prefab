@@ -150,9 +150,9 @@ MonoBehaviour:
   parentAfterDrag: {fileID: 0}
   connectionsList:
   - direction: 0
-    isConnected: 0
+    isConnected: 1
   - direction: 1
-    isConnected: 0
+    isConnected: 1
   - direction: 2
     isConnected: 0
   - direction: 3

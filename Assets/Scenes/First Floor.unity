@@ -2339,7 +2339,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Show / Hide
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2366,10 +2366,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -4246,14 +4246,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wire
       objectReference: {fileID: 0}
-    - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
-      propertyPath: connectionsList.Array.data[0].isConnected
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
-      propertyPath: connectionsList.Array.data[1].isConnected
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6964363767761384634, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -5187,8 +5179,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -760.52, y: 378.98}
+  m_SizeDelta: {x: 600, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1643006468
 MonoBehaviour:
