@@ -1,8 +1,9 @@
 // Script for any game object that acts as a quest start/end point. 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Util;
 
-public class QuestPoint : MonoBehaviour
+public class QuestPoint : MonoBehaviour, IPointerClickHandler
 {
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questForPoint;
@@ -22,16 +23,6 @@ public class QuestPoint : MonoBehaviour
 
     private void Update()
     {
-        if (Utils.IsMouseClicked() && QuestPointInteract())
-        {
-            if(questState.Equals(QuestState.CAN_START) && startPoint)
-            {
-                QuestManager.Instance.questEvents.StartQuest(questID);
-            }else if(questState.Equals(QuestState.CAN_FINISH) && endPoint)
-            {
-                QuestManager.Instance.questEvents.FinishQuest(questID);
-            }
-        }
     }
 
     //add listener to quest manager on startup and enable.
@@ -77,5 +68,16 @@ public class QuestPoint : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (questState.Equals(QuestState.CAN_START) && startPoint)
+        {
+            QuestManager.Instance.questEvents.StartQuest(questID);
+        }
+        else if (questState.Equals(QuestState.CAN_FINISH) && endPoint)
+        {
+            QuestManager.Instance.questEvents.FinishQuest(questID);
+        }
     }
 }

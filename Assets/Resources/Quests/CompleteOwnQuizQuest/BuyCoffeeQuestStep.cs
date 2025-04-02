@@ -18,9 +18,12 @@ public class BuyCoffeeQuestStep : QuestStep
         ItemTracker.Instance.itemEvents.OnItemAdded -= ItemAdded;
     }
 
-    private void ItemAdded()
+    private void ItemAdded(string item)
     {
-        FinishQuestStep();
+        if(item == "Coffee")
+        {
+            FinishQuestStep();
+        }
     }
 
 }
