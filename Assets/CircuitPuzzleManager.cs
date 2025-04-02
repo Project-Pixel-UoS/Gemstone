@@ -4,7 +4,7 @@ using UnityEngine;
 public class CircuitPuzzleManager : MonoBehaviour
 {
     public int gridWidth, gridHeight; // Define the grid size
-    private WireTileHandling[,] wireGrid; // 2D array for storing tiles
+    public WireTileHandling[,] wireGrid; // 2D array for storing tiles
 
     void Start()
     {
