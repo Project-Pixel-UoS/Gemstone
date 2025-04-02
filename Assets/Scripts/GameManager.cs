@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //references to all GameObjects
-    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom;
-    private GameObject tableContainer;
+    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom, 
+                        inventory, tableContainer;
     private void Awake()
     {
         if (instance == null)
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
         bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
+        inventory = panel.transform.Find("Inventory")?.gameObject;
 
     }
     
@@ -74,8 +75,9 @@ public class GameManager : MonoBehaviour
     {
         if (mainHall == null || backButton == null) return;
 
-        mainHall.SetActive(true);
-        backButton.SetActive(false);
+        mainHall?.SetActive(true);
+        backButton?.SetActive(false);
+        inventory?.SetActive(false);
         cafe?.SetActive(false);
         table?.SetActive(false);
         store?.SetActive(false);
@@ -115,7 +117,7 @@ public class GameManager : MonoBehaviour
         }
 
         roomToShow.SetActive(true);
-        if (roomToShow != mainHall) backButton?.SetActive(true);
+        if (roomToShow != mainHall) { backButton?.SetActive(true); inventory?.SetActive(true);}
     }
     /// <summary>
     /// Room switching functions
