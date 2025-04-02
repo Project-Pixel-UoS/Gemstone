@@ -95,6 +95,12 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     public void RotateTile()
     {
+        if (initialParentScript != null && !initialParentScript.isEditable)
+        {
+            Debug.Log("Rotation is NOT Allowed.");
+            return; // Stop the drag process
+        }
+
         rotationState = (rotationState + 1) % 4; // Cycle through 0, 90, 180, 270 degrees
         transform.Rotate(0, 0, -90);
 
