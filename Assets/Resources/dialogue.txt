@@ -1,5 +1,6 @@
 Format:
-text|typing delay|skippable (1/0)|item dependency
+text|typing delay|skippable (1/0)|font|speaker name
+"-" is blank
 If nothing is put, e.g:
 Hello, welcome to the cafe!
 
@@ -14,7 +15,7 @@ The values most recently input are re-used until changed again
 
 
 [CafeCounter/]
-Hello, welcome to the cafe! What can I get started for you? We have all sorts of drinks available. Including teas, coffees, etc.|0.05|1|normal|patrick
+Hello, welcome to the cafe! What can I get started for you? We have all sorts of drinks available. Including teas, coffees, etc.|0.05|1|HelpMe|Barista
 [/CafeCounter]
 
 [corridor1/]
@@ -26,24 +27,53 @@ WELawddawdawawddawCOME TO THE CORRIDOROR!!!!!!!!!!!!!!!!!
 ITEM FOUR OMG!!!!!
 [/Item 4]
 
-[main_hall_morning]
-Ugh… This module is so dumb… Why do we have to complete a 10 hour quiz EVERYDAY?
+[main_hall_morning/]
+Ugh… This module is so dumb… Why do we have to complete a 10 hour quiz EVERYDAY?|-|-|-|Player
 Having to do them in a university building is also so cringe… 
 Eh… whatever, it is what it is. Let’s go grab a cup of coffee first. 
 [/main_hall_morning]
 
-[elevator_fail]
-Hmm… Seems like the elevator’s broken.
+[elevator_fail/]
+Hmm… Seems like the elevator’s broken.|-|-|-|Player
 [/elevator_fail]
 
-[cafe_morning]
-Nice! There’s no queue for the coffee! I’ll save myself a seat first.
-YOU PLACE YOUR LAPTOP ON THE TABLE CLOSEST TO YOU. 
-I can’t wait to get my favorite venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda. 
+[cafe_morning/]
+Nice! There’s no queue for the coffee! I’ll save myself a seat first.|-|-|-|Player
+YOU PLACE YOUR LAPTOP ON THE TABLE CLOSEST TO YOU.
+I can’t wait to get my favorite venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda.
 [/cafe_morning]
 
-[table_fail]
-NEED. COFFEE. NOW.
+[table_fail/]
+NEED. COFFEE. NOW.|-|-|-|Player
 [/table_fail]
 
-[shopfront_morning]
+[shopfront_morning/]
+You alright? What would you like today?|-|-|-|Barista
+Hiya, can I get a venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda, please?|-|-|-|Player
+Alright, a venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda, correct? That’ll be £10.99, thank you.|-|-|-|Barista
+[/shopfront_morning]
+
+[barista_fail/]
+Well? Are you going to give me the money or not?|-|-|-|Barista
+[/barista_fail]
+
+[barista_success/]
+Here’s your venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda. Have a nice day!|-|-|-|Barista
+[/barista_success]
+
+[cafe_morning2/]
+Now I have my coffee, I should finish the quiz before the sun goes down.|-|-|-|Player
+[/cafe_morning2]
+
+[table_night/]
+Damn, that quiz was hard. I had to skip tea and dinner for it, and now it’s midnight.|-|-|-|Player
+*sighs* Lucky you. I’ve only completed 1 question and still got 99 to go. I’ll be stuck here until I die!!!|-|-|-|Student
+You good, bro? Do you want some help with that?|-|-|-|Player
+You sure? Man, I don’t even care if I get expelled for this, I just want to end this suffering. Please help me!|-|-|-|Student
+I’ve been stuck on this question for hours: “The Riemann hypothesis is that all nontrivial zeros of the analytical continuation of the Riemann zeta function have a real part of ⁠1/2, and has been proven true for many large prime values, but not to infinity; please provide formal proof of the Riemann hypothesis to infinity.”
+Uhhh… The what? The rebar hypostasis? Umm… I don’t think I’ve been taught that before. I’ll go upstairs and see if the library has any information on that. |-|-|-|Player
+[/table_night]
+
+[main_hall_night/]
+Huh. The elevator’s working again. Oh well, at least I don’t have to take the stairs anymore.|-|-|-|Player
+[/main_hall_night]

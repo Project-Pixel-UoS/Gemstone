@@ -5,6 +5,7 @@ namespace Util
 { 
     public class Utils : MonoBehaviour
     {
+        public static bool DISABLE_ALL_DIALOGUE = false;
         public static bool IsMouseClicked()
         {
             return Input.GetMouseButtonDown(0);

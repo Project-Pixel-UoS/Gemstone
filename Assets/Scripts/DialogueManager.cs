@@ -37,6 +37,7 @@ public static class DialogueHandler
 
     public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
+        if (Utils.DISABLE_ALL_DIALOGUE) { yield break; }
         Debug.Log("Display called");
         hasFinished = false;
 
@@ -58,8 +59,9 @@ public static class DialogueHandler
             textElement.textWrappingMode = TextWrappingModes.Normal;
             textElement.overflowMode = TextOverflowModes.Masking;
             textElement.color = Color.black;
+            textElement.alignment = TextAlignmentOptions.Center;
         }
-        textElement.font = Resources.Load<TMP_FontAsset>($"{fontName}");
+        textElement.font = Resources.Load<TMP_FontAsset>(fontName);
         
         if (rectTransformTXT == null)
         {
@@ -117,15 +119,17 @@ public static class DialogueHandler
                 speakerNameElement.alignment = TextAlignmentOptions.Center;
             }
             
+            int flippedMultiplier = speakerName == "Player" || speakerName.IsUnityNull() ? 1 : -1;
+
             rectTransformSpeakerName = speakerNameObj.GetComponent<RectTransform>();
             rectTransformSpeakerName.sizeDelta = new Vector2(Utils.GetPercentScreenSizeX(15.6f), Utils.GetPercentScreenSizeY(7.4f));
-            rectTransformSpeakerName.anchoredPosition = new Vector2(-1 * Utils.GetPercentScreenSizeX(30), rectTransformBG.anchoredPosition.y + rectTransformBG.sizeDelta.y / 2 + Utils.GetPercentScreenSizeY(0.9f));
+            rectTransformSpeakerName.anchoredPosition = new Vector2(-1 * Utils.GetPercentScreenSizeX(30) * flippedMultiplier, rectTransformBG.anchoredPosition.y + rectTransformBG.sizeDelta.y / 2 + Utils.GetPercentScreenSizeY(0.9f));
 
             RectTransform rectTransformSpeakerBG = speakerBGObj.GetComponent<RectTransform>();
             rectTransformSpeakerBG.sizeDelta = new Vector2(Utils.GetPercentScreenSizeX(15.6f) * 1.3f, Utils.GetPercentScreenSizeY(7.4f) * 1.3f);
             rectTransformSpeakerBG.anchoredPosition = new Vector2(rectTransformSpeakerName.anchoredPosition.x, rectTransformSpeakerName.anchoredPosition.y);
 
-            speakerNameElement.font = Resources.Load<TMP_FontAsset>($"{fontName}");
+            speakerNameElement.font = Resources.Load<TMP_FontAsset>(fontName);
 
             speakerNameElement.text = speakerName;
         }
@@ -181,6 +185,12 @@ public static class DialogueHandler
     public static bool IsFinished()
     {
         return hasFinished;
+    }
+
+    public static void PlayDialogue(string tag)
+    {
+        DialogueInstance dialogueInstance = new DialogueInstance(tag);
+        dialogueInstance.StartDialogue();
     }
 
     public static void ClearDialogue()
@@ -257,14 +267,13 @@ public class DialogueInstance
             var s = line.Trim().Split("|");
 
             if (s.Length > 1)
-            {
-                typingDelay = float.Parse(s[1]);
-                skippable = Convert.ToBoolean(int.Parse(s[2]));
-                fontName = s[3].Trim();
-                speakerName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s[4].Trim());
+            {   
+                typingDelay = s[1].Trim() == "-" ?  typingDelay : float.Parse(s[1]);
+                skippable = s[2].Trim() == "-" ? skippable : Convert.ToBoolean(int.Parse(s[2]));
+                fontName = s[3].Trim() == "-" ? fontName : s[3].Trim();
+                speakerName = s[4].Trim() == "-" ? speakerName : CultureInfo.CurrentCulture.TextInfo.ToTitleCase(s[4].Trim());
             }
             dialogueLines.Add(new DialogueBlock(s[0], typingDelay, skippable, fontName, speakerName));
-            
         }
     }
     public void StartDialogue()
