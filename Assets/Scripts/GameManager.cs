@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using UnityEditor.Animations;
-using System;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -200,7 +199,13 @@ public class GameManager : MonoBehaviour
     public void OnChairClicked() => SwitchRooms(table);
     public void OnStoreClicked() => SwitchRooms(store);
     public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
-    public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
+    public void OnElevatorClicked() 
+    {
+        Debug.Log("Elevator clicked!");
+        // RoomTransitionFade(true);
+        SceneManager.LoadScene("First Floor");
+        // RoomTransitionFade(false);
+    }
 
     public void OnBackButtonClicked()
     {

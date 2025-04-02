@@ -32,8 +32,8 @@ public static class DialogueHandler
     private static Image speakerBGImage;
     private static RectTransform rectTransformSpeakerName;
     
-    private static int textPaddingPX_X { get {return Utils.GetPercentScreenSizeX(1.56f);} }
-    private static int textPaddingPX_Y { get {return Utils.GetPercentScreenSizeY(0.46f);} }
+    private static int textPaddingPX_X { get {return Utils.GetPercentScreenSizeX(3.5f);} }
+    private static int textPaddingPX_Y { get {return Utils.GetPercentScreenSizeY(2f);} }
 
     public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
@@ -79,7 +79,7 @@ public static class DialogueHandler
         if (backgroundImage == null)
         {
             backgroundImage = backgroundObj.AddComponent<Image>();
-            backgroundImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG2");
+            backgroundImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG1");
             backgroundImage.type = Image.Type.Filled;
         }
 
@@ -100,7 +100,7 @@ public static class DialogueHandler
                 speakerBGObj.transform.SetSiblingIndex(2);
 
                 speakerBGImage = speakerBGObj.AddComponent<Image>();
-                speakerBGImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG2");
+                speakerBGImage.sprite = Resources.Load<Sprite>("Images/Dialogue/DialogueBG1");
                 speakerBGImage.type = Image.Type.Filled;
             }
 
@@ -165,7 +165,7 @@ public static class DialogueHandler
 
     public static bool IsActive()
     {
-        Debug.Log(!(canvasObj == null));
+        // Debug.Log(!(canvasObj == null));
         return !(canvasObj == null);
     }
     public static string FetchDialogueFromTag(string tag)
@@ -343,5 +343,4 @@ public class CoroutineRunner : MonoBehaviour
     {
         StartCoroutine(coroutine);
     }
-    
 }

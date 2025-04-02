@@ -25,3 +25,25 @@ WELawddawdawawddawCOME TO THE CORRIDOROR!!!!!!!!!!!!!!!!!
 [Item 4/]
 ITEM FOUR OMG!!!!!
 [/Item 4]
+
+[main_hall_morning]
+Ugh… This module is so dumb… Why do we have to complete a 10 hour quiz EVERYDAY?
+Having to do them in a university building is also so cringe… 
+Eh… whatever, it is what it is. Let’s go grab a cup of coffee first. 
+[/main_hall_morning]
+
+[elevator_fail]
+Hmm… Seems like the elevator’s broken.
+[/elevator_fail]
+
+[cafe_morning]
+Nice! There’s no queue for the coffee! I’ll save myself a seat first.
+YOU PLACE YOUR LAPTOP ON THE TABLE CLOSEST TO YOU. 
+I can’t wait to get my favorite venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda. 
+[/cafe_morning]
+
+[table_fail]
+NEED. COFFEE. NOW.
+[/table_fail]
+
+[shopfront_morning]
