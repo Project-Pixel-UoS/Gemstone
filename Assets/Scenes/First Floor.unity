@@ -2081,6 +2081,8 @@ GameObject:
   - component: {fileID: 704575739}
   - component: {fileID: 704575742}
   - component: {fileID: 704575741}
+  - component: {fileID: 704575744}
+  - component: {fileID: 704575743}
   m_Layer: 0
   m_Name: 'Puzzle: Electronic Puzzle Panel'
   m_TagString: Untagged
@@ -2147,6 +2149,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704575738}
   m_CullTransparentMesh: 1
+--- !u!225 &704575743
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704575738}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &704575744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704575738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fd2f942ea62854a9ef87502e8c8f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 704575739}
+  canvasGroup: {fileID: 704575743}
+  moveDistance: 50
+  duration: 0.5
 --- !u!1001 &786310769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3591,6 +3621,7 @@ GameObject:
   - component: {fileID: 1219763931}
   - component: {fileID: 1219763930}
   - component: {fileID: 1219763932}
+  - component: {fileID: 1219763933}
   m_Layer: 0
   m_Name: Circuit Puzzle Panel
   m_TagString: Untagged
@@ -3697,6 +3728,18 @@ MonoBehaviour:
   m_Spacing: {x: 5, y: 5}
   m_Constraint: 1
   m_ConstraintCount: 6
+--- !u!114 &1219763933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219763928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66fbaa336d7d7654c891ae5b2731ffc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1262620266
 GameObject:
   m_ObjectHideFlags: 0
