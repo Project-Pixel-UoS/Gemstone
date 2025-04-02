@@ -47,6 +47,7 @@ public class QuestPoint : MonoBehaviour
         {
             QuestManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
             Debug.Log("reenabled quest point " + questState);
+            QuestManager.Instance.ReloadQuest(questID);
         }
     }
 
