@@ -1863,7 +1863,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: connectionsList.Array.data[0].isConnected
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: connectionsList.Array.data[1].isConnected
@@ -1875,7 +1875,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: connectionsList.Array.data[3].isConnected
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7985144448423629157, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: m_Pivot.x
@@ -4061,6 +4061,14 @@ PrefabInstance:
     - target: {fileID: 3027997479654623646, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: m_Name
       value: Wire
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: connectionsList.Array.data[0].isConnected
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+      propertyPath: connectionsList.Array.data[2].isConnected
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7985144448423629157, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
       propertyPath: m_Pivot.x
