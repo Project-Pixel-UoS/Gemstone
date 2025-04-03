@@ -2,10 +2,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    private Vector3 targetPos;
+    private Vector3 placementLocation;
+    private float snappingThreshold = 2f;
+
+    public void Start()
+    {
+        placementLocation = GameObject.Find("DetectorPlacement").transform.position;
+        placementLocation.z = 0;
+        Debug.Log("Placement pos " + placementLocation);
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        targetPos = new Vector3(-63, 340, 0);
         Debug.Log("Starting dragging");
     }
 
@@ -19,7 +26,10 @@ public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("Stopped dragging!");
+        if (Vector3.Distance(transform.position,placementLocation) < snappingThreshold)
+        {
+            transform.position = placementLocation;
+        }
     }
 
 }
