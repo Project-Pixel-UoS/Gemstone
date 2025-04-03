@@ -132,9 +132,9 @@ public class CircuitPuzzleManager : MonoBehaviour
     {
         switch (direction)
         {
-            case Direction.Top: return new Vector2Int(0, 1);
+            case Direction.Top: return new Vector2Int(0, -1);
             case Direction.Right: return new Vector2Int(1, 0);
-            case Direction.Bottom: return new Vector2Int(0, -1);
+            case Direction.Bottom: return new Vector2Int(0, 1);
             case Direction.Left: return new Vector2Int(-1, 0);
             default: return Vector2Int.zero;
         }
