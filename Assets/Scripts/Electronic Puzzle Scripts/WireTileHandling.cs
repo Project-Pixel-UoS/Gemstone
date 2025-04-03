@@ -21,6 +21,7 @@ public class DirectionConnection
 
 public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public Vector2Int gridPosition { get; private set; }
 
     public Color onColor = Color.green;  // Color when the wire is "on"
     public Color offColor = Color.red;  // Color when the wire is "off"
@@ -152,6 +153,25 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         isWireOn = false;
         UpdateWireColor();
+    }
+
+    public List<Direction> GetConnectedDirections()
+    {
+        List<Direction> connectedDirections = new List<Direction>();
+
+        foreach (var conn in connectionsList)
+        {
+            if (conn.isConnected)
+            {
+                connectedDirections.Add(conn.direction);
+            }
+        }
+
+        return connectedDirections;
+    }
+    public void SetGridPosition(int x, int y)
+    {
+        gridPosition = new Vector2Int(x, y);
     }
 
 }
