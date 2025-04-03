@@ -61,6 +61,10 @@ public class CircuitPuzzleManager : MonoBehaviour
         HashSet<WireTileHandling> visited = new HashSet<WireTileHandling>();
         DFS(powerSource, visited);
 
+        // Debug log to print the size of visited and wireGrid
+        Debug.Log($"Visited size: {visited.Count}");
+        Debug.Log($"WireGrid size: {gridWidth} x {gridHeight}");
+
         // Turn off all unvisited wires
         foreach (WireTileHandling tile in wireGrid)
         {
@@ -95,9 +99,6 @@ public class CircuitPuzzleManager : MonoBehaviour
             {
                 // Get the neighboring tile at the calculated position
                 WireTileHandling neighborWire = wireGrid[neighborPos.x, neighborPos.y];
-
-                // Log the neighbor tile position
-                Debug.Log($"Neighbor position: {neighborPos}, Neighbor wire found: {neighborWire != null}");
 
                 // Check if the neighboring tile has a valid connection for the current direction
                 if (neighborWire != null && neighborWire.GetConnectedDirections().Contains(OppositeDirection(dir)))

@@ -46,18 +46,6 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     private int rotationState = 0;
 
-    private Dictionary<Direction, bool> connections = new Dictionary<Direction, bool>();
-
-    private void Awake()
-    {
-        // Convert list into dictionary at runtime
-        connections = new Dictionary<Direction, bool>();
-        foreach (var entry in connectionsList)
-        {
-            connections[entry.direction] = entry.isConnected;
-        }
-    }
-
     private void Start()
     {
         initialParent = transform.parent;
@@ -129,14 +117,6 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
         connectionsList[0].isConnected = lastConnection;
 
-        // Rotate connections by shifting values
-        bool last = connections[Direction.Left];
-
-        connections[Direction.Left] = connections[Direction.Bottom];
-        connections[Direction.Bottom] = connections[Direction.Right];
-        connections[Direction.Right] = connections[Direction.Top];
-        connections[Direction.Top] = last;
-
         // Call the LightUpConnectedWires function to update the circuit
         if (puzzleManager != null)
         {
@@ -178,8 +158,11 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             }
         }
 
+        Debug.Log($"Wire at {gridPosition} has connections: {string.Join(", ", connectedDirections)}");
+
         return connectedDirections;
     }
+
     public void SetGridPosition(int x, int y)
     {
         gridPosition = new Vector2Int(x, y);
