@@ -33,7 +33,7 @@ public class ItemTracker : MonoBehaviour
     {
         if (Utils.IsMouseClicked())
         {
-            SelectItem();
+            if(Utils.CheckMousePosInsideStage("Inventory")) SelectItem();
             if (currentItem == null) PickupItem();
         }
     }
@@ -47,6 +47,7 @@ public class ItemTracker : MonoBehaviour
         //shorthand for: if *condition*, then currentItem = null, else = item.
         //can click twice on the same item to unselect.
         currentItem = (item != null && (currentItem != item.gameObject || currentItem == null)) ? item.gameObject : null;
+        Debug.Log(currentItem);
         return currentItem;
     }
 
@@ -84,7 +85,7 @@ public class ItemTracker : MonoBehaviour
             item.transform.localScale = itemSlot.localScale;
             item.gameObject.layer = itemSlot.gameObject.layer;
             itemEvents.ItemAdded(item.name);//broadcast event 
-
+            Debug.Log("Item picked up: " + item.name);
             DialogueInstance DI = new DialogueInstance(item.name);
             DI.StartDialogue();
         }
@@ -100,6 +101,7 @@ public class ItemTracker : MonoBehaviour
     {
         if(itemName.Equals(currentItem.name))
         {
+            Debug.Log("Item used");
             GameObject item = GameObject.Find(itemName); 
             Destroy(item);
             currentItem = null;
