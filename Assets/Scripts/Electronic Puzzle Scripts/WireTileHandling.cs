@@ -23,6 +23,9 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 {
     public Vector2Int gridPosition { get; private set; }
 
+    public CircuitPuzzleManager puzzleManager;  // Reference to the CircuitPuzzleManager
+
+
     public Color onColor = Color.green;  // Color when the wire is "on"
     public Color offColor = Color.red;  // Color when the wire is "off"
 
@@ -62,6 +65,8 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
         // Set initial color (could be off by default)
         UpdateWireColor();
+
+        puzzleManager = GetComponentInParent<CircuitPuzzleManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -131,6 +136,12 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         connections[Direction.Bottom] = connections[Direction.Right];
         connections[Direction.Right] = connections[Direction.Top];
         connections[Direction.Top] = last;
+
+        // Call the LightUpConnectedWires function to update the circuit
+        if (puzzleManager != null)
+        {
+            puzzleManager.LightUpConnectedWires();
+        }
     }
 
     private void UpdateWireColor()

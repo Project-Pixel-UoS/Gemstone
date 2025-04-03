@@ -27,6 +27,8 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
 
         LightUpConnectedWires();
+        Debug.Log("Grid position of first tile: " + wireGrid[0, 0].gridPosition);
+        Debug.Log("There are this many Tiles all in all: " + count);
     }
 
     public void RegisterTile(WireTileHandling tile, int x, int y)
@@ -53,6 +55,7 @@ public class CircuitPuzzleManager : MonoBehaviour
 
     public void LightUpConnectedWires()
     {
+        
         if (powerSource == null) return;
 
         HashSet<WireTileHandling> visited = new HashSet<WireTileHandling>();
