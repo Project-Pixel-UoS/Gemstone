@@ -75,19 +75,53 @@ public class CircuitPuzzleManager : MonoBehaviour
     {
         if (wire == null || visited.Contains(wire)) return;
 
+        // Debug log when we visit a tile
+        Debug.Log($"Visiting tile at position: {wire.gridPosition}");
+
         wire.TurnOn();
         visited.Add(wire);
 
         Vector2Int pos = wire.gridPosition;
-        foreach (Direction dir in wire.GetConnectedDirections()) // Get valid connections
+
+        // Loop through all connected directions of the wire
+        foreach (Direction dir in wire.GetConnectedDirections())
         {
+            // Log which direction we're currently considering
+            Debug.Log($"Checking direction: {dir} from tile at position: {wire.gridPosition}");
+
             Vector2Int neighborPos = pos + GetDirectionOffset(dir);
+
             if (IsWithinBounds(neighborPos))
             {
-                DFS(wireGrid[neighborPos.x, neighborPos.y], visited);
+                // Get the neighboring tile at the calculated position
+                WireTileHandling neighborWire = wireGrid[neighborPos.x, neighborPos.y];
+
+                // Log the neighbor tile position
+                Debug.Log($"Neighbor position: {neighborPos}, Neighbor wire found: {neighborWire != null}");
+
+                // Check if the neighboring tile has a valid connection for the current direction
+                if (neighborWire != null && neighborWire.GetConnectedDirections().Contains(OppositeDirection(dir)))
+                {
+                    // Log that we are going to recursively call DFS for the valid neighboring tile
+                    Debug.Log($"Valid connection found to neighbor at {neighborPos}. Recursively calling DFS.");
+
+                    // Recursively call DFS for the valid neighboring tile
+                    DFS(neighborWire, visited);
+                }
+                else
+                {
+                    // Log if no valid connection is found
+                    Debug.Log($"No valid connection for direction: {dir} at position: {wire.gridPosition} to neighbor at {neighborPos}");
+                }
+            }
+            else
+            {
+                // Log if the neighboring position is out of bounds
+                Debug.Log($"Neighbor position {neighborPos} is out of bounds.");
             }
         }
     }
+
 
     private bool IsWithinBounds(Vector2Int pos)
     {
@@ -103,6 +137,23 @@ public class CircuitPuzzleManager : MonoBehaviour
             case Direction.Bottom: return new Vector2Int(0, -1);
             case Direction.Left: return new Vector2Int(-1, 0);
             default: return Vector2Int.zero;
+        }
+    }
+
+    private Direction OppositeDirection(Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.Top:
+                return Direction.Bottom;
+            case Direction.Right:
+                return Direction.Left;
+            case Direction.Bottom:
+                return Direction.Top;
+            case Direction.Left:
+                return Direction.Right;
+            default:
+                return Direction.Top; // Default to Top if something goes wrong
         }
     }
 
