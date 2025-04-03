@@ -74,6 +74,9 @@ public class CircuitPuzzleManager : MonoBehaviour
                 tile.TurnOff();
             }
         }
+
+        CheckIfSolved(endTiles);
+
     }
 
     private void DFS(WireTileHandling wire, HashSet<WireTileHandling> visited)
