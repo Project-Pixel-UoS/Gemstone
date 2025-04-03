@@ -22,11 +22,10 @@ public class DirectionConnection
 public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
-    private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer
     public Color onColor = Color.green;  // Color when the wire is "on"
     public Color offColor = Color.red;  // Color when the wire is "off"
 
-    private bool isWireOn = false; // Track whether the wire is "on"
+    public bool isWireOn = false; // Track whether the wire is "on"
 
     public Image image;
     TileSlot initialParentScript;
@@ -59,8 +58,9 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         initialParent = transform.parent;
         initialParentScript = initialParent.GetComponent<TileSlot>(); // Get the isEditable variable from the parent
-                                                                      // Get the SpriteRenderer component attached to the same GameObject
-        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Set initial color (could be off by default)
+        UpdateWireColor();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -134,10 +134,24 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
     private void UpdateWireColor()
     {
-        if (spriteRenderer != null)
+        if (image != null)
         {
-            spriteRenderer.color = isWireOn ? onColor : offColor;
+            image.color = isWireOn ? onColor : offColor;
         }
+    }
+
+    // Turn the wire ON
+    public void TurnOn()
+    {
+        isWireOn = true;
+        UpdateWireColor();
+    }
+
+    // Turn the wire OFF
+    public void TurnOff()
+    {
+        isWireOn = false;
+        UpdateWireColor();
     }
 
 }

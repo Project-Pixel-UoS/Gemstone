@@ -133,6 +133,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3725748728685468907}
+        m_TargetAssemblyTypeName: WireTileHandling, Assembly-CSharp
+        m_MethodName: TurnOn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3725748728685468907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +157,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8901837fa0c554469f369a21cbc6dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onColor: {r: 0, g: 1, b: 0, a: 1}
+  offColor: {r: 1, g: 0, b: 0, a: 1}
+  isWireOn: 0
   image: {fileID: 6964363767761384634}
   initialParent: {fileID: 0}
   parentAfterDrag: {fileID: 0}

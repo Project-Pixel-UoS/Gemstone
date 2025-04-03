@@ -5,6 +5,7 @@ public class CircuitPuzzleManager : MonoBehaviour
 {
     public int gridWidth, gridHeight; // Define the grid size
     public WireTileHandling[,] wireGrid; // 2D array for storing tiles
+    public WireTileHandling powerSource; // Assign the starting wire with power
 
     void Start()
     {
