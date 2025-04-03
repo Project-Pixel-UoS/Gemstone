@@ -3,19 +3,12 @@ using UnityEngine.EventSystems;
 
 public class Barista : MonoBehaviour, IPointerClickHandler
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    /// <summary>
+    /// When the barista is clicked, the player will use the money item and receive a coffee item.
+    /// </summary>
     public void OnPointerClick(PointerEventData eventData)
     {
+        //TODO: Trigger starting dialogue
         var item = ItemTracker.Instance.currentItem;
         if (item != null && item.name == "Money")
         {
@@ -23,7 +16,7 @@ public class Barista : MonoBehaviour, IPointerClickHandler
             ItemTracker.Instance.UseItem(item.name);
             var coffee = Instantiate(Resources.Load("Items/Coffee"), transform.parent);
             coffee.name = "Coffee";
-        }
+        }//TODO: else trigger dialogue for not having money/incorrect item
     }
 
 
