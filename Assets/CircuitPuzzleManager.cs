@@ -6,6 +6,7 @@ public class CircuitPuzzleManager : MonoBehaviour
     public int gridWidth, gridHeight; // Define the grid size
     public WireTileHandling[,] wireGrid; // 2D array for storing tiles
     public WireTileHandling powerSource; // Assign the starting wire with power
+    public WireTileHandling[] endTiles; // Assign the starting wire with power
 
     void Start()
     {
@@ -155,6 +156,26 @@ public class CircuitPuzzleManager : MonoBehaviour
                 return Direction.Right;
             default:
                 return Direction.Top; // Default to Top if something goes wrong
+        }
+    }
+
+    public void CheckIfSolved(WireTileHandling[] requiredTiles)
+    {
+        bool allConnected = true;
+
+        foreach (WireTileHandling requiredTile in requiredTiles)
+        {
+            if (!requiredTile.isWireOn)
+            {
+                allConnected = false;
+                break;
+            }
+        }
+
+        if (allConnected)
+        {
+            Debug.Log("Puzzle Solved!");
+            // Trigger any win condition logic here
         }
     }
 
