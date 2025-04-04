@@ -1287,6 +1287,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7985144448423629157, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
   m_PrefabInstance: {fileID: 2050317743}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &562819048 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3725748728685468907, guid: 50664163d4b8b2a468628c37e85617ea, type: 3}
+  m_PrefabInstance: {fileID: 2050317743}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8901837fa0c554469f369a21cbc6dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &573496296
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,7 +1907,7 @@ MonoBehaviour:
   canvasGroup: {fileID: 704575743}
   moveDistance: 50
   duration: 0.5
-  puzzlePanel:
+  puzzlePanels:
   - {fileID: 1219763928}
   - {fileID: 1262620266}
 --- !u!224 &719285715 stripped
@@ -3116,7 +3127,8 @@ MonoBehaviour:
   powerSource: {fileID: 617260621}
   endTiles:
   - {fileID: 1274726395}
-  puzzleUIManager: {fileID: 0}
+  - {fileID: 562819048}
+  puzzleUIManager: {fileID: 704575744}
 --- !u!1001 &1234113944
 PrefabInstance:
   m_ObjectHideFlags: 0

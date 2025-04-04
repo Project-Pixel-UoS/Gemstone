@@ -11,7 +11,7 @@ public class PanelAnimator : MonoBehaviour
 
     private Vector2 originalPosition;
 
-    public GameObject[] puzzlePanel; // The UI panel you want to animate
+    public GameObject[] puzzlePanels; // The UI panel you want to animate
 
     private void Start()
     {
@@ -52,7 +52,7 @@ public class PanelAnimator : MonoBehaviour
 
     public void DisplayWinMessage()
     {
-        foreach (GameObject panel in puzzlePanel)
+        foreach (GameObject panel in puzzlePanels)
         {
             panel.SetActive(false);
         }
