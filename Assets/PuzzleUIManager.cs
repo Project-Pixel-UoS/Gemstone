@@ -13,11 +13,22 @@ public class PanelAnimator : MonoBehaviour
 
     public GameObject[] puzzlePanels; // The UI panel you want to animate
 
+    public RectTransform winPanel; // The UI panel you want to animate
+    private CanvasGroup winGroup;     // For fading in the panel
+
+
     private void Start()
     {
         originalPosition = panel.anchoredPosition; // Store the original position
         canvasGroup.alpha = 0; // Start fully transparent
         panel.anchoredPosition = originalPosition - new Vector2(0, moveDistance); // Start slightly lower
+
+        winGroup = winPanel.GetComponent<CanvasGroup>();
+        if (winGroup == null)
+        {
+            // Add one if missing
+            winGroup = winPanel.gameObject.AddComponent<CanvasGroup>();
+        }
     }
 
     public void TogglePanel()
@@ -56,5 +67,15 @@ public class PanelAnimator : MonoBehaviour
         {
             panel.SetActive(false);
         }
+
+        // Enable the win panel
+        winPanel.gameObject.SetActive(true);
+
+        // Reset alpha
+        winGroup.alpha = 0f;
+
+        // Fade in the win panel
+        LeanTween.alphaCanvas(winGroup, 1f, 0.5f).setEase(LeanTweenType.easeOutCubic);
+
     }
 }
