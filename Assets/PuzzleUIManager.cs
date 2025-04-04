@@ -11,6 +11,8 @@ public class PanelAnimator : MonoBehaviour
 
     private Vector2 originalPosition;
 
+    public RectTransform[] puzzlePanel; // The UI panel you want to animate
+
     private void Start()
     {
         originalPosition = panel.anchoredPosition; // Store the original position
@@ -46,5 +48,10 @@ public class PanelAnimator : MonoBehaviour
         // Move down & fade out
         LeanTween.moveY(panel, originalPosition.y - moveDistance, duration).setEaseInExpo();
         LeanTween.alphaCanvas(canvasGroup, 0, duration).setEaseInExpo();
+    }
+
+    public void DisplayWinMessage()
+    {
+        
     }
 }
