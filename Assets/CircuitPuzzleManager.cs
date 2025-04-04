@@ -8,6 +8,8 @@ public class CircuitPuzzleManager : MonoBehaviour
     public WireTileHandling powerSource; // Assign the starting wire with power
     public WireTileHandling[] endTiles; // Assign the starting wire with power
 
+    public PanelAnimator puzzleUIManager;
+
     void Start()
     {
         wireGrid = new WireTileHandling[gridWidth, gridHeight]; // Initialize grid
@@ -177,7 +179,7 @@ public class CircuitPuzzleManager : MonoBehaviour
 
         if (allConnected)
         {
-            Debug.Log("Puzzle Solved!");
+            puzzleUIManager.DisplayWinMessage();
             // Trigger any win condition logic here
         }
     }

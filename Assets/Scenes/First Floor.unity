@@ -1896,6 +1896,9 @@ MonoBehaviour:
   canvasGroup: {fileID: 704575743}
   moveDistance: 50
   duration: 0.5
+  puzzlePanel:
+  - {fileID: 1219763928}
+  - {fileID: 1262620266}
 --- !u!224 &719285715 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7985144448423629157, guid: bc788d6518d84804999cb947dbe413c5, type: 3}
@@ -3113,6 +3116,7 @@ MonoBehaviour:
   powerSource: {fileID: 617260621}
   endTiles:
   - {fileID: 1274726395}
+  puzzleUIManager: {fileID: 0}
 --- !u!1001 &1234113944
 PrefabInstance:
   m_ObjectHideFlags: 0
