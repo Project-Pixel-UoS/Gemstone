@@ -92,6 +92,7 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             Debug.Log("Dragging is disabled for this slot.");
             return; // Stop the drag process
         }
+
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
     }
