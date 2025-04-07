@@ -25,6 +25,14 @@ public class CircuitPuzzleManager : MonoBehaviour
                 {
                     RegisterTile(tiles[count], x, y);
                     count++;
+
+                    // Get the GameObject of the current tile slot
+                    GameObject slotObject = transform.GetChild(count).gameObject;
+
+                    // Get the TileSlot component
+                    TileSlot slot = slotObject.GetComponent<TileSlot>();
+                    slot.x = x;
+                    slot.y = y;
                 }
             }
         }
@@ -78,6 +86,39 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
 
         CheckIfSolved(endTiles);
+
+    }
+
+    // Add a tile to the grid
+    public void AddTileAt(WireTileHandling tile, int x, int y)
+    {
+        if (IsWithinBounds(new Vector2Int(x, y)))
+        {
+            wireGrid[x, y] = tile;
+            tile.SetGridPosition(x, y);
+        }
+    }
+
+    // Remove a tile from the grid
+    public void RemoveTileAt(int x, int y)
+    {
+        if (IsWithinBounds(new Vector2Int(x, y)))
+        {
+            wireGrid[x, y] = null;
+        }
+    }
+
+    public void UpdateWireGrid(int x, int y, WireTileHandling newTile)
+    {
+        if (IsWithinBounds(new Vector2Int(x, y)))
+        {
+            wireGrid[x, y] = newTile;
+        }
+
+        if (newTile != null)
+        {
+            newTile.SetGridPosition(x, y);
+        }
 
     }
 

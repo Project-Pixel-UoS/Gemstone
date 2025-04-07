@@ -69,6 +69,14 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
         image.raycastTarget = false;
+
+        //Remove wire from 2D array wireGrid and update connections
+        if (puzzleManager != null)
+        {
+            Vector2Int oldPos = gridPosition;
+            puzzleManager.UpdateWireGrid(oldPos.x, oldPos.y, null);
+            puzzleManager.LightUpConnectedWires();
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -95,6 +103,13 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
 
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
+
+        if (puzzleManager != null)
+        {
+            puzzleManager.UpdateWireGrid(gridPosition.x, gridPosition.y, this);
+            puzzleManager.LightUpConnectedWires();
+        }
+
     }
 
     public void RotateTile()
