@@ -101,15 +101,24 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             return; // Stop the drag process
         }
 
+        // Reset parenting
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
 
-        if (puzzleManager != null)
+        // Get the TileSlot from the new parent
+        TileSlot newSlot = parentAfterDrag.GetComponent<TileSlot>();
+        if (newSlot != null)
         {
-            puzzleManager.UpdateWireGrid(gridPosition.x, gridPosition.y, this);
-            puzzleManager.LightUpConnectedWires();
-        }
+            // Update the wire’s gridPosition
+            gridPosition = new Vector2Int(newSlot.x, newSlot.y);
 
+            // Update wireGrid and light up wires
+            if (puzzleManager != null)
+            {
+                puzzleManager.UpdateWireGrid(newSlot.x, newSlot.y, this);
+                puzzleManager.LightUpConnectedWires();
+            }
+        }
     }
 
     public void RotateTile()

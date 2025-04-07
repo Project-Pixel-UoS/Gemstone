@@ -23,8 +23,7 @@ public class CircuitPuzzleManager : MonoBehaviour
             {
                 if (count < tiles.Length) // Ensure we don't go out of bounds
                 {
-                    RegisterTile(tiles[count], x, y);
-                    count++;
+                    RegisterTile(tiles[count], x, y);                    
 
                     // Get the GameObject of the current tile slot
                     GameObject slotObject = transform.GetChild(count).gameObject;
@@ -33,6 +32,8 @@ public class CircuitPuzzleManager : MonoBehaviour
                     TileSlot slot = slotObject.GetComponent<TileSlot>();
                     slot.x = x;
                     slot.y = y;
+
+                    count++;
                 }
             }
         }
