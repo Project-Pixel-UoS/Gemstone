@@ -77,6 +77,8 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
             puzzleManager.UpdateWireGrid(oldPos.x, oldPos.y, null);
             puzzleManager.LightUpConnectedWires();
         }
+
+        TurnOff();
     }
 
     public void OnDrag(PointerEventData eventData)
