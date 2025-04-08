@@ -1,8 +1,9 @@
 // Script for any game object that acts as a quest start/end point. 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Util;
 
-public class QuestPoint : MonoBehaviour
+public class QuestPoint : MonoBehaviour, IPointerClickHandler
 {
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questForPoint;
@@ -20,20 +21,6 @@ public class QuestPoint : MonoBehaviour
         questState = QuestState.REQ_NOT_MET;
     }
 
-    private void Update()
-    {
-        if (Utils.IsMouseClicked() && QuestPointInteract())
-        {
-            if(questState.Equals(QuestState.CAN_START) && startPoint)
-            {
-                QuestManager.Instance.questEvents.StartQuest(questID);
-            }else if(questState.Equals(QuestState.CAN_FINISH) && endPoint)
-            {
-                QuestManager.Instance.questEvents.FinishQuest(questID);
-            }
-        }
-    }
-
     //add listener to quest manager on startup and enable.
     private void Start()
     {
@@ -47,6 +34,7 @@ public class QuestPoint : MonoBehaviour
         {
             QuestManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
             Debug.Log("reenabled quest point " + questState);
+            QuestManager.Instance.ReloadQuest(questID);
         }
     }
 
@@ -67,14 +55,15 @@ public class QuestPoint : MonoBehaviour
         }
     }
 
-    //checks if quest point is clicked.
-    private bool QuestPointInteract()
+    public void OnPointerClick(PointerEventData eventData)
     {
-        var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
-        if (item != null && item.transform.tag.Equals("QuestPoint") && item.transform.Equals(this.transform))
+        if (questState.Equals(QuestState.CAN_START) && startPoint)
         {
-            return true;
+            QuestManager.Instance.questEvents.StartQuest(questID);
         }
-        return false;
+        else if (questState.Equals(QuestState.CAN_FINISH) && endPoint)
+        {
+            QuestManager.Instance.questEvents.FinishQuest(questID);
+        }
     }
 }
