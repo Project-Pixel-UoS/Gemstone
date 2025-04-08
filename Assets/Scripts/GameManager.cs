@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-
+        
         CacheGameObjects();
         var clickedItem = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
         if (clickedItem == null) return;
@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(SwitchRoomsIE(roomToShow, entranceDialogueTag));
     }
+
     
     /// <summary>
     /// Loops through each child of the panel transform and deactivates them,
