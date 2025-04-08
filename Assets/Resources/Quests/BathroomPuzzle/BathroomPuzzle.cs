@@ -11,6 +11,7 @@ public class BathroomPuzzle : QuestStep
     private GameObject smokeDetector, placementLocation;
     public static bool isFinished = false;
 
+
     void Start()
     {
         smokeDetector = GameObject.Find("SmokeDetector");
