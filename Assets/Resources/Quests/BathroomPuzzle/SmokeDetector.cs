@@ -31,7 +31,6 @@ public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             return;
         }
     }
-
     public void OnEndDrag(PointerEventData eventData)
     {
         if (Vector3.Distance(transform.position,placementLocation) < snappingThreshold)

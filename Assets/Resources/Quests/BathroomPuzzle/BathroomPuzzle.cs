@@ -1,5 +1,4 @@
 using UnityEngine;
-using Util;
 using UnityEngine.Rendering;
 
 public class BathroomPuzzle : QuestStep
@@ -10,6 +9,7 @@ public class BathroomPuzzle : QuestStep
     /// </summary>
 
     private GameObject smokeDetector, placementLocation;
+    public static bool isFinished = false;
 
 
     void Start()
@@ -24,6 +24,8 @@ public class BathroomPuzzle : QuestStep
         if (smokeDetector.GetComponent<Collider2D>().IsTouching(placementLocation.GetComponent<Collider2D>()))
         {
             FinishQuestStep();
+            isFinished = true;
         }
     }
+
 }

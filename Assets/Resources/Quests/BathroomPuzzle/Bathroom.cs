@@ -4,16 +4,28 @@ using Util;
 
 public class Bathroom : MonoBehaviour
 {
-    private GameObject panel, bathroom, withSmoker, withoutSmoker;
+    /// <summary>
+    /// Handles movement within the bathroom depending on whether the quest is done or not
+    /// </summary>
+    private GameObject withSmoker, noSmoker, questPoint;
 
     private void OnEnable()
     {
-        panel = GameObject.FindWithTag("GameStage");
-        bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
-        withSmoker = bathroom.transform.Find("WithSmoker")?.gameObject;
-        withoutSmoker = bathroom.transform.Find("WithoutSmoker")?.gameObject;
-        withSmoker.SetActive(true);
-        withoutSmoker.SetActive(false);
+        withSmoker = transform.Find("WithSmoker")?.gameObject;
+        noSmoker = transform.Find("WithoutSmoker")?.gameObject;
+        questPoint = transform.Find("QuestPoint")?.gameObject;
+        if (!SmokerConditionDisabled())
+        {
+            withSmoker.SetActive(true);
+            noSmoker.SetActive(false);
+            questPoint.SetActive(true);
+        }
+        else
+        {
+            withSmoker.SetActive(false);
+            noSmoker.SetActive(true);
+            questPoint.SetActive(false);
+        }
     }
     private void Update()
     {
@@ -23,9 +35,14 @@ public class Bathroom : MonoBehaviour
             if (clickedItem != null && clickedItem.gameObject.name == "Smoker")
             {
                 withSmoker.SetActive(false);
-                withoutSmoker.SetActive(true);
+                noSmoker.SetActive(true);
+                questPoint?.SetActive(false);
             }
 
         }
+    }
+    private bool SmokerConditionDisabled()
+    { 
+        return BathroomPuzzle.isFinished;
     }
 }
