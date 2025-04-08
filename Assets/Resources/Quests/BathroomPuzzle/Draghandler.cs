@@ -4,6 +4,7 @@ public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
     private Vector3 placementLocation;
     private float snappingThreshold = 2f;
+    private bool isLocked = false;
 
     public void Start()
     {
@@ -13,15 +14,22 @@ public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("Starting dragging");
+        Debug.Log("Locked? " + isLocked);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log("Dragging");
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10f;
-        transform.position = Camera.main.ScreenToWorldPoint(mousePos);
+        if (!isLocked)
+        {
+            Debug.Log("Dragging");
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 10f;
+            transform.position = Camera.main.ScreenToWorldPoint(mousePos);
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -29,6 +37,7 @@ public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (Vector3.Distance(transform.position,placementLocation) < snappingThreshold)
         {
             transform.position = placementLocation;
+            isLocked = true;
         }
     }
 
