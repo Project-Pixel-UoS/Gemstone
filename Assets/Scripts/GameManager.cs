@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
 
         mainHall?.SetActive(true);
         backButton?.SetActive(false);
-        inventory?.SetActive(false);
+        //inventory?.SetActive(false);
         cafe?.SetActive(false);
         table?.SetActive(false);
         store?.SetActive(false);
