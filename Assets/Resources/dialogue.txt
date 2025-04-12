@@ -20,5 +20,5 @@ This is awesome! GIHCGUWOUID GAWIDG IOUWd GIHCGUWOUID GAWIDG IOUWd
 
 [ElectronicPuzzle/]
 Start the Puzzle?|0.05|1
-Start the Puzzle 2?
+Wait why am i asking? I didnt program in the ability to make choices yet...
 [/ElectronicPuzzle]

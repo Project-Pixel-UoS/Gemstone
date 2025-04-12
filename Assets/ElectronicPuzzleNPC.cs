@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class ElectronicPuzzleNPC : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void TalktoNPC()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        DialogueInstance dialogueInstance = new DialogueInstance("ElectronicPuzzle");
+        dialogueInstance.StartDialogue();
     }
 }
