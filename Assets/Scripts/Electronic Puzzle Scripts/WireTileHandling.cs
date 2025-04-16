@@ -126,6 +126,11 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         UpdateWireColor();
 
         puzzleManager = GetComponentInParent<CircuitPuzzleManager>();
+
+        if (puzzleManager == null)
+        {
+            puzzleManager = FindObjectOfType<CircuitPuzzleManager>();
+        }
     }
 
     /// <summary>
