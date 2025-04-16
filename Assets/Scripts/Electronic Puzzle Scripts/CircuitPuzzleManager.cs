@@ -1,34 +1,69 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Manages the logic for a grid-based circuit puzzle,
+/// including tile registration, DFS-based connection checking,
+/// and win condition verification.
+/// </summary>
 public class CircuitPuzzleManager : MonoBehaviour
 {
-    public int gridWidth, gridHeight; // Define the grid size
-    public WireTileHandling[,] wireGrid; // 2D array for storing tiles
-    public WireTileHandling powerSource; // Assign the starting wire with power
-    public WireTileHandling[] endTiles; // Assign the starting wire with power
+    /// <summary>
+    /// Width of the wire grid.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
+    public int gridWidth;
 
+    /// <summary>
+    /// Height of the wire grid.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
+    public int gridHeight;
+
+    /// <summary>
+    /// 2D array storing wire tiles.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
+    public WireTileHandling[,] wireGrid;
+
+    /// <summary>
+    /// Reference to the initial powered wire tile.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
+    public WireTileHandling powerSource;
+
+    /// <summary>
+    /// Tiles that must be powered for the puzzle to be considered solved.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
+    public WireTileHandling[] endTiles;
+
+    /// <summary>
+    /// UI manager to handle puzzle win animations.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public PanelAnimator puzzleUIManager;
 
+    /// <summary>
+    /// Initializes the grid, registers tiles, and attempts to light up the circuit.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     void Start()
     {
-        wireGrid = new WireTileHandling[gridWidth, gridHeight]; // Initialize grid
+        wireGrid = new WireTileHandling[gridWidth, gridHeight];
 
-        WireTileHandling[] tiles = GetComponentsInChildren<WireTileHandling>(); // Only check children
+        WireTileHandling[] tiles = GetComponentsInChildren<WireTileHandling>();
 
-        int count = 0; // Track how many tiles have been assigned
+        int count = 0;
         for (int y = 0; y < gridHeight; y++)
         {
             for (int x = 0; x < gridWidth; x++)
             {
-                if (count < tiles.Length) // Ensure we don't go out of bounds
+                if (count < tiles.Length)
                 {
-                    RegisterTile(tiles[count], x, y);                    
+                    RegisterTile(tiles[count], x, y);
 
-                    // Get the GameObject of the current tile slot
                     GameObject slotObject = transform.GetChild(count).gameObject;
-
-                    // Get the TileSlot component
                     TileSlot slot = slotObject.GetComponent<TileSlot>();
                     slot.x = x;
                     slot.y = y;
@@ -39,16 +74,24 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
 
         LightUpConnectedWires();
+
         Debug.Log("Grid position of first tile: " + wireGrid[0, 0].gridPosition);
         Debug.Log("There are this many Tiles all in all: " + count);
     }
 
+    /// <summary>
+    /// Registers a tile to a specific grid position.
+    /// </summary>
+    /// <param name="tile">The wire tile to register.</param>
+    /// <param name="x">X position.</param>
+    /// <param name="y">Y position.</param>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public void RegisterTile(WireTileHandling tile, int x, int y)
     {
         if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight)
         {
             wireGrid[x, y] = tile;
-            tile.SetGridPosition(x, y); // Assigns the grid position
+            tile.SetGridPosition(x, y);
         }
         else
         {
@@ -56,6 +99,13 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets a wire tile at a specific grid position.
+    /// </summary>
+    /// <param name="x">X position.</param>
+    /// <param name="y">Y position.</param>
+    /// <returns>The tile at the position or null.</returns>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public WireTileHandling GetTileAtPosition(int x, int y)
     {
         if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight)
@@ -65,19 +115,17 @@ public class CircuitPuzzleManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// Lights up all tiles connected to the power source using DFS.
+    /// </summary>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public void LightUpConnectedWires()
     {
-        
         if (powerSource == null) return;
 
         HashSet<WireTileHandling> visited = new HashSet<WireTileHandling>();
         DFS(powerSource, visited);
 
-        // Debug log to print the size of visited and wireGrid
-        Debug.Log($"Visited size: {visited.Count}");
-        Debug.Log($"WireGrid size: {gridWidth} x {gridHeight}");
-
-        // Turn off all unvisited wires
         foreach (WireTileHandling tile in wireGrid)
         {
             if (tile != null && !visited.Contains(tile))
@@ -87,10 +135,15 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
 
         CheckIfSolved(endTiles);
-
     }
 
-    // Add a tile to the grid
+    /// <summary>
+    /// Adds a tile to the grid at a specific position.
+    /// </summary>
+    /// <param name="tile">The tile to add.</param>
+    /// <param name="x">X position.</param>
+    /// <param name="y">Y position.</param>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public void AddTileAt(WireTileHandling tile, int x, int y)
     {
         if (IsWithinBounds(new Vector2Int(x, y)))
@@ -100,7 +153,12 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
     }
 
-    // Remove a tile from the grid
+    /// <summary>
+    /// Removes a tile from the grid at the given position.
+    /// </summary>
+    /// <param name="x">X coordinate.</param>
+    /// <param name="y">Y coordinate.</param>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public void RemoveTileAt(int x, int y)
     {
         if (IsWithinBounds(new Vector2Int(x, y)))
@@ -109,6 +167,13 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the wire grid with a new tile at a specific position.
+    /// </summary>
+    /// <param name="x">X position.</param>
+    /// <param name="y">Y position.</param>
+    /// <param name="newTile">The tile to insert.</param>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public void UpdateWireGrid(int x, int y, WireTileHandling newTile)
     {
         if (IsWithinBounds(new Vector2Int(x, y)))
@@ -120,63 +185,56 @@ public class CircuitPuzzleManager : MonoBehaviour
         {
             newTile.SetGridPosition(x, y);
         }
-
     }
 
+    /// <summary>
+    /// Recursive DFS algorithm to turn on and track connected wires.
+    /// </summary>
+    /// <param name="wire">Current tile being visited.</param>
+    /// <param name="visited">Set of already visited tiles.</param>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     private void DFS(WireTileHandling wire, HashSet<WireTileHandling> visited)
     {
         if (wire == null || visited.Contains(wire)) return;
-
-        // Debug log when we visit a tile
-        Debug.Log($"Visiting tile at position: {wire.gridPosition}");
 
         wire.TurnOn();
         visited.Add(wire);
 
         Vector2Int pos = wire.gridPosition;
 
-        // Loop through all connected directions of the wire
         foreach (Direction dir in wire.GetConnectedDirections())
         {
-            // Log which direction we're currently considering
-            Debug.Log($"Checking direction: {dir} from tile at position: {wire.gridPosition}");
-
             Vector2Int neighborPos = pos + GetDirectionOffset(dir);
 
             if (IsWithinBounds(neighborPos))
             {
-                // Get the neighboring tile at the calculated position
                 WireTileHandling neighborWire = wireGrid[neighborPos.x, neighborPos.y];
 
-                // Check if the neighboring tile has a valid connection for the current direction
                 if (neighborWire != null && neighborWire.GetConnectedDirections().Contains(OppositeDirection(dir)))
                 {
-                    // Log that we are going to recursively call DFS for the valid neighboring tile
-                    Debug.Log($"Valid connection found to neighbor at {neighborPos}. Recursively calling DFS.");
-
-                    // Recursively call DFS for the valid neighboring tile
                     DFS(neighborWire, visited);
                 }
-                else
-                {
-                    // Log if no valid connection is found
-                    Debug.Log($"No valid connection for direction: {dir} at position: {wire.gridPosition} to neighbor at {neighborPos}");
-                }
-            }
-            else
-            {
-                // Log if the neighboring position is out of bounds
-                Debug.Log($"Neighbor position {neighborPos} is out of bounds.");
             }
         }
     }
 
-
+    /// <summary>
+    /// Checks whether a given grid position is within the grid bounds.
+    /// </summary>
+    /// <param name="pos">The position to check.</param>
+    /// <returns>True if valid, false otherwise.</returns>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     private bool IsWithinBounds(Vector2Int pos)
     {
         return pos.x >= 0 && pos.x < gridWidth && pos.y >= 0 && pos.y < gridHeight;
     }
 
+    /// <summary>
+    /// Returns the Vector2 offset for a given direction. This vector2 will be applied to the current tile position to get the next tile in DFS.
+    /// </summary>
+    /// <param name="direction">The direction to convert.</param>
+    /// <returns>Offset vector.</returns>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     private Vector2Int GetDirectionOffset(Direction direction)
     {
         switch (direction)
@@ -189,23 +247,29 @@ public class CircuitPuzzleManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns the opposite direction of the one passed in.
+    /// </summary>
+    /// <param name="dir">The original direction.</param>
+    /// <returns>The opposite direction.</returns>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     private Direction OppositeDirection(Direction dir)
     {
         switch (dir)
         {
-            case Direction.Top:
-                return Direction.Bottom;
-            case Direction.Right:
-                return Direction.Left;
-            case Direction.Bottom:
-                return Direction.Top;
-            case Direction.Left:
-                return Direction.Right;
-            default:
-                return Direction.Top; // Default to Top if something goes wrong
+            case Direction.Top: return Direction.Bottom;
+            case Direction.Right: return Direction.Left;
+            case Direction.Bottom: return Direction.Top;
+            case Direction.Left: return Direction.Right;
+            default: return Direction.Top;
         }
     }
 
+    /// <summary>
+    /// Checks if all required end tiles are powered and triggers win condition if true.
+    /// </summary>
+    /// <param name="requiredTiles">Array of required powered tiles.</param>
+    /// <remarks>Maintained by: Michael Edems-Eze</remarks>
     public void CheckIfSolved(WireTileHandling[] requiredTiles)
     {
         bool allConnected = true;
@@ -222,8 +286,7 @@ public class CircuitPuzzleManager : MonoBehaviour
         if (allConnected)
         {
             puzzleUIManager.DisplayWinMessage();
-            // Trigger any win condition logic here
+            // Additional win logic can go here
         }
     }
-
 }
