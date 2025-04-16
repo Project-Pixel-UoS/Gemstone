@@ -5,62 +5,38 @@ using UnityEngine.UI;
 /// Handles UI panel animations such as showing, hiding, and fading, 
 /// as well as win message display logic for a puzzle game.
 /// </summary>
+/// <remarks>
+/// Maintained by: Michael Edems-Eze
+/// </remarks>
 public class PanelAnimator : MonoBehaviour
 {
-    /// <summary>
-    /// The main UI panel to animate.
-    /// </summary>
-    public RectTransform panel;
+    public RectTransform panel;           // The main UI panel to animate
+    public CanvasGroup canvasGroup;       // CanvasGroup for fade in/out effect
 
-    /// <summary>
-    /// The CanvasGroup attached to the panel for controlling fade effects.
-    /// </summary>
-    public CanvasGroup canvasGroup;
+    public float moveDistance = 50f;      // Distance panel moves upward when shown
+    public float duration = 0.5f;         // Duration of the animation
 
-    /// <summary>
-    /// Distance the panel should move upward when showing.
-    /// </summary>
-    public float moveDistance = 50f;
+    private bool isVisible = false;       // Tracks whether the panel is currently visible
+    private Vector2 originalPosition;     // Original anchored position of the panel
 
-    /// <summary>
-    /// Duration of the show/hide animation in seconds.
-    /// </summary>
-    public float duration = 0.5f;
+    public GameObject[] puzzlePanels;     // All puzzle UI panels to be hidden on win
 
-    /// <summary>
-    /// Tracks whether the panel is currently visible.
-    /// </summary>
-    private bool isVisible = false;
-
-    /// <summary>
-    /// The original anchored position of the panel.
-    /// </summary>
-    private Vector2 originalPosition;
-
-    /// <summary>
-    /// Array of puzzle-related panels that are hidden when the win message is shown.
-    /// </summary>
-    public GameObject[] puzzlePanels;
-
-    /// <summary>
-    /// The win panel that is shown when the puzzle is completed.
-    /// </summary>
-    public RectTransform winPanel;
-
-    /// <summary>
-    /// CanvasGroup attached to the win panel for fade-in effects.
-    /// </summary>
-    private CanvasGroup winGroup;
+    public RectTransform winPanel;        // The win message panel
+    private CanvasGroup winGroup;         // CanvasGroup for fading in the win panel
 
     /// <summary>
     /// Initializes panel position and visibility states.
     /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     private void Start()
     {
-        originalPosition = panel.anchoredPosition;
-        canvasGroup.alpha = 0;
-        panel.anchoredPosition = originalPosition - new Vector2(0, moveDistance);
+        originalPosition = panel.anchoredPosition; // Store original panel position
+        canvasGroup.alpha = 0; // Set panel to fully transparent
+        panel.anchoredPosition = originalPosition - new Vector2(0, moveDistance); // Move it downward off-screen
 
+        // Ensure the win panel has a CanvasGroup for fade animation
         winGroup = winPanel.GetComponent<CanvasGroup>();
         if (winGroup == null)
         {
@@ -71,6 +47,9 @@ public class PanelAnimator : MonoBehaviour
     /// <summary>
     /// Toggles the panel visibility. Shows it if hidden, hides it if visible.
     /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void TogglePanel()
     {
         if (isVisible)
@@ -86,6 +65,9 @@ public class PanelAnimator : MonoBehaviour
     /// <summary>
     /// Animates the panel to move upward and fade in.
     /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void ShowPanel()
     {
         isVisible = true;
@@ -97,6 +79,9 @@ public class PanelAnimator : MonoBehaviour
     /// <summary>
     /// Animates the panel to move downward and fade out.
     /// </summary>
+    /// /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void HidePanel()
     {
         isVisible = false;
@@ -108,13 +93,18 @@ public class PanelAnimator : MonoBehaviour
     /// <summary>
     /// Hides all puzzle panels and displays the win message panel with a fade-in effect.
     /// </summary>
+    /// /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void DisplayWinMessage()
     {
+        // Deactivate all puzzle panels
         foreach (GameObject panel in puzzlePanels)
         {
             panel.SetActive(false);
         }
 
+        // Show and fade in the win panel
         winPanel.gameObject.SetActive(true);
         winGroup.alpha = 0f;
         LeanTween.alphaCanvas(winGroup, 1f, 0.5f).setEase(LeanTweenType.easeOutCubic);

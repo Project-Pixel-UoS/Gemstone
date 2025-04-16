@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+/// <summary>
+/// Directions used to define wire connections.
+/// </summary>
 public enum Direction
 {
     Top = 0,
@@ -12,31 +15,95 @@ public enum Direction
     Left = 3
 }
 
+/// <summary>
+/// Represents a directional connection for a wire tile.
+/// </summary>
 [Serializable]
 public class DirectionConnection
 {
-    public Direction direction;
-    public bool isConnected;
+    public Direction direction;      // The direction this connection is facing
+    public bool isConnected;         // Whether this direction is actively connected
 }
 
+/// <summary>
+/// Handles dragging, rotating, and wire state management for a single wire tile.
+/// </summary>
 public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    /// <summary>
+    /// The tile's position in the puzzle grid.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public Vector2Int gridPosition { get; private set; }
 
-    public CircuitPuzzleManager puzzleManager;  // Reference to the CircuitPuzzleManager
+    /// <summary>
+    /// Reference to the puzzle manager that manages the overall circuit.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
+    public CircuitPuzzleManager puzzleManager;
 
+    /// <summary>
+    /// Color when the wire is turned on.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
+    public Color onColor = Color.green;
 
-    public Color onColor = Color.green;  // Color when the wire is "on"
-    public Color offColor = Color.red;  // Color when the wire is "off"
+    /// <summary>
+    /// Color when the wire is turned off.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
+    public Color offColor = Color.red;
 
-    public bool isWireOn = false; // Track whether the wire is "on"
+    /// <summary>
+    /// Indicates whether the wire is currently powered.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
+    public bool isWireOn = false;
 
+    /// <summary>
+    /// Reference to the image component representing the tile visually.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public Image image;
-    TileSlot initialParentScript;
-    [HideInInspector] public Transform initialParent; //Holds parent of dragged item before dragging begins
-    [HideInInspector] public Transform parentAfterDrag; //Holds parent of dragged item before dragging begins
 
-    [SerializeField] public List<DirectionConnection> connectionsList = new List<DirectionConnection> //Makes a list of objects first so they can be set and show up in Inspector
+    private TileSlot initialParentScript;   // Cached reference to the parent slot's script
+
+    /// <summary>
+    /// Original parent of the tile before dragging.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
+    [HideInInspector] public Transform initialParent;
+
+    /// <summary>
+    /// Parent the tile will return to after dragging.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
+    [HideInInspector] public Transform parentAfterDrag;
+
+    /// <summary>
+    /// List of directional connections for the tile (visible in inspector).
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
+    [SerializeField]
+    public List<DirectionConnection> connectionsList = new List<DirectionConnection>
     {
         new DirectionConnection { direction = Direction.Top, isConnected = false },
         new DirectionConnection { direction = Direction.Right, isConnected = false },
@@ -44,25 +111,36 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         new DirectionConnection { direction = Direction.Left, isConnected = false }
     };
 
-    private int rotationState = 0;
+    private int rotationState = 0; // Tracks the number of 90-degree rotations (0-3)
 
+    /// <summary>
+    /// Initializes the tile, caching references and setting color states.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     private void Start()
     {
         initialParent = transform.parent;
-        initialParentScript = initialParent.GetComponent<TileSlot>(); // Get the isEditable variable from the parent
-
-        // Set initial color (could be off by default)
+        initialParentScript = initialParent.GetComponent<TileSlot>();
         UpdateWireColor();
 
         puzzleManager = GetComponentInParent<CircuitPuzzleManager>();
     }
 
+    /// <summary>
+    /// Called when dragging starts.
+    /// </summary>
+    /// <param name="eventData">Pointer event data.</param>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (initialParentScript != null && !initialParentScript.isEditable)
         {
             Debug.Log("Dragging is disabled for this slot.");
-            return; // Stop the drag process
+            return;
         }
 
         parentAfterDrag = transform.parent;
@@ -70,7 +148,6 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         transform.SetAsLastSibling();
         image.raycastTarget = false;
 
-        //Remove wire from 2D array wireGrid and update connections
         if (puzzleManager != null)
         {
             Vector2Int oldPos = gridPosition;
@@ -81,40 +158,49 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         TurnOff();
     }
 
+    /// <summary>
+    /// Called while dragging the tile.
+    /// </summary>
+    /// <param name="eventData">Pointer event data.</param>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void OnDrag(PointerEventData eventData)
     {
         if (initialParentScript != null && !initialParentScript.isEditable)
         {
             Debug.Log("Dragging is disabled for this slot.");
-            return; // Stop the drag process
+            return;
         }
 
-        //These three lines make sure dragging and dropping actually works
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10f;
         transform.position = Camera.main.ScreenToWorldPoint(mousePos);
     }
 
+    /// <summary>
+    /// Called when dragging ends.
+    /// </summary>
+    /// <param name="eventData">Pointer event data.</param>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void OnEndDrag(PointerEventData eventData)
     {
         if (initialParentScript != null && !initialParentScript.isEditable)
         {
             Debug.Log("Dragging is disabled for this slot.");
-            return; // Stop the drag process
+            return;
         }
 
-        // Reset parenting
         transform.SetParent(parentAfterDrag);
         image.raycastTarget = true;
 
-        // Get the TileSlot from the new parent
         TileSlot newSlot = parentAfterDrag.GetComponent<TileSlot>();
         if (newSlot != null)
         {
-            // Update the wire’s gridPosition
             gridPosition = new Vector2Int(newSlot.x, newSlot.y);
 
-            // Update wireGrid and light up wires
             if (puzzleManager != null)
             {
                 puzzleManager.UpdateWireGrid(newSlot.x, newSlot.y, this);
@@ -123,34 +209,43 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
     }
 
+    /// <summary>
+    /// Rotates the tile clockwise and updates the directional connections.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void RotateTile()
     {
         if (initialParentScript != null && !initialParentScript.isEditable)
         {
             Debug.Log("Rotation is NOT Allowed.");
-            return; // Stop the drag process
+            return;
         }
 
-        rotationState = (rotationState + 1) % 4; // Cycle through 0, 90, 180, 270 degrees
+        rotationState = (rotationState + 1) % 4;
         transform.Rotate(0, 0, -90);
 
-        // Store the last connection before rotating
         bool lastConnection = connectionsList[3].isConnected;
 
-        // Shift connections clockwise (left → bottom → right → top)
         for (int i = 3; i > 0; i--)
         {
             connectionsList[i].isConnected = connectionsList[i - 1].isConnected;
         }
         connectionsList[0].isConnected = lastConnection;
 
-        // Call the LightUpConnectedWires function to update the circuit
         if (puzzleManager != null)
         {
             puzzleManager.LightUpConnectedWires();
         }
     }
 
+    /// <summary>
+    /// Updates the wire color based on its on/off state.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     private void UpdateWireColor()
     {
         if (image != null)
@@ -159,20 +254,37 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
     }
 
-    // Turn the wire ON
+    /// <summary>
+    /// Turns the wire on and updates its visual state.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void TurnOn()
     {
         isWireOn = true;
         UpdateWireColor();
     }
 
-    // Turn the wire OFF
+    /// <summary>
+    /// Turns the wire off and updates its visual state.
+    /// </summary>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void TurnOff()
     {
         isWireOn = false;
         UpdateWireColor();
     }
 
+    /// <summary>
+    /// Returns a list of directions that are currently connected.
+    /// </summary>
+    /// <returns>List of connected directions.</returns>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public List<Direction> GetConnectedDirections()
     {
         List<Direction> connectedDirections = new List<Direction>();
@@ -186,13 +298,19 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
         }
 
         Debug.Log($"Wire at {gridPosition} has connections: {string.Join(", ", connectedDirections)}");
-
         return connectedDirections;
     }
 
+    /// <summary>
+    /// Sets the wire’s grid position manually.
+    /// </summary>
+    /// <param name="x">Grid X position.</param>
+    /// <param name="y">Grid Y position.</param>
+    /// <remarks>
+    /// Maintained by: Michael Edems-Eze
+    /// </remarks>
     public void SetGridPosition(int x, int y)
     {
         gridPosition = new Vector2Int(x, y);
     }
-
 }
