@@ -76,9 +76,13 @@ public class ItemTracker : MonoBehaviour
         {
             return;
         }
-        
+
         var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
-        if (item != null && item.transform.tag.Equals("Item"))
+        if (Draghandler.isLocked)
+        {
+            return;
+        }    
+        else if (item != null && item.transform.tag.Equals("Item"))
         {
             Transform itemSlot = GetEmptyInvSlot();
             item.transform.SetParent(itemSlot, false);

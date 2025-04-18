@@ -4,7 +4,7 @@ public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
     private Vector3 placementLocation;
     private float snappingThreshold = 2f;
-    private bool isLocked = false;
+    public static bool isLocked = false;
 
     public void Start()
     {
