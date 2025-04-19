@@ -36,7 +36,6 @@ public class Draghandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (Vector3.Distance(transform.position,placementLocation) < snappingThreshold)
         {
             transform.position = placementLocation;
-            isLocked = true;
         }
     }
 

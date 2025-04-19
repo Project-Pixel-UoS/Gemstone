@@ -8,7 +8,7 @@ public class BathroomPuzzle : QuestStep
     /// for the quest to complete which results in clearing up the smoke in one of the lab.
     /// </summary>
 
-    private GameObject smokeDetector, placementLocation, a;
+    private GameObject smokeDetector, placementLocation, newSmoke;
     public static bool isFinished = false;
 
 
@@ -24,12 +24,12 @@ public class BathroomPuzzle : QuestStep
         if (smokeDetector.GetComponent<Collider2D>().IsTouching(placementLocation.GetComponent<Collider2D>()))
         {
             FinishQuestStep();
-            Vector3 spawnPoint = smokeDetector.transform.position;
+            Vector3 spawnPoint = placementLocation.transform.position;
             Destroy(smokeDetector);
             ItemTracker.Instance.itemEvents.ItemRemoved();
-            a = Resources.Load("Quests/BathroomPuzzle/SmokeDetector") as GameObject;
-            Debug.Log(spawnPoint);
-            Instantiate(a, spawnPoint, Quaternion.identity, placementLocation.transform);
+            newSmoke = Resources.Load("Quests/BathroomPuzzle/SmokeDetector") as GameObject;
+            Instantiate(newSmoke, spawnPoint, Quaternion.identity, GameObject.Find("Room: Bathroom").transform);
+            Draghandler.isLocked = true;
             isFinished = true;
         }
     }

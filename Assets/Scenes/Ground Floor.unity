@@ -4507,6 +4507,7 @@ GameObject:
   - component: {fileID: 858076031}
   - component: {fileID: 858076033}
   - component: {fileID: 858076032}
+  - component: {fileID: 858076035}
   - component: {fileID: 858076034}
   m_Layer: 0
   m_Name: Inventory
@@ -4590,6 +4591,18 @@ MonoBehaviour:
   isInventoryOpen: 1
   inventoryPanel: {fileID: 1957500878}
   transitionTime: 0.5
+--- !u!114 &858076035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858076030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d1bd52eb018324cb1f1ad1c3da197e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &861366195
 GameObject:
   m_ObjectHideFlags: 0
@@ -9383,6 +9396,10 @@ PrefabInstance:
     - target: {fileID: 5258461114406464556, guid: 2cd55a046ad35fb4c87e918cf513f871, type: 3}
       propertyPath: m_Name
       value: SmokeDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 5258461114406464556, guid: 2cd55a046ad35fb4c87e918cf513f871, type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     - target: {fileID: 6223687877419412571, guid: 2cd55a046ad35fb4c87e918cf513f871, type: 3}
       propertyPath: m_Pivot.x
