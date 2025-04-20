@@ -4507,8 +4507,8 @@ GameObject:
   - component: {fileID: 858076031}
   - component: {fileID: 858076033}
   - component: {fileID: 858076032}
-  - component: {fileID: 858076035}
   - component: {fileID: 858076034}
+  - component: {fileID: 858076036}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Inventory
@@ -4525,7 +4525,7 @@ RectTransform:
   m_GameObject: {fileID: 858076030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 107.949356, y: 107.949356, z: 107.949356}
+  m_LocalScale: {x: 106.98087, y: 106.98087, z: 106.98087}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 384104559}
@@ -4534,7 +4534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -161, y: 0}
+  m_AnchoredPosition: {x: -168, y: 0}
   m_SizeDelta: {x: 3.0204, y: 9.87}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &858076032
@@ -4591,7 +4591,7 @@ MonoBehaviour:
   isInventoryOpen: 1
   inventoryPanel: {fileID: 1957500878}
   transitionTime: 0.5
---- !u!114 &858076035
+--- !u!114 &858076036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4600,7 +4600,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 858076030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d1bd52eb018324cb1f1ad1c3da197e, type: 3}
+  m_Script: {fileID: 11500000, guid: 59bc0ba6aacd7a4499341c2a94353d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &861366195
