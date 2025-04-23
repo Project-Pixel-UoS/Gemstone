@@ -207,7 +207,6 @@ public class GameManager : MonoBehaviour
     public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
     public void OnBathroomClicked() => SwitchRooms(bathroom);
     public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
-
     public void OnBackButtonClicked()
     {
         //note: need to make our own back button graphic to avoid copyright

@@ -24,12 +24,8 @@ public class BathroomPuzzle : QuestStep
         if (smokeDetector.GetComponent<Collider2D>().IsTouching(placementLocation.GetComponent<Collider2D>()))
         {
             FinishQuestStep();
-            Vector3 spawnPoint = placementLocation.transform.position;
-            Destroy(smokeDetector);
-            ItemTracker.Instance.itemEvents.ItemRemoved();
-            newSmoke = Resources.Load("Quests/BathroomPuzzle/SmokeDetector") as GameObject;
-            Instantiate(newSmoke, spawnPoint, Quaternion.identity, GameObject.Find("Room: Bathroom").transform);
-            Draghandler.isLocked = true;
+            smokeDetector.transform.SetParent(placementLocation.transform, true);
+            smokeDetector.tag = "Untagged";
             isFinished = true;
         }
     }

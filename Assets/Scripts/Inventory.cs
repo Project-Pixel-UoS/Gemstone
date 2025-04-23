@@ -1,9 +1,8 @@
-using System.Linq;
 using UnityEngine;
 
-public class DontDestroy : MonoBehaviour
+public class Inventory : MonoBehaviour
 {
-    public static DontDestroy instance;
+    public static Inventory instance;
     private void Awake()
     {
         if (instance == null)
@@ -14,6 +13,6 @@ public class DontDestroy : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
+        } 
     }
-}   
+}
