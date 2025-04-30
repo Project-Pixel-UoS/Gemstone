@@ -52,7 +52,7 @@ You alright? What would you like today?|-|-|-|Barista
 Hiya, can I get a venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda, please?|-|-|-|Player
 Alright, a venti white mocha with 10 pumps of caramel, 2 dashes of tabasco, 7 sprinkles of cinnamon, and 3 shavings of 63% dark chocolate from Uganda, correct? That’ll be £10.99, thank you.|-|-|-|Barista
 [/shopfront_morning]
-
+---- Waiting on quests ----
 [barista_fail/]
 Well? Are you going to give me the money or not?|-|-|-|Barista
 [/barista_fail]
