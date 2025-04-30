@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -5,10 +6,10 @@ public class BathroomPuzzle : QuestStep
 {
     /// <summary>
     /// Need to provide a smoke detector game object which can be placed in the bathroom 
-    /// for the quest to complete which results in clearing up the smoke in one of the lab.
+    /// for the quest to complete which results in clearing up the smoke in one of the labs.
     /// </summary>
 
-    private GameObject smokeDetector, placementLocation, newSmoke;
+    private GameObject smokeDetector, placementLocation;
     public static bool isFinished = false;
 
 
@@ -18,13 +19,15 @@ public class BathroomPuzzle : QuestStep
         placementLocation = GameObject.Find("DetectorPlacement");
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+        //checks if smoke detector is touching the placement location
         if (smokeDetector.GetComponent<Collider2D>().IsTouching(placementLocation.GetComponent<Collider2D>()))
         {
             FinishQuestStep();
-            smokeDetector.transform.SetParent(placementLocation.transform, true);
+            //reparent and untag smoke detector so it doesn't overlap other scenes when leaving bathroom
+            smokeDetector.transform.SetParent(placementLocation.transform, true); 
             smokeDetector.tag = "Untagged";
             isFinished = true;
         }
