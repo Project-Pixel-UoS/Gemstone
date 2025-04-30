@@ -25,3 +25,7 @@ WELawddawdawawddawCOME TO THE CORRIDOROR!!!!!!!!!!!!!!!!!
 [Item 4/]
 ITEM FOUR OMG!!!!!
 [/Item 4]
+
+[ElectronicPuzzle/]
+Want to start the electronic puzzle?
+[/ElectronicPuzzle]
