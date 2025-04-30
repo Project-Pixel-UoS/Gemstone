@@ -15,7 +15,7 @@ The values most recently input are re-used until changed again
 
 
 [CafeCounter/]
-Hello, welcome to the cafe! What can I get started for you? We have all sorts of drinks available. Including teas, coffees, etc.|0.05|1|HelpMe|Barista
+Hello, welcome to the cafe! What can I get started for you? We have all sorts of drinks available. Including teas, coffees, etc.|0.05|1|Rudiment|Barista
 [/CafeCounter]
 
 [corridor1/]
