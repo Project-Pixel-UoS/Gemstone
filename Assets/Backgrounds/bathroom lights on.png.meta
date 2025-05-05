@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bathroom lights on_0: -1124399147391121551
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
