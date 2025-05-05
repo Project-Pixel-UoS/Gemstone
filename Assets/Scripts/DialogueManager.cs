@@ -38,7 +38,7 @@ public static class DialogueHandler
     public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
         if (Utils.DISABLE_ALL_DIALOGUE) { yield break; }
-        Debug.Log("Display called");
+        Debug.Log("Display Dialogue called");
         hasFinished = false;
 
         if (canvasObj == null)
