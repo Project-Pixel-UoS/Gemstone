@@ -79,7 +79,6 @@ public class GameManager : MonoBehaviour
         if (mainHall == null || backButton == null) return;
 
         mainHall?.SetActive(true);
-        backButton?.SetActive(false);
         //inventory?.SetActive(false);
         cafe?.SetActive(false);
         table?.SetActive(false);
@@ -136,7 +135,7 @@ public class GameManager : MonoBehaviour
         }
 
         roomToShow.SetActive(true);
-        if (roomToShow != mainHall) backButton?.SetActive(true);
+        backButton?.SetActive(true);
         
         yield return StartCoroutine(RoomTransitionFade(false));
         DestroyTransitionOverlay();
@@ -217,7 +216,11 @@ public class GameManager : MonoBehaviour
         else
         {
             SwitchRooms(mainHall);
-            backButton?.SetActive(false);
+        }
+
+        if(mainHall?.activeSelf == true)
+        {
+            SceneManager.LoadScene("Main Menu");
         }
     }
 
