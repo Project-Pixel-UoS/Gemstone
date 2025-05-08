@@ -5,6 +5,7 @@ public class DayNightTransition : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject openLaptopImage;
     public GameObject closedLaptopImage;
+    public GameObject zoomedInLaptopImage;
     public GameObject quizPanel;
 
     // Update is called once per frame
@@ -18,6 +19,7 @@ public class DayNightTransition : MonoBehaviour
 
         openLaptopImage.SetActive(false);
         closedLaptopImage.SetActive(true);
+        zoomedInLaptopImage.SetActive(false);
         quizPanel.SetActive(false);
 
     }

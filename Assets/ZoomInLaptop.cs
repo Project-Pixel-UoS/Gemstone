@@ -6,7 +6,7 @@ public class ZoomInLaptop : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject openLaptopImage;
     public GameObject closedLaptopImage;
-    public GameObject zoomInLaptopImage;
+    public GameObject zoomedInLaptopImage;
     public GameObject enterQuizSection;
     public GameObject quizScreen;
 
@@ -37,7 +37,7 @@ public class ZoomInLaptop : MonoBehaviour
     {
         openLaptopImage.SetActive(false);
         closedLaptopImage.SetActive(false);
-        zoomInLaptopImage.SetActive(true);
+        zoomedInLaptopImage.SetActive(true);
         enterQuizSection.SetActive(false);
         quizScreen.SetActive(true);
         FadeOut();
