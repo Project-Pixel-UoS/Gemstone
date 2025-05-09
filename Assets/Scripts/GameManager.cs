@@ -7,7 +7,6 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using UnityEditor.Animations;
-using System;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -138,8 +137,7 @@ public class GameManager : MonoBehaviour
         // yield return new WaitForSeconds(0.3f);
         if (entranceDialogueTag != null)
         {
-            DialogueInstance DI = new DialogueInstance(entranceDialogueTag);
-            DI.StartDialogue();
+            DialogueHandler.PlayDialogue(entranceDialogueTag);
         }
     }
     
@@ -196,11 +194,34 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Room switching functions
     /// </summary>
-    public void OnSignClicked() => SwitchRooms(cafe);
-    public void OnChairClicked() => SwitchRooms(table);
-    public void OnStoreClicked() => SwitchRooms(store);
+    public void OnSignClicked() => SwitchRooms(cafe, "cafe_morning");
+    public void OnChairClicked()
+    {
+        // if (allowed) 
+        // { 
+        //     SwitchRooms(table);
+        // }
+        // else
+        // {
+        //     DialogueHandler.PlayDialogue("table_fail");
+        // }
+        SwitchRooms(table);
+    }
+    public void OnStoreClicked() => SwitchRooms(store, "shopfront_morning");
     public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
-    public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
+    public void OnElevatorClicked() 
+    {
+        // if (allowed) 
+        // { 
+        //     SceneManager.LoadScene("First Floor");
+        // }
+        // else
+        // {
+        //     DialogueHandler.PlayDialogue("elevator_fail");
+        // }
+
+        SceneManager.LoadScene("First Floor");
+    }
 
     public void OnBackButtonClicked()
     {
