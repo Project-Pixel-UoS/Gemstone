@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class QuestManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class QuestManager : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogError("Found more than one Item Events Manager in the scene.");
+            Debug.LogError("Found more than one Quest Events Manager in the scene.");
         }
         Instance = this;
 
@@ -25,7 +26,7 @@ public class QuestManager : MonoBehaviour
     }
 
     private void Start()
-    {
+    {   
         //broadcast all initial quest states on startup
         foreach (Quest quest in questMap.Values)
         {
@@ -161,5 +162,13 @@ public class QuestManager : MonoBehaviour
     {
         //TODO: add some rewards (game object?)
         Debug.Log("Quest finished");
+    }
+
+    /// <summary>
+    /// reloads all quests on room change. (so inactive rooms updates quests when reactivated)
+    /// </summary>
+    public void ReloadQuest(string questID)
+    {
+        ChangeQuestState(questID, questMap[questID].state);
     }
 }
