@@ -230,10 +230,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2048304856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.76, y: 1.0776}
-  m_SizeDelta: {x: 2290.67, y: 1074.6}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0063476562, y: 1.0776367}
+  m_SizeDelta: {x: 1920, y: 1074.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &16304699
 MonoBehaviour:
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &172750861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,7 +873,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 32.07, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &216452386
@@ -1225,15 +1225,15 @@ RectTransform:
   m_GameObject: {fileID: 245541594}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9995375, y: 0.9995375, z: 0.9995375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2048304856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.243645, y: -5.9654026}
-  m_SizeDelta: {x: 2271.5835, y: 1048.4231}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0.000011205502, y: -0.000004887581}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &245541596
 MonoBehaviour:
@@ -2897,7 +2897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &574214593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3968,7 +3968,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 1, g: 0, b: 0.10455465, a: 1}
+    m_SelectedColor: {r: 0.76729554, g: 0.76729554, b: 0.76729554, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -4013,7 +4013,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 801675832}
-  - component: {fileID: 801675833}
   m_Layer: 0
   m_Name: 'Room: Table'
   m_TagString: Untagged
@@ -4021,16 +4020,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &801675832
-Transform:
+--- !u!224 &801675832
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801675831}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.2445, y: 5.966199, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0001334, y: 1.0001334, z: 1.0001334}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4038,22 +4036,11 @@ Transform:
   - {fileID: 1741705951}
   m_Father: {fileID: 1180173152}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &801675833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801675831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64edd45dd53bbd34d9f34dea6ee205b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openLaptopImage: {fileID: 836338102}
-  closedLaptopImage: {fileID: 1259700258}
-  zoomedInLaptopImage: {fileID: 0}
-  quizPanel: {fileID: 998405271}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &820249847
 GameObject:
   m_ObjectHideFlags: 0
@@ -4205,7 +4192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &828021601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4268,7 +4255,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 4707761157293552289, guid: 1d1e339d91219a14bb378848fa708c91, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -4300,8 +4287,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.8491, y: -8.72}
-  m_SizeDelta: {x: 2241.4, y: 992.36}
+  m_AnchoredPosition: {x: 6.849121, y: -8.720093}
+  m_SizeDelta: {x: 103.92, y: -42.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &840141355
 GameObject:
@@ -4587,7 +4574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -40.577}
   m_SizeDelta: {x: 640, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &893779317
@@ -5100,7 +5087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &998405272
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5123,8 +5110,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -142.46, y: -12.64}
-  m_SizeDelta: {x: 1429.91, y: 826.21}
+  m_AnchoredPosition: {x: -180.43, y: 15.840027}
+  m_SizeDelta: {x: -898.96, y: -255.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &998405273
 MonoBehaviour:
@@ -5139,7 +5126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5449,7 +5436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &1072397958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5751,7 +5738,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: Start!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5902,8 +5889,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 6.8491, y: -8.72}
-  m_SizeDelta: {x: 2241.4, y: 992.36}
+  m_AnchoredPosition: {x: 6.849121, y: -8.720093}
+  m_SizeDelta: {x: 103.92, y: -42.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1318517386
 GameObject:
@@ -6266,7 +6253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1371393344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6283,8 +6270,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -610, y: 142}
-  m_SizeDelta: {x: 5995.82, y: 2708.37}
+  m_AnchoredPosition: {x: -592.7999, y: 150}
+  m_SizeDelta: {x: 3340.4, y: 1542.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1371393345
 MonoBehaviour:
@@ -6607,7 +6594,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -166}
+  m_AnchoredPosition: {x: 0, y: -235}
   m_SizeDelta: {x: 600, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1541334137
@@ -7235,7 +7222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 174.73001, y: -52.339993}
+  m_AnchoredPosition: {x: 174.72998, y: -52.339996}
   m_SizeDelta: {x: 570.64, y: 335.33}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1685048726
@@ -7888,7 +7875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 179.99994}
+  m_AnchoredPosition: {x: 0, y: 211.15}
   m_SizeDelta: {x: 1269.3, y: 141.1534}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1794212093
@@ -8044,7 +8031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &1851180093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8667,9 +8654,9 @@ RectTransform:
   m_Father: {fileID: 801675832}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.00024414062, y: 0}
+  m_SizeDelta: {x: 0, y: 0.00024414}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &2048304857
 MonoBehaviour:
@@ -8963,7 +8950,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 0, b: 0, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 1, g: 0, b: 0, a: 1}
+    m_SelectedColor: {r: 0.67295593, g: 0, b: 0, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
