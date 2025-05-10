@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1157267638}
-  buttonClickSound: {fileID: 8300000, guid: b4a144423f4fd1645be876a23a1cbf1e, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
 --- !u!114 &999699175
 MonoBehaviour:
   m_ObjectHideFlags: 0
