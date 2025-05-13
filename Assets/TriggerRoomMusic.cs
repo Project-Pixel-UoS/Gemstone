@@ -4,7 +4,7 @@ public class TriggerRoomMusic : MonoBehaviour
 {
     public AudioClip roomMusic;
 
-    void Awake()
+    void OnEnable()
     {
         if (roomMusic != null && AudioManagement.instance != null)
         {
