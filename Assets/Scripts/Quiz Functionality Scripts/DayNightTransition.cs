@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 public class DayNightTransition : MonoBehaviour
@@ -11,31 +12,27 @@ public class DayNightTransition : MonoBehaviour
     public AudioClip laptopCloseClip;
     public AudioClip cafeNightMusic;
 
-    // Update is called once per frame
-    void Update()
+    public UnityEvent OnNightTransition;
+
+    // Handles all visual changes for night transition
+    public void SwitchToNightVisuals()
     {
-
-    }
-
-    public void TransitionToNight()
-    {
-
         openLaptopImage.SetActive(false);
         closedLaptopImage.SetActive(true);
         quizPanel.SetActive(false);
-
-        StartCoroutine(HandleAudioTransition());
     }
 
-    private IEnumerator HandleAudioTransition()
+    // Handles stopping current music and playing SFX + new music
+    public void PlayNightAudio()
     {
         AudioManagement.instance.StopMusic();
         AudioManagement.instance.PlaySFX(laptopCloseClip);
-
-        // Optional: wait for the SFX to finish before playing music
-        if (laptopCloseClip != null)
-            yield return new WaitForSeconds(laptopCloseClip.length);
-
         AudioManagement.instance.PlayMusic(cafeNightMusic);
+    }
+
+    // Invokes the event that triggers night-related actions (audio, animations etc.)
+    public void InvokeNightTransitionEvent()
+    {
+        OnNightTransition.Invoke();
     }
 }

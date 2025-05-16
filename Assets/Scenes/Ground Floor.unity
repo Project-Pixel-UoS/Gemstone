@@ -1255,6 +1255,9 @@ MonoBehaviour:
   quizPanel: {fileID: 998405271}
   laptopCloseClip: {fileID: 0}
   cafeNightMusic: {fileID: 0}
+  OnNightTransition:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &261526519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,7 +1757,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &396826362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3647,8 +3650,35 @@ MonoBehaviour:
   openLaptopImage: {fileID: 836338102}
   closedLaptopImage: {fileID: 1259700258}
   quizPanel: {fileID: 998405271}
-  laptopCloseClip: {fileID: 0}
+  laptopCloseClip: {fileID: 8300000, guid: 5397f4eb3abfd5e4fbd8f2c53814a65d, type: 3}
   cafeNightMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
+  OnNightTransition:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 783704458}
+        m_TargetAssemblyTypeName: DayNightTransition, Assembly-CSharp
+        m_MethodName: PlayNightAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 783704458}
+        m_TargetAssemblyTypeName: DayNightTransition, Assembly-CSharp
+        m_MethodName: SwitchToNightVisuals
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &783704459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3695,7 +3725,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 783704458}
         m_TargetAssemblyTypeName: DayNightTransition, Assembly-CSharp
-        m_MethodName: TransitionToNight
+        m_MethodName: InvokeNightTransitionEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3872,7 +3902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &801675832
 Transform:
   m_ObjectHideFlags: 0
@@ -3907,6 +3937,9 @@ MonoBehaviour:
   quizPanel: {fileID: 998405271}
   laptopCloseClip: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
   cafeNightMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
+  OnNightTransition:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &820249847
 GameObject:
   m_ObjectHideFlags: 0
@@ -4058,7 +4091,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &828021601
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7176,7 +7209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1720057191
 RectTransform:
   m_ObjectHideFlags: 0
