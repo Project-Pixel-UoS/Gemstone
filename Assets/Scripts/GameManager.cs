@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     //references to all GameObjects
     private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2;
     private GameObject tableContainer;
+
+    public AudioClip footsteps;
     private void Awake()
     {
         if (instance == null)
@@ -107,6 +109,7 @@ public class GameManager : MonoBehaviour
 
     private void SwitchRooms(GameObject roomToShow, string entranceDialogueTag = null)
     {
+        AudioManagement.instance.PlaySFX(footsteps);
         StartCoroutine(SwitchRoomsIE(roomToShow, entranceDialogueTag));
     }
     

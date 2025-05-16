@@ -11,6 +11,8 @@ public class ItemTracker : MonoBehaviour
     private GameObject item;
     public ItemEvent itemEvents;
 
+    public AudioClip pickUpItemSound;
+
     public GameObject currentItem
     {
         get => item;
@@ -80,6 +82,7 @@ public class ItemTracker : MonoBehaviour
         var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
         if (item != null && item.transform.tag.Equals("Item"))
         {
+            AudioManagement.instance.PlaySFX(pickUpItemSound);
             Transform itemSlot = GetEmptyInvSlot();
             item.transform.SetParent(itemSlot, false);
             item.transform.localScale = itemSlot.localScale;

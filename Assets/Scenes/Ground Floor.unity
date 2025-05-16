@@ -1844,6 +1844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5020a7f8652f2ab4ca5254c0323d0009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  footsteps: {fileID: 8300000, guid: f37b8f58aa2d12f4c893b8e6a1f79612, type: 3}
 --- !u!4 &496104891
 Transform:
   m_ObjectHideFlags: 0
@@ -3902,7 +3903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &801675832
 Transform:
   m_ObjectHideFlags: 0
@@ -5780,6 +5781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438fc4e0e4b445a4397b122f3ede86a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpItemSound: {fileID: 8300000, guid: 4ddc2b15d24812247b08e158a85bf814, type: 3}
 --- !u!4 &1345257630
 Transform:
   m_ObjectHideFlags: 0
@@ -7472,7 +7474,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1756667569
 RectTransform:
   m_ObjectHideFlags: 0
