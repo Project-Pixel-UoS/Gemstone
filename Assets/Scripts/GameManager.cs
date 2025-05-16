@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //references to all GameObjects
-    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2;
-    private GameObject tableContainer;
+    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom, 
+                        inventory, tableContainer;
     private void Awake()
     {
         if (instance == null)
@@ -64,7 +64,9 @@ public class GameManager : MonoBehaviour
         backButton = panel.transform.Find("BackButton")?.gameObject;
         reception = panel.transform.Find("Room: Reception")?.gameObject;
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
+        bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
+        inventory = panel.transform.Find("Inventory")?.gameObject;
 
     }
     
@@ -75,8 +77,8 @@ public class GameManager : MonoBehaviour
     {
         if (mainHall == null || backButton == null) return;
 
-        mainHall.SetActive(true);
-        backButton.SetActive(false);
+        mainHall?.SetActive(true);
+        //inventory?.SetActive(false);
         cafe?.SetActive(false);
         table?.SetActive(false);
         store?.SetActive(false);
@@ -103,6 +105,7 @@ public class GameManager : MonoBehaviour
             case "BackButton": OnBackButtonClicked(); break;
             case "BackButton2": OnBackButton2Clicked(); break;
             case "Corridor1": OnCorridor1Clicked(); break;
+            case "Bathroom": OnBathroomClicked(); break;
         }
     }
 
@@ -110,6 +113,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(SwitchRoomsIE(roomToShow, entranceDialogueTag));
     }
+
     
     /// <summary>
     /// Loops through each child of the panel transform and deactivates them,
@@ -130,7 +134,7 @@ public class GameManager : MonoBehaviour
         }
 
         roomToShow.SetActive(true);
-        if (roomToShow != mainHall) backButton?.SetActive(true);
+        backButton?.SetActive(true);
         
         yield return StartCoroutine(RoomTransitionFade(false));
         DestroyTransitionOverlay();
@@ -209,20 +213,8 @@ public class GameManager : MonoBehaviour
     }
     public void OnStoreClicked() => SwitchRooms(store, "shopfront_morning");
     public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
-    public void OnElevatorClicked() 
-    {
-        // if (allowed) 
-        // { 
-        //     SceneManager.LoadScene("First Floor");
-        // }
-        // else
-        // {
-        //     DialogueHandler.PlayDialogue("elevator_fail");
-        // }
-
-        SceneManager.LoadScene("First Floor");
-    }
-
+    public void OnBathroomClicked() => SwitchRooms(bathroom);
+    public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
     public void OnBackButtonClicked()
     {
         //note: need to make our own back button graphic to avoid copyright
@@ -233,7 +225,11 @@ public class GameManager : MonoBehaviour
         else
         {
             SwitchRooms(mainHall);
-            backButton?.SetActive(false);
+        }
+
+        if(mainHall?.activeSelf == true)
+        {
+            SceneManager.LoadScene("Main Menu");
         }
     }
 

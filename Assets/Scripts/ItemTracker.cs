@@ -76,7 +76,7 @@ public class ItemTracker : MonoBehaviour
         {
             return;
         }
-        
+
         var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
         if (item != null && item.transform.tag.Equals("Item"))
         {
