@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using Util;
 
-public class QuestPoint : MonoBehaviour, IPointerClickHandler
+public class QuestPoint : MonoBehaviour//, IPointerClickHandler
 {
     [Header("Quest")]
     [SerializeField] private QuestInfoSO questForPoint;
@@ -37,6 +37,21 @@ public class QuestPoint : MonoBehaviour, IPointerClickHandler
             QuestManager.Instance.ReloadQuest(questID);
         }
     }
+    //Old way
+    private void Update()
+    {
+        if (Utils.IsMouseClicked() && QuestPointInteract())
+        {
+            if (questState.Equals(QuestState.CAN_START) && startPoint)
+            {
+                QuestManager.Instance.questEvents.StartQuest(questID);
+            }
+            else if (questState.Equals(QuestState.CAN_FINISH) && endPoint)
+            {
+                QuestManager.Instance.questEvents.FinishQuest(questID);
+            }
+        }
+    }
 
     /* uncomment in future in case of performance issue.
     private void OnDisable()
@@ -54,16 +69,26 @@ public class QuestPoint : MonoBehaviour, IPointerClickHandler
             print("actually changed state" + quest.state);
         }
     }
-
-    public void OnPointerClick(PointerEventData eventData)
+    //old way
+    private bool QuestPointInteract()
     {
-        if (questState.Equals(QuestState.CAN_START) && startPoint)
+        var item = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
+        if (item != null && item.transform.tag.Equals("QuestPoint") && item.transform.Equals(this.transform))
         {
-            QuestManager.Instance.questEvents.StartQuest(questID);
+            return true;
         }
-        else if (questState.Equals(QuestState.CAN_FINISH) && endPoint)
-        {
-            QuestManager.Instance.questEvents.FinishQuest(questID);
-        }
+        return false;
     }
+    //new way - currently really buggy
+    //public void OnPointerClick(PointerEventData eventData)
+    //{
+    //    if (questState.Equals(QuestState.CAN_START) && startPoint)
+    //    {
+    //        QuestManager.Instance.questEvents.StartQuest(questID);
+    //    }
+    //    else if (questState.Equals(QuestState.CAN_FINISH) && endPoint)
+    //    {
+    //        QuestManager.Instance.questEvents.FinishQuest(questID);
+    //    }
+    //}
 }

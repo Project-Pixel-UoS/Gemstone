@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2803376876632524349}
   - component: {fileID: 5097149838050739075}
+  - component: {fileID: 2123428816638050923}
   m_Layer: 0
   m_Name: Coffee
   m_TagString: Item
@@ -158,3 +159,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
+--- !u!222 &2123428816638050923
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6782982517880970341}
+  m_CullTransparentMesh: 1
