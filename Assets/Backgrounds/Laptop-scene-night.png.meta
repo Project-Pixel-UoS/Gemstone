@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Laptop-scene-night_0: 5379475873099327831
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
