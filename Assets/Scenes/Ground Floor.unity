@@ -3866,14 +3866,13 @@ GameObject:
   m_Component:
   - component: {fileID: 801675832}
   - component: {fileID: 801675833}
-  - component: {fileID: 801675834}
   m_Layer: 0
   m_Name: 'Room: Table'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &801675832
 Transform:
   m_ObjectHideFlags: 0
@@ -3906,21 +3905,8 @@ MonoBehaviour:
   openLaptopImage: {fileID: 836338102}
   closedLaptopImage: {fileID: 1259700258}
   quizPanel: {fileID: 998405271}
-  laptopCloseClip: {fileID: 0}
-  cafeNightMusic: {fileID: 0}
---- !u!114 &801675834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801675831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79e71efbf274dd746a737e3ce1215ebf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
+  laptopCloseClip: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
+  cafeNightMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
 --- !u!1 &820249847
 GameObject:
   m_ObjectHideFlags: 0
@@ -7190,7 +7176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1720057191
 RectTransform:
   m_ObjectHideFlags: 0
