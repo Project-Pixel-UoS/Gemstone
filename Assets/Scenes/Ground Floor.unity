@@ -3362,6 +3362,7 @@ GameObject:
   - component: {fileID: 702552041}
   - component: {fileID: 702552043}
   - component: {fileID: 702552042}
+  - component: {fileID: 702552044}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -3479,6 +3480,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &702552044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702552040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78285d5c7104ccb4dac20d8963dba7c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questForPoint: {fileID: 11400000, guid: 96050d3c76cdf0a48abdc787c01da3e3, type: 2}
+  startPoint: 0
+  endPoint: 1
 --- !u!1 &817301113
 GameObject:
   m_ObjectHideFlags: 0
