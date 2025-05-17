@@ -16,11 +16,11 @@ public class DayNightTransition : MonoBehaviour
 
     public void TransitionToNight()
     {
-
         openLaptopImage.SetActive(false);
         closedLaptopImage.SetActive(true);
         zoomedInLaptopImage.SetActive(false);
         quizPanel.SetActive(false);
-
+        DoQuizQuestStep questStep = GameObject.Find("DoQuizQuestStep(Clone)").GetComponent<DoQuizQuestStep>();
+        questStep.EndQuiz();
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DoQuiz : MonoBehaviour
+public class DoQuizQuestStep : QuestStep
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -8,9 +8,10 @@ public class DoQuiz : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EndQuiz()
     {
-        
+        FinishQuestStep();
     }
+    // Update is called once per frame
+
 }
