@@ -9,7 +9,7 @@ using JetBrains.Annotations;
 using UnityEditor.Animations;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance { get; private set; }
     //references to all GameObjects
     private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom, 
                         inventory, tableContainer;
@@ -262,4 +262,16 @@ public class GameManager : MonoBehaviour
             greyTable.SetActive(true);
         }
     }*/
+    public void ChangeBackground(Sprite newBackground, string roomName)
+    {
+        Debug.Log("Changing background of " + roomName);
+        if(roomName == "Room: Cafe")
+        {
+            cafe.GetComponent<Image>().sprite = newBackground;
+        }
+        else if (roomName == "Room: Main Hall")
+        {
+            mainHall.GetComponent<Image>().sprite = newBackground;
+        }
+    }
 }
