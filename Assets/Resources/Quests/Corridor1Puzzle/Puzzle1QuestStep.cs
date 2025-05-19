@@ -11,7 +11,7 @@ using static UnityEngine.Rendering.DebugUI;
 public class Puzzle1QuestStep : QuestStep
 {
     public GameObject selectionMarker;
-    private GameObject fail1, fail2, fail3, fail4, corridor1, backButton, point, steps, panel;
+    private GameObject fail1, fail2, fail3, fail4, corridor1, backButton, point, steps, panel, passed;
     private string clickedScene;
     private string[] correctOrder = { "Step1", "Step2", "Step3", "Step4" };
     private List<string> clickedOrder = new List<string>();
@@ -20,6 +20,7 @@ public class Puzzle1QuestStep : QuestStep
     private void OnEnable()
     {
         StoreObjects();
+        point.SetActive(false);
     }
     private void Update()
     {
@@ -39,7 +40,11 @@ public class Puzzle1QuestStep : QuestStep
             if (CompareOrders(correctOrder, clickedOrder.ToArray()))
             {
                 FinishQuestStep();
+                DestroySelectionMarkers();
                 backButton.SetActive(true);
+                passed.SetActive(true);
+                point.SetActive(true);
+                point.transform.SetParent(passed.transform, true);
             }
             else
             {
@@ -101,6 +106,8 @@ public class Puzzle1QuestStep : QuestStep
         fail2 = panel.transform.Find("Fail2").gameObject;
         fail3 = panel.transform.Find("Fail3").gameObject;
         fail4 = panel.transform.Find("Fail4").gameObject;
+        passed = panel.transform.Find("Corridor 1 Passed").gameObject;
+        point = corridor1.transform.Find("QuestPoint").gameObject;
     }
     /// <summary>
     /// Reparents the children of the previous attempt of the puzzle to the next,
@@ -112,9 +119,9 @@ public class Puzzle1QuestStep : QuestStep
     private void ReparentChildren(GameObject curr, GameObject prev)
     {
         curr?.SetActive(true);
-        point = prev.transform.GetChild(0).gameObject;
+        //point = prev.transform.GetChild(0).gameObject;
         steps = prev.transform.GetChild(1).gameObject;
-        point.transform.SetParent(curr.transform, true);
+        //point.transform.SetParent(curr.transform, true);
         steps.transform.SetParent(curr.transform, true);
         prev?.SetActive(false);  
     }
