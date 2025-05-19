@@ -88,7 +88,7 @@ public class ItemTracker : MonoBehaviour
             item.transform.localScale = itemSlot.localScale;
             item.gameObject.layer = itemSlot.gameObject.layer;
             itemEvents.ItemAdded(item.name);//broadcast event 
-            Debug.Log("Item picked up: " + item.name);
+            Debug.Log("Item picked up: " + item.name);            
             DialogueInstance DI = new DialogueInstance(item.name);
             DI.StartDialogue();
         }

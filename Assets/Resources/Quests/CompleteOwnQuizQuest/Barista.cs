@@ -3,6 +3,7 @@ using UnityEngine.EventSystems;
 
 public class Barista : MonoBehaviour, IPointerClickHandler
 {
+    public AudioClip coffeeClip;
     /// <summary>
     /// When the barista is clicked, the player will use the money item and receive a coffee item.
     /// </summary>
@@ -13,6 +14,7 @@ public class Barista : MonoBehaviour, IPointerClickHandler
         if (item != null && item.name == "Money")
         {
             Debug.Log("Barista clicked");
+            AudioManagement.instance.PlaySFX(coffeeClip);
             ItemTracker.Instance.UseItem(item.name);
             var coffee = Instantiate(Resources.Load("Items/Coffee"), transform.parent);
             coffee.name = "Coffee";

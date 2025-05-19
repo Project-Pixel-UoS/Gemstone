@@ -5160,6 +5160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0f6db57227f3e54f8c4e594c6618874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coffeeClip: {fileID: 8300000, guid: c1b46dc3e50a72841ba0896de0af41f3, type: 3}
 --- !u!1 &1018001246
 GameObject:
   m_ObjectHideFlags: 0
@@ -7284,7 +7285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79e71efbf274dd746a737e3ce1215ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomMusic: {fileID: 8300000, guid: b4a144423f4fd1645be876a23a1cbf1e, type: 3}
+  roomMusic: {fileID: 8300000, guid: 6cac3f0580425da47a83666aef3239d8, type: 3}
 --- !u!1 &1721775276
 GameObject:
   m_ObjectHideFlags: 0
@@ -8633,7 +8634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2129634609
 RectTransform:
   m_ObjectHideFlags: 0
