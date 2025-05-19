@@ -188,7 +188,7 @@ public static class DialogueHandler
         return hasFinished;
     }
 
-    private static void addPlayedDialogue(string tag)
+    private static void AddPlayedDialogue(string tag)
     {
         if (dialogueHistory.ContainsKey(tag))
         {
@@ -200,16 +200,21 @@ public static class DialogueHandler
         }
     }
 
-    public static void PlayDialogue(string tag)
+    private static bool DialogueIsPlayed(string tag)
     {
-        if (dialogueHistory.ContainsKey(tag) && dialogueHistory[tag] > 0)
+        return dialogueHistory.ContainsKey(tag) && dialogueHistory[tag] > 0;
+    }
+    
+    public static void PlayDialogue(string tag, bool ignoreLimit = false)
+    {
+        if (!ignoreLimit && DialogueIsPlayed(tag))
         {
             Debug.Log($"Dialogue {tag} has already been played {dialogueHistory[tag]} times.");
             return;
         }
         DialogueInstance dialogueInstance = new DialogueInstance(tag);
         dialogueInstance.StartDialogue();
-        addPlayedDialogue(tag);
+        AddPlayedDialogue(tag);
     }
 
     public static void ClearDialogue()
