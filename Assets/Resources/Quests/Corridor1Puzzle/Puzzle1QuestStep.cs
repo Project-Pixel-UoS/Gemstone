@@ -30,10 +30,12 @@ public class Puzzle1QuestStep : QuestStep
             && Utils.CheckMousePosInsideStage("Puzzle"))
         {
             clickedScene = GetClickedScene();
-            clickedOrder.Add(clickedScene);
-            if (retryCount < 4)
-            {
-                PlaceSelectionMarker();
+            if (clickedScene != null) {
+                clickedOrder.Add(clickedScene);
+                if (retryCount < 4)
+                {
+                    PlaceSelectionMarker();
+                }
             }
             Debug.Log(clickedScene + retryCount);
         }
