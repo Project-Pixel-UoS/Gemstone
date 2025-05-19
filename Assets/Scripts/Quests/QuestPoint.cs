@@ -33,7 +33,7 @@ public class QuestPoint : MonoBehaviour//, IPointerClickHandler
         if (QuestManager.Instance != null)
         {
             QuestManager.Instance.questEvents.onQuestStateChange += QuestStateChange;
-            Debug.Log("reenabled quest point " + questState);
+            //Debug.Log("reenabled quest point " + questState);
             QuestManager.Instance.ReloadQuest(questID);
         }
     }
@@ -66,7 +66,7 @@ public class QuestPoint : MonoBehaviour//, IPointerClickHandler
         if(quest.info.id.Equals(questID))
         {
             questState = quest.state;
-            print("actually changed state" + quest.state);
+            //print("actually changed state" + quest.state);
         }
     }
     //old way
