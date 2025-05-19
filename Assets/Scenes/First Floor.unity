@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 102035831}
   - component: {fileID: 102035830}
   m_Layer: 0
-  m_Name: No monster
+  m_Name: NoMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2117,7 +2117,7 @@ GameObject:
   - component: {fileID: 1220312000}
   - component: {fileID: 1220312001}
   m_Layer: 0
-  m_Name: Meeting room
+  m_Name: MeetingRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
