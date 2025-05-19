@@ -34,7 +34,8 @@ public static class DialogueHandler
     
     private static int textPaddingPX_X { get {return Utils.GetPercentScreenSizeX(3.5f);} }
     private static int textPaddingPX_Y { get {return Utils.GetPercentScreenSizeY(2f);} }
-
+    
+    private static Dictionary<string, int> dialogueHistory = new Dictionary<string, int>();
     public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
         if (Utils.DISABLE_ALL_DIALOGUE) { yield break; }
@@ -62,7 +63,7 @@ public static class DialogueHandler
             textElement.alignment = TextAlignmentOptions.Center;
         }
         textElement.font = Resources.Load<TMP_FontAsset>(fontName);
-        
+
         if (rectTransformTXT == null)
         {
             rectTransformTXT = textObj.GetComponent<RectTransform>();
@@ -118,7 +119,7 @@ public static class DialogueHandler
                 speakerNameElement.color = Color.black;
                 speakerNameElement.alignment = TextAlignmentOptions.Center;
             }
-            
+
             int flippedMultiplier = speakerName == "Player" || speakerName.IsUnityNull() ? 1 : -1;
 
             rectTransformSpeakerName = speakerNameObj.GetComponent<RectTransform>();
@@ -139,7 +140,7 @@ public static class DialogueHandler
         {
             text = text.ToUpper();
         }
-        
+
         // Text printing
         foreach (char c in text)
         {
@@ -155,7 +156,7 @@ public static class DialogueHandler
             }
         }
         textElement.ForceMeshUpdate();
-        
+
         finishOnNextIter = false;
         hasFinished = true;
     }
@@ -187,10 +188,28 @@ public static class DialogueHandler
         return hasFinished;
     }
 
+    private static void addPlayedDialogue(string tag)
+    {
+        if (dialogueHistory.ContainsKey(tag))
+        {
+            dialogueHistory[tag]++;
+        }
+        else
+        {
+            dialogueHistory.Add(tag, 1);
+        }
+    }
+
     public static void PlayDialogue(string tag)
     {
+        if (dialogueHistory.ContainsKey(tag) && dialogueHistory[tag] > 0)
+        {
+            Debug.Log($"Dialogue {tag} has already been played {dialogueHistory[tag]} times.");
+            return;
+        }
         DialogueInstance dialogueInstance = new DialogueInstance(tag);
         dialogueInstance.StartDialogue();
+        addPlayedDialogue(tag);
     }
 
     public static void ClearDialogue()
@@ -256,7 +275,7 @@ public class DialogueInstance
     private void LoadDialogueLines(string tag)
     {
         string dialogueText = DialogueHandler.FetchDialogueFromTag(tag);
-        
+
         float typingDelay = 0.025f;
         bool skippable = true;
         string fontName = "normal";
