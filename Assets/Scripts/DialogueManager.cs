@@ -39,7 +39,7 @@ public static class DialogueHandler
     public static IEnumerator Display(string text, float delay, bool skippable, string fontName, string speakerName = null)
     {
         if (Utils.DISABLE_ALL_DIALOGUE) { yield break; }
-        Debug.Log("Display Dialogue called");
+        // Debug.Log("Display Dialogue called");
         hasFinished = false;
 
         if (canvasObj == null)
@@ -204,7 +204,7 @@ public static class DialogueHandler
     {
         return dialogueHistory.ContainsKey(tag) && dialogueHistory[tag] > 0;
     }
-    
+
     public static void PlayDialogue(string tag, bool ignoreLimit = false)
     {
         if (!ignoreLimit && DialogueIsPlayed(tag))

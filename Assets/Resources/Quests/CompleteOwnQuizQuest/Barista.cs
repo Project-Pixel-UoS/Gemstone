@@ -13,12 +13,14 @@ public class Barista : MonoBehaviour, IPointerClickHandler
         var item = ItemTracker.Instance.currentItem;
         if (item != null && item.name == "Money")
         {
-            
+            DialogueHandler.PlayDialogue("barista_success");
             ItemTracker.Instance.UseItem(item.name);
             var coffee = Instantiate(Resources.Load("Items/Coffee"), transform.parent);
             coffee.name = "Coffee";
-        }//TODO: else trigger dialogue for not having money/incorrect item
+        }
+        else
+        {
+            DialogueHandler.PlayDialogue("barista_fail", true);
+        }
     }
-
-
 }

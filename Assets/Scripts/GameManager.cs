@@ -7,12 +7,15 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using UnityEditor.Animations;
+using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
     //references to all GameObjects
     private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom, 
                         inventory, tableContainer;
+
+    private List<string> allowedRooms = new List<string>();
     private void Awake()
     {
         if (instance == null)
@@ -46,6 +49,27 @@ public class GameManager : MonoBehaviour
             GetClickedScene();
         }
     }
+
+    public void AllowRoom(string roomName)
+    {
+        if (!allowedRooms.Contains(roomName))
+        {
+            allowedRooms.Add(roomName);
+        }
+    }
+    public void DisallowRoom(string roomName)
+    {
+        if (allowedRooms.Contains(roomName))
+        {
+            allowedRooms.Remove(roomName);
+        }
+    }
+    private bool IsRoomAllowed(string roomName)
+    {
+        return true;
+        return allowedRooms.Contains(roomName);
+    }
+    
 
     /// <summary>
     /// Finds all the GameObjects in ground floor and caches them in their 
@@ -201,20 +225,29 @@ public class GameManager : MonoBehaviour
     public void OnSignClicked() => SwitchRooms(cafe, "cafe_morning");
     public void OnChairClicked()
     {
-        // if (allowed) 
-        // { 
-        //     SwitchRooms(table);
-        // }
-        // else
-        // {
-        //     DialogueHandler.PlayDialogue("table_fail");
-        // }
-        SwitchRooms(table);
+        if (IsRoomAllowed("table"))
+        {
+            SwitchRooms(table, "table_morning");
+        }
+        else
+        {
+            DialogueHandler.PlayDialogue("table_fail");
+        }
     }
     public void OnStoreClicked() => SwitchRooms(store, "shopfront_morning");
     public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
     public void OnBathroomClicked() => SwitchRooms(bathroom);
-    public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
+    public void OnElevatorClicked()
+    {
+        if (IsRoomAllowed("elevator")) 
+        { 
+            SceneManager.LoadScene("First Floor");
+        }
+        else
+        {
+            DialogueHandler.PlayDialogue("elevator_fail");
+        }
+    }
     public void OnBackButtonClicked()
     {
         //note: need to make our own back button graphic to avoid copyright
@@ -227,7 +260,7 @@ public class GameManager : MonoBehaviour
             SwitchRooms(mainHall);
         }
 
-        if(mainHall?.activeSelf == true)
+        if (mainHall?.activeSelf == true)
         {
             SceneManager.LoadScene("Main Menu");
         }
