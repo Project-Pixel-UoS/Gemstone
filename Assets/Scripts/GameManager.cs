@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
     //references to all GameObjects
     private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom, 
-                        inventory, tableContainer;
+                        inventory, tableContainer, emptyCorridor;
     private void Awake()
     {
         if (instance == null)
@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
         bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
         inventory = panel.transform.Find("Inventory")?.gameObject;
+        emptyCorridor = panel.transform.Find("Corridor 1 Passed")?.gameObject;
 
     }
     
@@ -212,7 +213,12 @@ public class GameManager : MonoBehaviour
         SwitchRooms(table);
     }
     public void OnStoreClicked() => SwitchRooms(store, "shopfront_morning");
-    public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
+    public void OnCorridor1Clicked()
+    {
+        if (!Puzzle1QuestStep.corridorPassed) SwitchRooms(corridor1, "corridor1");
+        else SwitchRooms(emptyCorridor);
+
+    }
     public void OnBathroomClicked() => SwitchRooms(bathroom);
     public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
     public void OnBackButtonClicked()

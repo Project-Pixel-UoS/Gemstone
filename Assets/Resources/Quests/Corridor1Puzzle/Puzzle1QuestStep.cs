@@ -11,11 +11,13 @@ using static UnityEngine.Rendering.DebugUI;
 public class Puzzle1QuestStep : QuestStep
 {
     public GameObject selectionMarker;
-    private GameObject fail1, fail2, fail3, fail4, corridor1, backButton, point, steps, panel, passed;
+    private GameObject fail1, fail2, fail3, fail4, corridor1, backButton, point, steps, panel, emptyCorridor;
     private string clickedScene;
     private string[] correctOrder = { "Step1", "Step2", "Step3", "Step4" };
     private List<string> clickedOrder = new List<string>();
     private int retryCount = 0;
+    private int completeFailCount = 0;
+    public static bool corridorPassed = false;
 
     private void OnEnable()
     {
@@ -42,9 +44,10 @@ public class Puzzle1QuestStep : QuestStep
                 FinishQuestStep();
                 DestroySelectionMarkers();
                 backButton.SetActive(true);
-                passed.SetActive(true);
+                emptyCorridor.SetActive(true);
                 point.SetActive(true);
-                point.transform.SetParent(passed.transform, true);
+                point.transform.SetParent(emptyCorridor.transform, true);
+                corridorPassed = true;
             }
             else
             {
@@ -106,7 +109,7 @@ public class Puzzle1QuestStep : QuestStep
         fail2 = panel.transform.Find("Fail2").gameObject;
         fail3 = panel.transform.Find("Fail3").gameObject;
         fail4 = panel.transform.Find("Fail4").gameObject;
-        passed = panel.transform.Find("Corridor 1 Passed").gameObject;
+        emptyCorridor = panel.transform.Find("Corridor 1 Passed").gameObject;
         point = corridor1.transform.Find("QuestPoint").gameObject;
     }
     /// <summary>
@@ -119,9 +122,8 @@ public class Puzzle1QuestStep : QuestStep
     private void ReparentChildren(GameObject curr, GameObject prev)
     {
         curr?.SetActive(true);
-        //point = prev.transform.GetChild(0).gameObject;
-        steps = prev.transform.GetChild(1).gameObject;
-        //point.transform.SetParent(curr.transform, true);
+        if (completeFailCount > 0) steps = prev.transform.GetChild(1).gameObject;
+        else steps = prev.transform.GetChild(0).gameObject;
         steps.transform.SetParent(curr.transform, true);
         prev?.SetActive(false);  
     }
@@ -148,6 +150,7 @@ public class Puzzle1QuestStep : QuestStep
     private IEnumerator DeathScreen()
     {
         ReparentChildren(corridor1, fail3);
+        completeFailCount++;
 
         fail4?.SetActive(true);
         fail3?.SetActive(false);
