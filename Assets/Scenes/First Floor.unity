@@ -5336,6 +5336,7 @@ GameObject:
   - component: {fileID: 1340945990}
   - component: {fileID: 1340945992}
   - component: {fileID: 1340945991}
+  - component: {fileID: 1340945993}
   m_Layer: 0
   m_Name: 'Room: Reception'
   m_TagString: Untagged
@@ -5401,6 +5402,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340945989}
   m_CullTransparentMesh: 1
+--- !u!114 &1340945993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340945989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e71efbf274dd746a737e3ce1215ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomMusic: {fileID: 8300000, guid: fb3ac52aae5869c41829acd9f4f8765f, type: 3}
+  nightRoomMusic: {fileID: 8300000, guid: fb3ac52aae5869c41829acd9f4f8765f, type: 3}
 --- !u!224 &1358945227 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8177862951672402668, guid: cff9b58530ad6dc468182ff9f4926a3b, type: 3}
@@ -5707,6 +5722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomMusic: {fileID: 8300000, guid: a3384747b0b1b2f4fa261302e1664253, type: 3}
+  nightRoomMusic: {fileID: 0}
 --- !u!224 &1374219556 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8177862951672402668, guid: cff9b58530ad6dc468182ff9f4926a3b, type: 3}

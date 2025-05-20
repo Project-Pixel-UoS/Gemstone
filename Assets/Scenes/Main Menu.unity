@@ -2893,6 +2893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c440002496354a4db3f49556160b82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuMusic: {fileID: 8300000, guid: f004e7788c65470449090eb7f4431f60, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
