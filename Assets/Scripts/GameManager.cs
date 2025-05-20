@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
     //references to all GameObjects
-    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom, 
+    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom,
                         inventory, tableContainer, emptyCorridor, meetingRoom;
     private void Awake()
     {
@@ -223,6 +223,7 @@ public class GameManager : MonoBehaviour
     }
     public void OnBathroomClicked() => SwitchRooms(bathroom);
     public void OnMeetingRoomClicked() => SwitchRooms(meetingRoom);
+    
     public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
     public void OnBackButtonClicked()
     {
