@@ -666,7 +666,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &172750861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2788,7 +2788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &574214593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3944,7 +3944,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 801675832}
-  - component: {fileID: 801675833}
   m_Layer: 0
   m_Name: 'Room: Table'
   m_TagString: Untagged
@@ -3969,26 +3968,6 @@ Transform:
   - {fileID: 1741705951}
   m_Father: {fileID: 1180173152}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &801675833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 801675831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64edd45dd53bbd34d9f34dea6ee205b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  openLaptopImage: {fileID: 836338102}
-  closedLaptopImage: {fileID: 1259700258}
-  quizPanel: {fileID: 998405271}
-  laptopCloseClip: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
-  cafeNightMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
-  OnNightTransition:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &820249847
 GameObject:
   m_ObjectHideFlags: 0
@@ -5399,7 +5378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &1072397958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7899,7 +7878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 1741705952}
-  dayNightScript: {fileID: 801675833}
+  dayNightScript: {fileID: 0}
 --- !u!114 &1851180093
 MonoBehaviour:
   m_ObjectHideFlags: 0
