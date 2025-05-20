@@ -120,7 +120,7 @@ public static class DialogueHandler
                 speakerNameElement.alignment = TextAlignmentOptions.Center;
             }
 
-            int flippedMultiplier = speakerName == "Player" || speakerName.IsUnityNull() ? 1 : -1;
+            int flippedMultiplier = speakerName == "Player" || speakerName == "You" || speakerName.IsUnityNull() ? 1 : -1;
 
             rectTransformSpeakerName = speakerNameObj.GetComponent<RectTransform>();
             rectTransformSpeakerName.sizeDelta = new Vector2(Utils.GetPercentScreenSizeX(15.6f), Utils.GetPercentScreenSizeY(7.4f));

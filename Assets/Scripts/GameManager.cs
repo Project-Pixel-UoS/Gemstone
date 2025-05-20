@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom, 
                         inventory, tableContainer;
 
+    public bool isDay = true;
     private List<string> allowedRooms = new List<string>();
     private void Awake()
     {
@@ -251,9 +252,14 @@ public class GameManager : MonoBehaviour
     public void OnBackButtonClicked()
     {
         //note: need to make our own back button graphic to avoid copyright
-        if (table?.activeSelf == true || store?.activeSelf == true)
+        if (table?.activeSelf == true)
         {
             SwitchRooms(cafe);
+        }
+        else if (store?.activeSelf == true)
+        {
+            SwitchRooms(cafe);
+            DialogueHandler.PlayDialogue("cafe_morning2");
         }
         else
         {
