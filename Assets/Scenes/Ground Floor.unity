@@ -3944,6 +3944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 801675832}
+  - component: {fileID: 801675833}
   m_Layer: 0
   m_Name: 'Room: Table'
   m_TagString: Untagged
@@ -3968,6 +3969,20 @@ Transform:
   - {fileID: 1741705951}
   m_Father: {fileID: 1180173152}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &801675833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801675831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e71efbf274dd746a737e3ce1215ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomMusic: {fileID: 8300000, guid: b4a144423f4fd1645be876a23a1cbf1e, type: 3}
+  nightRoomMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
 --- !u!1 &820249847
 GameObject:
   m_ObjectHideFlags: 0
@@ -4795,6 +4810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomMusic: {fileID: 8300000, guid: b4a144423f4fd1645be876a23a1cbf1e, type: 3}
+  nightRoomMusic: {fileID: 0}
 --- !u!1 &919158116
 GameObject:
   m_ObjectHideFlags: 0
@@ -7337,6 +7353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomMusic: {fileID: 8300000, guid: 6cac3f0580425da47a83666aef3239d8, type: 3}
+  nightRoomMusic: {fileID: 8300000, guid: 6cac3f0580425da47a83666aef3239d8, type: 3}
 --- !u!1 &1721775276
 GameObject:
   m_ObjectHideFlags: 0
@@ -7602,6 +7619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomMusic: {fileID: 8300000, guid: b4a144423f4fd1645be876a23a1cbf1e, type: 3}
+  nightRoomMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
 --- !u!114 &1773289349 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1021247068254510274, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
@@ -8781,6 +8799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomMusic: {fileID: 8300000, guid: b4a144423f4fd1645be876a23a1cbf1e, type: 3}
+  nightRoomMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
 --- !u!1001 &5381419198494277914
 PrefabInstance:
   m_ObjectHideFlags: 0
