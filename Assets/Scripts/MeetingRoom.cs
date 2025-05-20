@@ -5,11 +5,17 @@ using Util;
 public class MeetingRoom : MonoBehaviour
 {
     private GameObject monster, empty;
+    public static bool bookCollected = false;
 
     private void OnEnable()
     {
         monster = transform.Find("Monster")?.gameObject;
         empty = transform.Find("Empty")?.gameObject;
+        if(bookCollected)
+        { 
+            monster.SetActive(false);
+            empty.SetActive(true);
+        }
     }
     void Update()
     {
@@ -20,6 +26,7 @@ public class MeetingRoom : MonoBehaviour
             {
                 monster.SetActive(false);
                 empty.SetActive(true);
+                bookCollected = true;
             }
 
         }
