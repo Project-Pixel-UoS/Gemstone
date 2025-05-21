@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
         bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
+        backButton3 = panel.transform.Find("BackButton3")?.gameObject;
         inventory = panel.transform.Find("Inventory")?.gameObject;
         emptyCorridor = panel.transform.Find("Corridor 1 Passed")?.gameObject;
         meetingRoom = panel.transform.Find("Room: Meeting room")?.gameObject;
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
             case "Elevator": OnElevatorClicked(); break;
             case "BackButton": OnBackButtonClicked(); break;
             case "BackButton2": OnBackButton2Clicked(); break;
+            case "BackButton3": OnBackButton3Clicked(); break;
             case "Corridor1": OnCorridor1Clicked(); break;
             case "Bathroom": OnBathroomClicked(); break;
             case "MeetingRoom": OnMeetingRoomClicked(); break;
@@ -248,6 +250,18 @@ public class GameManager : MonoBehaviour
         if (reception?.activeSelf == true)
         {
             SceneManager.LoadScene("Ground Floor");
+        }
+        else
+        {
+            SwitchRooms(reception);
+        }
+    }
+
+    public void OnBackButton3Clicked()
+    {
+        if (meetingRoom?.activeSelf == true)
+        {
+            SceneManager.LoadScene("First Floor");
         }
         else
         {
