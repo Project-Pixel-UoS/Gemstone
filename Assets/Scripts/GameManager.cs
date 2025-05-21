@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
         bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
-        backButton3 = panel.transform.Find("BackButton3")?.gameObject;
+        //backButton3 = panel.transform.Find("BackButton3")?.gameObject;
         inventory = panel.transform.Find("Inventory")?.gameObject;
         emptyCorridor = panel.transform.Find("Corridor 1 Passed")?.gameObject;
         meetingRoom = panel.transform.Find("Room: Meeting room")?.gameObject;
