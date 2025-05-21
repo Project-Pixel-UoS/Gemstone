@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Meeting-room_0: 1173472970111507260
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

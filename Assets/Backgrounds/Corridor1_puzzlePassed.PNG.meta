@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Corridor1_puzzlePassed_0: -572050455870108440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
