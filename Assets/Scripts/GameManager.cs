@@ -6,13 +6,12 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
-using UnityEditor.Animations;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance { get; private set; }
+    public static GameManager instance;
     //references to all GameObjects
-    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, bathroom,
-                        inventory, tableContainer, emptyCorridor, meetingRoom;
+    private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, backButton3, bathroom, inventory, tableContainer, emptyCorridor, meetingRoom;
+    public AudioClip footsteps;
     private void Awake()
     {
         if (instance == null)
@@ -66,7 +65,7 @@ public class GameManager : MonoBehaviour
         corridor1 = panel.transform.Find("Room: Corridor 1")?.gameObject;
         bathroom = panel.transform.Find("Room: Bathroom")?.gameObject;
         backButton2 = panel.transform.Find("BackButton2")?.gameObject;
-        //backButton3 = panel.transform.Find("BackButton3")?.gameObject;
+        backButton3 = panel.transform.Find("BackButton3")?.gameObject;
         inventory = panel.transform.Find("Inventory")?.gameObject;
         emptyCorridor = panel.transform.Find("Corridor 1 Passed")?.gameObject;
         meetingRoom = panel.transform.Find("Room: Meeting room")?.gameObject;
@@ -116,6 +115,7 @@ public class GameManager : MonoBehaviour
 
     private void SwitchRooms(GameObject roomToShow, string entranceDialogueTag = null)
     {
+        AudioManagement.instance.PlaySFX(footsteps);
         StartCoroutine(SwitchRoomsIE(roomToShow, entranceDialogueTag));
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Events;
+using System.Collections;
 
 public class DayNightTransition : MonoBehaviour
 {
@@ -10,20 +11,19 @@ public class DayNightTransition : MonoBehaviour
     public GameObject quizPanel;
     public Sprite nightCafe;
     public Sprite nightMainHall;
+    public AudioClip laptopCloseClip;
+    public AudioClip cafeNightMusic;
 
     private void Start()
     {
         nightCafe = Resources.Load<Sprite>("Sprites/NightCafe");
         nightMainHall = Resources.Load<Sprite>("Sprites/NightMainHall");
     }
-        
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
+    public UnityEvent OnNightTransition;
 
-    public void TransitionToNight()
+    // Handles all visual changes for night transition
+    public void SwitchToNightVisuals()
     {
         openLaptopImage.SetActive(false);
         closedLaptopImage.SetActive(true);
@@ -33,6 +33,19 @@ public class DayNightTransition : MonoBehaviour
         GameManager.instance.ChangeBackground(nightMainHall, "Room: Main Hall");
         DoQuizQuestStep questStep = GameObject.Find("DoQuizQuestStep(Clone)").GetComponent<DoQuizQuestStep>();
         questStep.EndQuiz();
-        
+    }
+
+    // Handles stopping current music and playing SFX + new music
+    public void PlayNightAudio()
+    {
+        AudioManagement.instance.StopMusic();
+        AudioManagement.instance.PlaySFX(laptopCloseClip);
+        AudioManagement.instance.PlayMusic(cafeNightMusic);
+    }
+
+    // Invokes the event that triggers night-related actions (audio, animations etc.)
+    public void InvokeNightTransitionEvent()
+    {
+        OnNightTransition.Invoke();
     }
 }
