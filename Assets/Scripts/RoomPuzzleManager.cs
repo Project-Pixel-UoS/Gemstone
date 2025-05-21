@@ -7,6 +7,8 @@ public class RoomPuzzleManagaer : MonoBehaviour
     private bool isDragging = false;
     private Vector3 correctPosition;
     private bool isCorrect = false;
+    [SerializeField] private GameObject wellDone;
+    private bool isComplete = false;
 
     private float snapThreshold = 1f;
     private static int snappedPieces = 0; 
@@ -15,7 +17,11 @@ public class RoomPuzzleManagaer : MonoBehaviour
     void Start()
     {
         correctPosition = transform.position; 
-        ScatterPieces(); 
+        ScatterPieces();
+      
+        if (wellDone != null)
+            wellDone.SetActive(false);
+            Debug.Log("wellDone at start: " + wellDone.name);
     }
 
     void ScatterPieces()
@@ -52,15 +58,35 @@ public class RoomPuzzleManagaer : MonoBehaviour
         if (Vector3.Distance(transform.position, correctPosition) < snapThreshold)
         {
             transform.position = correctPosition;
-            isCorrect = true;
-            snappedPieces++;
 
-            /*if (snappedPieces == totalPieces)
+            if (!isCorrect)
             {
-                ShowSuccessMessage();
-            }*/
+                isCorrect = true;
+                snappedPieces++;
+
+                if (snappedPieces == totalPieces)
+                {
+                    isComplete = true;
+                    showWellDone();
+
+
+                }
+            }
+        }       
+    }
+
+    void showWellDone()
+    {
+        if (isComplete == true)
+        {
+            if (wellDone != null)
+            {
+                wellDone.SetActive(true);
+            }
         }
     }
+
+    
 
     private Vector3 CheckPuzzleCompletion()
     {
@@ -69,4 +95,4 @@ public class RoomPuzzleManagaer : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mousePos);
     }
     
-}
+ }
