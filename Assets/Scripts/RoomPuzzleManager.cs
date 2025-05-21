@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomPuzzleManagaer : MonoBehaviour
+public class RoomPuzzleManager : MonoBehaviour
 {
     private Vector3 offset;
     private bool isDragging = false;

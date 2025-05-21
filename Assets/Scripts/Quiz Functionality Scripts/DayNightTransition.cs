@@ -9,8 +9,8 @@ public class DayNightTransition : MonoBehaviour
     public GameObject closedLaptopImage;
     public GameObject zoomedInLaptopImage;
     public GameObject quizPanel;
-    public Sprite nightCafe;
-    public Sprite nightMainHall;
+    private Sprite nightCafe;
+    private Sprite nightMainHall;
     public AudioClip laptopCloseClip;
     public AudioClip cafeNightMusic;
 
