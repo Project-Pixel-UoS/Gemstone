@@ -250,7 +250,8 @@ public class GameManager : MonoBehaviour
     {
         if (IsRoomAllowed("elevator"))
         {
-            StartCoroutine(OnElevatorClickedCoroutine());
+            SceneManager.LoadScene("First Floor");
+            // StartCoroutine(OnElevatorClickedCoroutine());
         }
         else
         {
