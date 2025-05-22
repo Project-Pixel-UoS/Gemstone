@@ -269,7 +269,6 @@ public class GameManager : MonoBehaviour
         if (IsRoomAllowed("elevator"))
         {
             //SceneManager.LoadScene("First Floor");
-            DialogueHandler.PlayDialogue("main_hall_night");
             StartCoroutine(OnElevatorClickedCoroutine());
         }
         else
@@ -299,6 +298,10 @@ public class GameManager : MonoBehaviour
         else
         {
             SwitchRooms(mainHall);
+            if (!isDay)
+            {
+                DialogueHandler.PlayDialogue("main_hall_night", true);
+            }
         }
 
         if (mainHall?.activeSelf == true)
