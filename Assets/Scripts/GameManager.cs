@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     {
         //may need to change depending on previous saved location
         InitialiseScene();
+        DialogueHandler.PlayDialogue("main_hall_morning", true);
+        allowedRooms.Add("store");
 
         tableContainer = GameObject.Find("TableContainer");
         if (tableContainer != null)
@@ -247,7 +249,13 @@ public class GameManager : MonoBehaviour
             DialogueHandler.PlayDialogue("table_fail");
         }
     }
-    public void OnStoreClicked() => SwitchRooms(store, "shopfront_morning");
+    public void OnStoreClicked()
+    {
+        if(IsRoomAllowed("store"))
+        {
+            SwitchRooms(store, "shopfront_morning");
+        }
+    }
     public void OnCorridor1Clicked()
     {
         if (!Puzzle1QuestStep.corridorPassed) SwitchRooms(corridor1, "corridor1");
@@ -260,8 +268,9 @@ public class GameManager : MonoBehaviour
     {
         if (IsRoomAllowed("elevator"))
         {
-            SceneManager.LoadScene("First Floor");
-            // StartCoroutine(OnElevatorClickedCoroutine());
+            //SceneManager.LoadScene("First Floor");
+            DialogueHandler.PlayDialogue("main_hall_night");
+            StartCoroutine(OnElevatorClickedCoroutine());
         }
         else
         {

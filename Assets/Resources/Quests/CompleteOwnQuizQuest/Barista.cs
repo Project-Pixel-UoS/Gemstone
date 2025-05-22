@@ -17,6 +17,8 @@ public class Barista : MonoBehaviour, IPointerClickHandler
             Debug.Log("Barista clicked");
             DialogueHandler.PlayDialogue("barista_success");
             AudioManagement.instance.PlaySFX(coffeeClip);
+            GameManager.instance.AllowRoom("table");
+            GameManager.instance.AllowRoom("elevator");
             ItemTracker.Instance.UseItem(item.name);
             var coffee = Instantiate(Resources.Load("Items/Coffee"), transform.parent);
             coffee.name = "Coffee";
