@@ -33,6 +33,7 @@ public class DayNightTransition : MonoBehaviour
         GameManager.instance.ChangeBackground(nightMainHall, "Room: Main Hall");
         DoQuizQuestStep questStep = GameObject.Find("DoQuizQuestStep(Clone)").GetComponent<DoQuizQuestStep>();
         questStep.EndQuiz();
+        GameManager.instance.isDay = false;
     }
 
     // Handles stopping current music and playing SFX + new music

@@ -6,12 +6,15 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
+using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     //references to all GameObjects
     private GameObject panel, mainHall, cafe, table, store, reception, corridor1, backButton, backButton2, backButton3, bathroom, inventory, tableContainer, emptyCorridor, meetingRoom;
     public AudioClip footsteps;
+    public bool isDay = true;
+    private List<string> allowedRooms = new List<string>();
     private void Awake()
     {
         if (instance == null)
@@ -45,6 +48,26 @@ public class GameManager : MonoBehaviour
             GetClickedScene();
         }
     }
+
+    public void AllowRoom(string roomName)
+    {
+        if (!allowedRooms.Contains(roomName))
+        {
+            allowedRooms.Add(roomName);
+        }
+    }
+    public void DisallowRoom(string roomName)
+    {
+        if (allowedRooms.Contains(roomName))
+        {
+            allowedRooms.Remove(roomName);
+        }
+    }
+    private bool IsRoomAllowed(string roomName)
+    {
+        return allowedRooms.Contains(roomName);
+    }
+    
 
     /// <summary>
     /// Finds all the GameObjects in ground floor and caches them in their 
@@ -150,20 +173,29 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    private IEnumerator RoomTransitionFade(bool fadeIn)
+    private IEnumerator RoomTransitionFade(bool fadeIn, GameObject transitionOverlay = null)
     {
-        GameObject overlay = new GameObject("TransitionOverlay");
-        overlay.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        Image overlayImage = overlay.AddComponent<Image>();
-        overlayImage.color = new Color(0f, 0f, 0f, 0f);
+        Image overlayImage = null;
+        if (transitionOverlay.IsUnityNull())
+        {
+            GameObject overlay = new GameObject("TransitionOverlay");
+            overlay.transform.SetParent(GameObject.Find("Canvas").transform, false);
+            overlayImage = overlay.AddComponent<Image>();
+            overlayImage.color = new Color(0f, 0f, 0f, 0f);
+
+            RectTransform rectTransform = overlay.GetComponent<RectTransform>();
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.one;
+            rectTransform.sizeDelta = Vector2.zero;
+            rectTransform.anchoredPosition = Vector2.zero;
+
+            overlay.transform.SetSiblingIndex(overlay.transform.childCount - 2);
+        }
+        else
+        {
+            overlayImage = transitionOverlay.GetComponent<Image>();
+        }
         
-        RectTransform rectTransform = overlay.GetComponent<RectTransform>();
-        rectTransform.anchorMin = Vector2.zero;
-        rectTransform.anchorMax = Vector2.one;
-        rectTransform.sizeDelta = Vector2.zero;
-        rectTransform.anchoredPosition = Vector2.zero;
-            
-        overlay.transform.SetSiblingIndex(overlay.transform.childCount - 2);
         
         const int fadeDuration = 1;
         
@@ -206,15 +238,14 @@ public class GameManager : MonoBehaviour
     public void OnSignClicked() => SwitchRooms(cafe, "cafe_morning");
     public void OnChairClicked()
     {
-        // if (allowed) 
-        // { 
-        //     SwitchRooms(table);
-        // }
-        // else
-        // {
-        //     DialogueHandler.PlayDialogue("table_fail");
-        // }
-        SwitchRooms(table);
+        if (IsRoomAllowed("table"))
+        {
+            SwitchRooms(table, "table_morning");
+        }
+        else
+        {
+            DialogueHandler.PlayDialogue("table_fail");
+        }
     }
     public void OnStoreClicked() => SwitchRooms(store, "shopfront_morning");
     public void OnCorridor1Clicked()
@@ -225,21 +256,43 @@ public class GameManager : MonoBehaviour
     }
     public void OnBathroomClicked() => SwitchRooms(bathroom);
     public void OnMeetingRoomClicked() => SwitchRooms(meetingRoom);
-    
-    public void OnElevatorClicked() => SceneManager.LoadScene("First Floor");
+    public void OnElevatorClicked()
+    {
+        if (IsRoomAllowed("elevator"))
+        {
+            SceneManager.LoadScene("First Floor");
+            // StartCoroutine(OnElevatorClickedCoroutine());
+        }
+        else
+        {
+            DialogueHandler.PlayDialogue("elevator_fail");
+        }
+    }
+
+    private IEnumerator OnElevatorClickedCoroutine()
+    {
+        yield return StartCoroutine(RoomTransitionFade(true));
+        SceneManager.LoadScene("First Floor");
+        yield return StartCoroutine(RoomTransitionFade(false));
+    }
     public void OnBackButtonClicked()
     {
         //note: need to make our own back button graphic to avoid copyright
-        if (table?.activeSelf == true || store?.activeSelf == true)
+        if (table?.activeSelf == true)
         {
             SwitchRooms(cafe);
+        }
+        else if (store?.activeSelf == true)
+        {
+            SwitchRooms(cafe);
+            DialogueHandler.PlayDialogue("cafe_morning2");
         }
         else
         {
             SwitchRooms(mainHall);
         }
 
-        if(mainHall?.activeSelf == true)
+        if (mainHall?.activeSelf == true)
         {
             SceneManager.LoadScene("Main Menu");
         }

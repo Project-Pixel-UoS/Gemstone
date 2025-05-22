@@ -15,12 +15,15 @@ public class Barista : MonoBehaviour, IPointerClickHandler
         if (item != null && item.name == "Money")
         {
             Debug.Log("Barista clicked");
+            DialogueHandler.PlayDialogue("barista_success");
             AudioManagement.instance.PlaySFX(coffeeClip);
             ItemTracker.Instance.UseItem(item.name);
             var coffee = Instantiate(Resources.Load("Items/Coffee"), transform.parent);
             coffee.name = "Coffee";
-        }//TODO: else trigger dialogue for not having money/incorrect item
+        }
+        else
+        {
+            DialogueHandler.PlayDialogue("barista_fail", true);
+        }
     }
-
-
 }
