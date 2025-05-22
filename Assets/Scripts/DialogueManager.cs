@@ -175,9 +175,8 @@ public static class DialogueHandler
     }
     public static string FetchDialogueFromTag(string tag)
     {
-        StreamReader sr = new StreamReader("Assets/Resources/Dialogue.txt");
-        string dialogue = sr.ReadToEnd().Split($"[{tag}/]")[1].Split($"[/{tag}]")[0].Trim();
-        sr.Close();
+        TextAsset textAsset = Resources.Load<TextAsset>("dialogue");
+        string dialogue = textAsset.text.Split($"[{tag}/]")[1].Split($"[/{tag}]")[0].Trim();
         if (dialogue.Length > 1) { return dialogue; }
         Debug.Log("No dialogue found for this tag");
         return "No dialogue found for this tag";

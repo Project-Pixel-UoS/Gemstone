@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
-using UnityEditor.Animations;
 using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
