@@ -169,20 +169,29 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    private IEnumerator RoomTransitionFade(bool fadeIn)
+    private IEnumerator RoomTransitionFade(bool fadeIn, GameObject transitionOverlay = null)
     {
-        GameObject overlay = new GameObject("TransitionOverlay");
-        overlay.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        Image overlayImage = overlay.AddComponent<Image>();
-        overlayImage.color = new Color(0f, 0f, 0f, 0f);
+        Image overlayImage = null;
+        if (transitionOverlay.IsUnityNull())
+        {
+            GameObject overlay = new GameObject("TransitionOverlay");
+            overlay.transform.SetParent(GameObject.Find("Canvas").transform, false);
+            overlayImage = overlay.AddComponent<Image>();
+            overlayImage.color = new Color(0f, 0f, 0f, 0f);
+
+            RectTransform rectTransform = overlay.GetComponent<RectTransform>();
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.one;
+            rectTransform.sizeDelta = Vector2.zero;
+            rectTransform.anchoredPosition = Vector2.zero;
+
+            overlay.transform.SetSiblingIndex(overlay.transform.childCount - 2);
+        }
+        else
+        {
+            overlayImage = transitionOverlay.GetComponent<Image>();
+        }
         
-        RectTransform rectTransform = overlay.GetComponent<RectTransform>();
-        rectTransform.anchorMin = Vector2.zero;
-        rectTransform.anchorMax = Vector2.one;
-        rectTransform.sizeDelta = Vector2.zero;
-        rectTransform.anchoredPosition = Vector2.zero;
-            
-        overlay.transform.SetSiblingIndex(overlay.transform.childCount - 2);
         
         const int fadeDuration = 1;
         
@@ -235,18 +244,25 @@ public class GameManager : MonoBehaviour
         }
     }
     public void OnStoreClicked() => SwitchRooms(store, "shopfront_morning");
-    public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");    
+    public void OnCorridor1Clicked() => SwitchRooms(corridor1, "corridor1");
     public void OnBathroomClicked() => SwitchRooms(bathroom);
     public void OnElevatorClicked()
     {
-        if (IsRoomAllowed("elevator")) 
-        { 
-            SceneManager.LoadScene("First Floor");
+        if (IsRoomAllowed("elevator"))
+        {
+            StartCoroutine(OnElevatorClickedCoroutine());
         }
         else
         {
             DialogueHandler.PlayDialogue("elevator_fail");
         }
+    }
+
+    private IEnumerator OnElevatorClickedCoroutine()
+    {
+        yield return StartCoroutine(RoomTransitionFade(true));
+        SceneManager.LoadScene("First Floor");
+        yield return StartCoroutine(RoomTransitionFade(false));
     }
     public void OnBackButtonClicked()
     {
