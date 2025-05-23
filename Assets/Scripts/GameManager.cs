@@ -99,6 +99,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void InitialiseScene()
     {
+        // StartCoroutine(RoomTransitionFade(true));
+        StartCoroutine(RoomTransitionFade(false));
+
         if (mainHall == null || backButton == null) return;
 
         mainHall?.SetActive(true);
@@ -148,7 +151,6 @@ public class GameManager : MonoBehaviour
     {
         yield return StartCoroutine(RoomTransitionFade(true));
         yield return new WaitForSeconds(0.5f);
-        DestroyTransitionOverlay();
         
         if (panel == null || roomToShow == null) yield break;
         Debug.Log(roomToShow.name);
@@ -161,7 +163,6 @@ public class GameManager : MonoBehaviour
         backButton?.SetActive(true);
         
         yield return StartCoroutine(RoomTransitionFade(false));
-        DestroyTransitionOverlay();
         // yield return new WaitForSeconds(0.3f);
         if (entranceDialogueTag != null)
         {
@@ -169,10 +170,10 @@ public class GameManager : MonoBehaviour
         }
     }
     
-    private IEnumerator RoomTransitionFade(bool fadeIn, GameObject transitionOverlay = null)
+    public IEnumerator RoomTransitionFade(bool fadeIn)
     {
-        Image overlayImage = null;
-        if (transitionOverlay.IsUnityNull())
+        Image overlayImage = GameObject.Find("TransitionOverlay")?.GetComponent<Image>();
+        if (overlayImage.IsUnityNull())
         {
             GameObject overlay = new GameObject("TransitionOverlay");
             overlay.transform.SetParent(GameObject.Find("Canvas").transform, false);
@@ -187,11 +188,6 @@ public class GameManager : MonoBehaviour
 
             overlay.transform.SetSiblingIndex(overlay.transform.childCount - 2);
         }
-        else
-        {
-            overlayImage = transitionOverlay.GetComponent<Image>();
-        }
-        
         
         const int fadeDuration = 1;
         
@@ -219,6 +215,7 @@ public class GameManager : MonoBehaviour
         else
         {
             overlayImage.color = new Color(0, 0, 0, 0);
+            DestroyTransitionOverlay();
         }
     }
 
