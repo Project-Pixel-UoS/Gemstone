@@ -54,6 +54,8 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     /// </remarks>
     public Color onColor = Color.green;
 
+    public Sprite onImage;
+
     /// <summary>
     /// Color when the wire is turned off.
     /// </summary>
@@ -61,6 +63,8 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     /// Maintained by: Michael Edems-Eze
     /// </remarks>
     public Color offColor = Color.red;
+
+    public Sprite offImage;
 
     /// <summary>
     /// Indicates whether the wire is currently powered.
@@ -269,6 +273,11 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         isWireOn = true;
         UpdateWireColor();
+
+        if (onImage != null)
+        {
+            image.sprite = onImage;
+        }
     }
 
     /// <summary>
@@ -281,6 +290,11 @@ public class WireTileHandling : MonoBehaviour, IBeginDragHandler, IDragHandler, 
     {
         isWireOn = false;
         UpdateWireColor();
+
+        if (offImage != null)
+        {
+            image.sprite = offImage;
+        }
     }
 
     /// <summary>

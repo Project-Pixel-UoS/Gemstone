@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 40563cf23cbdd4542a049ddfd47103db, type: 3}
+  m_Sprite: {fileID: -9190510163288940611, guid: 28cc0df1d153ffa40a01ced1a65e0385, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -147,7 +147,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleManager: {fileID: 0}
   onColor: {r: 0, g: 1, b: 0, a: 1}
+  onImage: {fileID: -470649675373169638, guid: 093b44910433e6c4e947124cefa1b2e4, type: 3}
   offColor: {r: 1, g: 0, b: 0, a: 1}
+  offImage: {fileID: -9190510163288940611, guid: 28cc0df1d153ffa40a01ced1a65e0385, type: 3}
   isWireOn: 0
   image: {fileID: 6964363767761384634}
   initialParent: {fileID: 0}
