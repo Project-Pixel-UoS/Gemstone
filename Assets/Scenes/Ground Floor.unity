@@ -2133,7 +2133,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -180.42993, y: 15.840027}
+  m_AnchoredPosition: {x: -180.42993, y: 15.840088}
   m_SizeDelta: {x: -898.96, y: -255.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &486740374
@@ -3715,7 +3715,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -22, y: 1.0775757}
+  m_AnchoredPosition: {x: -22, y: 1.0776367}
   m_SizeDelta: {x: 442.82, y: 100.76}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &858076030
@@ -4670,6 +4670,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1199422802}
         m_TargetAssemblyTypeName: DayNightTransition, Assembly-CSharp
         m_MethodName: SwitchToNightVisuals
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1199422802}
+        m_TargetAssemblyTypeName: DayNightTransition, Assembly-CSharp
+        m_MethodName: PlayNightAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

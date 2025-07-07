@@ -8,8 +8,8 @@ MonoImporter:
   - closedLaptopImage: {instanceID: 0}
   - zoomedInLaptopImage: {instanceID: 0}
   - quizPanel: {instanceID: 0}
-  - laptopCloseClip: {fileID: 8300000, guid: 5397f4eb3abfd5e4fbd8f2c53814a65d, type: 3}
-  - cafeNightMusic: {fileID: 8300000, guid: 2bc978c9f91da6f4c8abdae33f1470f6, type: 3}
+  - laptopCloseClip: {instanceID: 0}
+  - cafeNightMusic: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

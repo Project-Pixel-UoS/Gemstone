@@ -7,17 +7,21 @@ public class TriggerRoomMusic : MonoBehaviour
 
     void OnEnable()
     {
-        if (roomMusic != null && AudioManagement.instance != null)
+        if (GameManager.instance != null && GameManager.instance.isDay)
         {
-            AudioManagement.instance.PlayMusic(roomMusic);
+            if (roomMusic != null && AudioManagement.instance != null)
+            {
+                AudioManagement.instance.PlayMusic(roomMusic);
+            }
         }
-
-        /*ToDo - Use index of Quiz Quest to determine if it is night, then change the music 
-
-        if (nightRoomMusic != null && AudioManagement.instance != null)
+        else if (GameManager.instance != null && !GameManager.instance.isDay)
         {
-            AudioManagement.instance.PlayMusic(roomMusic);
+            //ToDo - Use index of Quiz Quest to determine if it is night, then change the music 
+
+            if (nightRoomMusic != null && AudioManagement.instance != null)
+            {
+                AudioManagement.instance.PlayMusic(nightRoomMusic);
+            }
         }
-        */
     }
 }
