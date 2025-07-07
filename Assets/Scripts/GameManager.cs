@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //Uncomment for testing
-        //String[] allowed = { "store", "table", "elevator", "corridor" };
-        //allowedRooms.AddRange(allowed); 
+        String[] allowed = { "store", "table", "elevator", "corridor" };
+        allowedRooms.AddRange(allowed); 
         //may need to change depending on previous saved location
         InitialiseScene();
         DialogueHandler.PlayDialogue("main_hall_morning", true);

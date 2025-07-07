@@ -319,6 +319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &183472159
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -374,6 +376,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &289961149
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.7210429
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.030967832
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4818191845917421048, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7186274409220617813, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b6824d9575146ab4f8fead6dcb5b0f01, type: 3}
 --- !u!1 &341609784
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,6 +609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!1 &417135194
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +717,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &417135198
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -847,6 +910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &428767622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1298,6 +1363,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &515778882
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1590,6 +1657,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!1 &1110587895
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,6 +1780,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &1110587900
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2024,6 +2095,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &1118837510
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2200,6 +2273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &1220934234
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2376,6 +2451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &1279118201
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2627,6 +2704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!212 &1356771522
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2889,6 +2968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footsteps: {fileID: 8300000, guid: f37b8f58aa2d12f4c893b8e6a1f79612, type: 3}
+  isDay: 1
 --- !u!61 &1426156078
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3239,6 +3319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!1 &1667550558
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,6 +3618,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!1 &1885907628
 GameObject:
   m_ObjectHideFlags: 0
@@ -3712,6 +3796,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!1 &2096429137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3888,6 +3974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wellDone: {fileID: 491871371}
+  pickup: {fileID: 8300000, guid: c3d9384809ec51140ad49e6ba60e27be, type: 3}
+  drop: {fileID: 8300000, guid: b0a3cb2fbea0da748bec76a82196a706, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3895,3 +3983,4 @@ SceneRoots:
   - {fileID: 1113315029}
   - {fileID: 1372731771}
   - {fileID: 2443451}
+  - {fileID: 289961149}

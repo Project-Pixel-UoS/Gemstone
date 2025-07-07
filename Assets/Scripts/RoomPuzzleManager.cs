@@ -14,6 +14,9 @@ public class RoomPuzzleManager : MonoBehaviour
     private static int snappedPieces = 0; 
     private static int totalPieces = 15;
 
+    public AudioClip pickup;
+    public AudioClip drop;
+
     void Start()
     {
         correctPosition = transform.position; 
@@ -36,6 +39,7 @@ public class RoomPuzzleManager : MonoBehaviour
 
     private void OnMouseDown()
     {
+        AudioManagement.instance.PlaySFX(pickup);
         if (!isCorrect) 
         {
             offset = transform.position - CheckPuzzleCompletion();
@@ -54,6 +58,7 @@ public class RoomPuzzleManager : MonoBehaviour
     private void OnMouseUp()
     {
         isDragging = false;
+        AudioManagement.instance.PlaySFX(drop);
 
         if (Vector3.Distance(transform.position, correctPosition) < snapThreshold)
         {
