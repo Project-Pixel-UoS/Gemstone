@@ -11,6 +11,7 @@ public class MeetingRoom : MonoBehaviour
     {
         monster = transform.Find("Monster")?.gameObject;
         empty = transform.Find("Empty")?.gameObject;
+        Debug.Log("Book collected: " + bookCollected);
         if(bookCollected)
         { 
             monster.SetActive(false);
@@ -21,14 +22,14 @@ public class MeetingRoom : MonoBehaviour
     {
         if (Utils.IsMouseClicked() && Utils.CheckMousePosInsideStage("GameStage"))
         {
-            var clickedItem = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("Default")).collider;
+            var clickedItem = Utils.CalculateMouseDownRaycast(LayerMask.GetMask("UI")).collider;
             if (clickedItem != null && clickedItem.gameObject.name == "Book")
             {
                 monster.SetActive(false);
                 empty.SetActive(true);
                 bookCollected = true;
-            }
-
+                Debug.Log("BOOK HAS BEEN COLLECTED!");
+            }   
         }
     }
 }

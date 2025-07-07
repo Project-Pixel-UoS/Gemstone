@@ -8,7 +8,7 @@ using Util;
 public class ItemTracker : MonoBehaviour
 {
     public static ItemTracker Instance { get; private set; }
-    private GameObject item;
+    public static GameObject item;
     public ItemEvent itemEvents;
 
     public AudioClip pickUpItemSound;

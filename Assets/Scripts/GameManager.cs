@@ -27,9 +27,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+        
     private void Start()
     {
+        //Uncomment for testing
+        //String[] allowed = { "store", "table", "elevator", "corridor" };
+        //allowedRooms.AddRange(allowed); 
         //may need to change depending on previous saved location
         InitialiseScene();
         DialogueHandler.PlayDialogue("main_hall_morning", true);
@@ -69,7 +72,7 @@ public class GameManager : MonoBehaviour
     {
         return allowedRooms.Contains(roomName);
     }
-    
+
 
     /// <summary>
     /// Finds all the GameObjects in ground floor and caches them in their 
