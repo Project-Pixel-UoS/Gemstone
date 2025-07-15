@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using Util;
 
 /// <summary>
@@ -12,6 +13,9 @@ public class ItemTracker : MonoBehaviour
     public ItemEvent itemEvents;
 
     public AudioClip pickUpItemSound;
+
+    public Color white = new Color(1f, 1f, 1f, 1f);
+    public Color black = new Color(0f, 0f, 0f, 1f);
 
     public GameObject currentItem
     {
@@ -50,7 +54,15 @@ public class ItemTracker : MonoBehaviour
         //can click twice on the same item to unselect.
         currentItem = (item != null && (currentItem != item.gameObject || currentItem == null)) ? item.gameObject : null;
         Debug.Log(currentItem);
-        return currentItem;
+        if (currentItem != null)
+        {
+            currentItem.GetComponentInParent<Image>().color = black;
+        }
+        else
+        {
+            item.gameObject.GetComponentInParent<Image>().color = white;
+        }
+            return currentItem;
     }
 
     /// <summary>
@@ -104,6 +116,7 @@ public class ItemTracker : MonoBehaviour
     {
         if(itemName.Equals(currentItem.name))
         {
+            currentItem.GetComponentInParent<Image>().color = white;
             Debug.Log("Item used");
             GameObject item = GameObject.Find(itemName); 
             Destroy(item);
