@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 using Util;
@@ -143,4 +145,46 @@ public class ItemTracker : MonoBehaviour
         return inventory;
     }
 
+    /// <summary>
+    /// Places the items in the hotbar based on the inventory list; used for loading different scenes.
+    /// </summary>
+    /// <param name="inventory">items from previous scene.</param>
+    public void LoadItems(List<String> inventory)
+    {
+        var hotbar = GameObject.Find("Hotbar").transform;
+        var i = 0;
+        foreach (Transform slot in hotbar)
+        {
+            if (slot.childCount != 0) Destroy(slot.GetChild(0).gameObject); // clear existing items
+            if (i < inventory.Count)
+            {
+                var item = GameObject.Find(inventory[i]);
+                item.transform.SetParent(slot, false);
+                item.transform.localScale = slot.localScale;
+                item.gameObject.layer = slot.gameObject.layer;
+            }
+            i++;
+        }
+    }
+
+    /// <summary>
+    /// Detaches all items from the hotbar, persists them, and returns their names.
+    /// </summary>
+    /// <returns>list of item names for reference when loading</returns>
+    public List<String> DetachItems()
+    {
+        List<String> items = new List<String>();
+        var hotbar = GameObject.Find("Hotbar").transform;
+        foreach(Transform slot in hotbar)
+        {
+            if (slot.childCount != 0)
+            { 
+                var item = slot.GetChild(0);
+                item.SetParent(null); // detach item from hotbar
+                DontDestroyOnLoad(item.gameObject); // keep item in the scene
+                items.Add(item.name);
+            }
+        }
+        return items;
+    }
 }

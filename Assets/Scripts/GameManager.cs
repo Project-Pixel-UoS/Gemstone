@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.Threading;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     public AudioClip footsteps;
     public bool isDay = true;
     private List<string> allowedRooms = new List<string>();
+
+    public List<String> items; //items that are in the inventory when switching scenes
     private void Awake()
     {
         if (instance == null)
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
         InitialiseScene();
         DialogueHandler.PlayDialogue("main_hall_morning", true);
         allowedRooms.Add("store");
+        //allowedRooms.Add("elevator"); //for debug
 
         tableContainer = GameObject.Find("TableContainer");
         if (tableContainer != null)
@@ -269,6 +273,7 @@ public class GameManager : MonoBehaviour
         if (IsRoomAllowed("elevator"))
         {
             //SceneManager.LoadScene("First Floor");
+            items = ItemTracker.Instance.DetachItems(); //before loading scene, save items
             StartCoroutine(OnElevatorClickedCoroutine());
         }
         else
@@ -277,11 +282,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //needs async load so items can be loaded in correctly.
     private IEnumerator OnElevatorClickedCoroutine()
     {
         yield return StartCoroutine(RoomTransitionFade(true));
-        SceneManager.LoadScene("First Floor");
+        var asyncLoad = SceneManager.LoadSceneAsync("First Floor"); 
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
         yield return StartCoroutine(RoomTransitionFade(false));
+        ItemTracker.Instance.LoadItems(items); //place items back in inventory
     }
     public void OnBackButtonClicked()
     {
@@ -314,26 +325,49 @@ public class GameManager : MonoBehaviour
     {
         if (reception?.activeSelf == true)
         {
-            SceneManager.LoadScene("Ground Floor");
+            items = ItemTracker.Instance.DetachItems();
+            StartCoroutine(OnBackButton2ClickedCoroutine());
         }
         else
         {
             SwitchRooms(reception);
         }
+    }
+    private IEnumerator OnBackButton2ClickedCoroutine()
+    {
+        yield return StartCoroutine(RoomTransitionFade(true));
+        var asyncLoad = SceneManager.LoadSceneAsync("Ground Floor");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        yield return StartCoroutine(RoomTransitionFade(false));
+        ItemTracker.Instance.LoadItems(items);
     }
 
     public void OnBackButton3Clicked()
     {
         if (meetingRoom?.activeSelf == true)
         {
-            SceneManager.LoadScene("First Floor");
+            items = ItemTracker.Instance.DetachItems();
+            StartCoroutine(OnBackButton3ClickedCoroutine());
         }
         else
         {
             SwitchRooms(reception);
         }
     }
-
+    private IEnumerator OnBackButton3ClickedCoroutine()
+    {
+        yield return StartCoroutine(RoomTransitionFade(true));
+        var asyncLoad = SceneManager.LoadSceneAsync("First Floor");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        yield return StartCoroutine(RoomTransitionFade(false));
+        ItemTracker.Instance.LoadItems(items);
+    }
 
     private void OnMouseDown()
     {
